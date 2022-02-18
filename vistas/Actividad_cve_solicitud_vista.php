@@ -130,7 +130,7 @@ ob_end_flush();
                           <div class="form-group">
                            <label>No.Solicitud:</label>
                            <input type="hidden" name="id_actividad_voae" id="id_actividad_voae">
-                           <input type="text" class="form-control" name="no_solicitud" id="no_solicitud" maxlength="10" style="text-transform: uppercase "placeholder="No de Solicitud" oncopy="return false" onpaste="return false" required/>
+                           <input type="text" class="form-control" name="no_solicitud" id="no_solicitud" maxlength="10" style="text-transform: uppercase;"  placeholder="No de Solicitud" oncopy="return false" onpaste="return false" required/>
                          </div>
                        </div>
                        <!-- Nombre de la Actividad -->
@@ -157,6 +157,7 @@ ob_end_flush();
                             <option value="TERCER PERIODO">TERCER PERIODO</option>
                           </select> 
                         </div>
+
                       </div>
 
                     </div>
@@ -180,19 +181,16 @@ ob_end_flush();
                     <div class="col-sm-6">
                       <div class="form-group">
                         <label>Fecha Incial:</label>
-                        <input type="date" class="form-control" placeholder="FECHA" name="fch_inicial_actividad" id="fch_inicial_actividad" required="" required min=<?php $hoy=date("Y-m-d"); echo $hoy;?>
-                        />
+                        <input type="date" class="form-control" placeholder="FECHA" name="fch_inicial_actividad" id="fch_inicial_actividad" required>
                     </div>
                     </div>
                     <!-- Fecha Final-->
                     <div class="col-sm-6">
                       <div class="form-group">
                        <label>Fecha Final:</label>
-                       <input type="date" class="form-control" name="fch_final_actividad" id="fch_final_actividad" required="" required min=<?php $hoy=date("Y-m-d"); echo $hoy;?>
-                       >
+                       <input type="date" class="form-control" name="fch_final_actividad" id="fch_final_actividad" required>
                      </div>
                    </div>
-
                  </div>
                </div>
              </div>
@@ -229,7 +227,7 @@ ob_end_flush();
               <div class="col-sm-6">
                 <div class="form-group">
                  <label>Presupuesto:</label>
-                 <input type="number" class="form-control" oncopy="return false" onpaste="return false" name="presupuesto" id="presupuesto" maxlength="50" onkeypress="return soloLetras(event)" placeholder="Presupuesto" required>
+                 <input type="number" class="form-control" oncopy="return false" onpaste="return false" name="presupuesto" id="presupuesto" maxlength="10000" placeholder="Presupuesto" required>
                </div>
              </div>
              <!-- Staff Alumnos -->
@@ -237,7 +235,7 @@ ob_end_flush();
               <div class="form-group">
                 <label>Staff Alumnos:</label>
                 <input type="hidden" class="form-control" name="id_estado" id="id_estado">
-                <input type="text" class="form-control" oncopy="return false" onpaste="return false" name="staff_alumnos" id="staff_alumnos" maxlength="50" placeholder="Staff Alumnos" onkeypress="return soloLetras(event)" required>
+                <input type="text" class="form-control" oncopy="return false" onpaste="return false" name="staff_alumnos" id="staff_alumnos" maxlength="700" placeholder="Staff Alumnos" onkeypress="return soloLetras(event)" required>
               </div>
             </div>
             <!-- Ambito -->

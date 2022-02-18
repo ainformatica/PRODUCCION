@@ -21,23 +21,23 @@ class mypdf extends FPDF
         $this->SetFont('Arial','B',10);
         $this->SetTextColor(255,255,255);
         $this->setY(13);
-        $this->Image('../dist/img/kkk.png', 8, 10, 25);
+        $this->Image('../dist/img/kkk.png', 180, 10,25,25);
 
         $this->setX(200);
         $this->setY(13);
-        $this->Image('../dist/img/logo_unah2.png', 180, 10,25,25);
+        $this->Image('../dist/img/logo_unah2.png', 8, 10, 16);
 
         $this->setX(35);
-        $this->write(5,'Universidad Nacional Autonoma de Honduras');
+        $this->write(5,'UNIVERSIDAD NACIONAL AUTONOMA DE HONDURAS');
         $this->ln();
         $this->setX(35);
-        $this->write(5,'Facultad de Ciencias Economicas, Administrativas y Contables');
+        $this->write(5,'FACULTAD DE CIENCIAS ECONOMICAS, ADMINISTRAIVAS Y CONTABLES');
         $this->ln();
         $this->setX(35);
-        $this->write(5,'Departamento de Informatica Administrativa');
+        $this->write(5,'DEPARTAMENTO DE INFORMATICA');
         $this->ln();
         $this->setX(35);
-        $this->write(5,'Comite de Vida Estudiantil');
+        $this->write(5,'COMITE DE VIDA ESTUDIANTIL');
         $this->ln();
         $this->SetX(35);
         $this->SetFont('Arial','B',8);
