@@ -131,7 +131,7 @@ ORDER BY id_periodo DESC LIMIT 1;");
        
         $id1 = $_SESSION['id_usuario'];
 
-        $mysqli = new mysqli('167.114.169.207', 'informat_informaticaunah2', 'dF%&(M6tJL?P', 'informat_automatizacion');
+        $mysqli = new mysqli('51.222.86.251', 'informat_informaticaunah2', 'WAc$W]74{Qo-', 'informat_automatizacion');
 
         if (mysqli_connect_errno()) {
             printf("Falló la conexión: %s\n", mysqli_connect_error());
