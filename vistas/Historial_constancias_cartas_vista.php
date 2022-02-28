@@ -13,7 +13,7 @@ require_once('../clases/funcion_visualizar.php');
 require_once('../clases/funcion_permisos.php');
 
 
-$Id_objeto = 18;
+$Id_objeto = 6005;
 
 
 
@@ -110,9 +110,7 @@ ob_end_flush();
                   <th>CUENTA</th>
                   <th>CONSTANCIA CHARLA</th>
                   <th>CARTA PRESENTACION</th>
-
-
-
+                  <th>CONSTANCIA CLASES</th>
                 </tr>
               </thead>
               <tbody>
@@ -126,10 +124,11 @@ ob_end_flush();
 
                     <td style="text-align: center;">
 
-                      <form class="well" action="../pdf/reporte_constancia_charla.php" method="POST" target="_blank">
-                        <button type="submit" class="btn btn-secondary btn-raised btn-sm" name="btn_imprimir">Imprimir
-                          <i class="zmdi zmdi-local-printshop"></i>
-                    </td>
+                    <form class="well" action="../pdf/reporte_constancia_charla.php" method="POST" target="_blank">
+                        <input type="hidden" name="id_persona" value="<?php echo $id_persona ?>">
+                        <button type="submit"  class="btn btn-secondary btn-raised btn-sm" name= "btn_imprimir">Imprimir
+                        <i class="zmdi zmdi-local-printshop"></i>
+                      </td>
                     </form>
                     <td style="text-align: center;">
 
@@ -137,6 +136,14 @@ ob_end_flush();
                         <button type="submit" class="btn btn-secondary btn-raised btn-sm" name="btn_imprimir">Imprimir
                           <i class="zmdi zmdi-local-printshop"></i>
                     </td>
+                    </form>
+                    <td style="text-align: center;">
+
+                    <form class="well" action="../pdf/reporte_constancia_clases.php" method="POST" target="_blank">
+                        <input type="hidden" name="id_persona" value="<?php echo $id_persona ?>">
+                        <button type="submit"  class="btn btn-secondary btn-raised btn-sm" name= "btn_imprimir">Imprimir
+                        <i class="zmdi zmdi-local-printshop"></i>
+                      </td>
                     </form>
                     </td>
 

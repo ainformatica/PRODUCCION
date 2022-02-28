@@ -25,7 +25,7 @@ if ($visualizacion == 0) {
                                    showConfirmButton: false,
                                    timer: 3000
                                 });
-                           window.location = "../vistas/menu_practica_vista.php";
+                           window.location = "../vistas/menu_estudiantes_practica_vista.php";
 
                             </script>';
 } else {
@@ -51,14 +51,15 @@ if ($visualizacion == 0) {
 
   $nombre = $resultado['nombre'];
   $cuenta = $resultado['valor'];
+
 }
 
 
-$sql2 = $mysqli->prepare("SELECT fecha_valida FROM tbl_charla_practica WHERE id_persona = $id_persona");
-$sql2->execute();
-$resultado2 = $sql2->get_result();
-$row2 = $resultado2->fetch_array(MYSQLI_ASSOC);
-ob_end_flush();
+// $sql2 = $mysqli->prepare("SELECT fecha_valida FROM tbl_charla_practica WHERE id_persona = $id_persona");
+// $sql2->execute();
+// $resultado2 = $sql2->get_result();
+// $row2 = $resultado2->fetch_array(MYSQLI_ASSOC);
+// ob_end_flush();
 
 
 
@@ -69,7 +70,6 @@ ob_end_flush();
 <html>
 
 <head>
-  <script src="../js/autologout.js"></script>
   <title></title>
 </head>
 
@@ -126,34 +126,69 @@ ob_end_flush();
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label>Válida Hasta:</label>
-                    <input class="form-control" type="text" maxlength="60" id="txt_fecha_valida" name="txt_fecha_valida" value="<?php echo $row2['fecha_valida']; ?>" readonly>
+                    <input class="form-control" type="text" maxlength="60" id="fecha_valida" name="txt_fecha_valida" value="" readonly>
 
+                  </div>
+                </div>
+                
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label> Charla PSS </label>
+                    <select class="form-control" name="cb_charla" id="charla">
+                      <option disabled selected value="0">Seleccione una charla :</option>
+                        <?php
+                            $sql=$mysqli->query("SELECT * FROM tbl_vinculacion_gestion_charla WHERE fecha_charla> CURRENT_DATE() 
+                            ");
+
+                            while($fila=$sql->fetch_array()){
+                                echo "<option value='".$fila['id_charla']."'>".$fila['nombre_charla']."</option>";
+                            }
+                        ?>
+                     </select>
                   </div>
                 </div>
 
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label>Jornada </label>
-                    <select class="form-control" name="cb_jornada" id="cb_jornada" onchange="Constancia();">
-                      <option value="0">Seleccione una opción :</option>
-                      <option value="MATUTINA">MATUTINA</option>
-                      <option value="VESPERTINA">VESPERTINA</option>
-                    </select>
+                    <label>Jornada</label>
+                    <input class="form-control" type="text" id="jornada" name="txt_jornada" value="" required onkeyup="Espacio(this, event)" maxlength="100" readonly>
                   </div>
                 </div>
 
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label>Expositores</label>
+                    <input class="form-control" type="text" id="expositores" name="txt_expositores" value="" required onkeyup="Espacio(this, event)" maxlength="100" readonly>
+                  </div>
+                </div>
+
+                <div class="col-sm-3">
+                  <div class="form-group">
+                    <label>Fecha y hora</label>
+                    <input class="form-control" type="text" id="fechahora" name="txt_fechahora" value="" required onkeyup="Espacio(this, event)" maxlength="20" readonly>
+                  </div>
+                </div>
+
+                <div class="col-sm-3">
+                  <div class="form-group">
+                    <label>Hora</label>
+                    <input class="form-control" type="text" id="hora" name="txt_hora" value="" required onkeyup="Espacio(this, event)" maxlength="20" readonly>
+                  </div>
+                </div>
+
+                
 
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label>Nº Constancia</label>
-                    <input class="form-control" type="text" id="txt_constancia_charla" name="txt_constancia_charla" value="" required onkeyup="Espacio(this, event)" maxlength="11" readonly>
+                    <input class="form-control" type="text" id="constancia_charla" name="txt_constancia_charla" value="" required onkeyup="Espacio(this, event)" maxlength="11" readonly>
                   </div>
                 </div>
 
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label>Nombre Completo</label>
-                    <input class="form-control" type="text" maxlength="60" id="txt_nombre_estudiante" name="txt_nombre_estudiante" value="<?php echo $nombre; ?>" required style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" readonly>
+                    <input class="form-control" type="text" maxlength="160" id="txt_nombre_estudiante" name="txt_nombre_estudiante" value="<?php echo $nombre; ?>" required style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" readonly>
 
                   </div>
                 </div>
@@ -217,6 +252,8 @@ ob_end_flush();
 
   </div>
 
+  <script src="../js/charla/charla.js"></script>
+
 </body>
 
 </html>
@@ -225,7 +262,7 @@ ob_end_flush();
   function Constancia() {
     /* Para obtener el valor */
 
-    var certicados = document.getElementById("cb_jornada").value;
+    var certicados = document.getElementById("jornada").value;
 
 
 
@@ -279,15 +316,15 @@ END) as contador from tbl_contador_constancia where id_contador =2 ";
   // }
 
 
-  function fecha_valida() {
-    var fech1 = new Date();
-    var fech2 = document.getElementById("txt_fecha_valida").value;
+  // function fecha_valida() {
+  // var fech1 = new Date();
+  // var fech2 = document.getElementById("fecha_valida").value;
 
-    if ((Date.parse(fech1)) >= (Date.parse(fech2))) {
+  // if ((Date.parse(fech1)) >= (Date.parse(fech2))) {
 
-      document.getElementById("txt_fecha_valida").value = "";
-    } else {
+  //   document.getElementById("txt_fecha_valida").value = "";
+  // } else {
 
-    }
-  }
+  // }
+}
 </script>

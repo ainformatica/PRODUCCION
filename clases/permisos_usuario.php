@@ -165,19 +165,19 @@ function  permisos_a_roles_visualizar($pantalla, $confirmacion)
    }
 
 
-   if ($_SESSION['pantalla'] == '14'  or $_SESSION['pantalla'] == '6005' or $_SESSION['pantalla'] == '20' or $_SESSION['pantalla'] == '21' or $_SESSION['pantalla'] == '26' or $_SESSION['pantalla'] == '27' or $_SESSION['pantalla'] == '28') {
+   if ($_SESSION['pantalla'] == '2000'  or $_SESSION['pantalla'] == '2001' or $_SESSION['pantalla'] == '2002' or $_SESSION['pantalla'] == '2004' or $_SESSION['pantalla'] == '2005' or $_SESSION['pantalla'] == '2006' or $_SESSION['pantalla'] == '2007' or $_SESSION['pantalla'] == '2009') {
       if ($_SESSION['confirmacion'] == 'block') {
          $_SESSION['practica_vista'] = "block";
       }
    }
-   if ($_SESSION['pantalla'] == '14'  or $_SESSION['pantalla'] == '6005' or $_SESSION['pantalla'] == '20' or $_SESSION['pantalla'] == '21' or $_SESSION['pantalla'] == '26' or $_SESSION['pantalla'] == '27' or $_SESSION['pantalla'] == '28') {
+   if ($_SESSION['pantalla'] == '2010' or $_SESSION['pantalla'] == '2011' or $_SESSION['pantalla'] == '2012' or $_SESSION['pantalla'] == '2013' or $_SESSION['pantalla'] == '2014' or $_SESSION['pantalla'] == '2015') {
       if ($_SESSION['confirmacion'] == 'block') {
          $_SESSION['supervision_vista'] = "block";
       }
    }
 
 
-   if ($_SESSION['pantalla'] == '6001' or $_SESSION['pantalla'] == '15' or $_SESSION['pantalla'] == '16' or $_SESSION['pantalla'] == '17' or $_SESSION['pantalla'] == '6004' or $_SESSION['pantalla'] == '6002' or  $_SESSION['pantalla'] == '6003') {
+   if ($_SESSION['pantalla'] == '6001' or $_SESSION['pantalla'] == '6002' or $_SESSION['pantalla'] == '6003' or $_SESSION['pantalla'] == '6004' or $_SESSION['pantalla'] == '6005') {
       if ($_SESSION['confirmacion'] == 'block') {
          $_SESSION['solicitud_practica'] = "block";
       }

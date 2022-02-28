@@ -65,7 +65,7 @@ if (isset($_REQUEST['msj'])) {
 </script>';
   }
 }
-$Id_objeto = 14;
+$Id_objeto = 2001;
 
 $visualizacion = permiso_ver($Id_objeto);
 
@@ -154,7 +154,6 @@ ob_end_flush();
 <html>
 
 <head>
-  <script src="../js/autologout.js"></script>
   <title></title>
 </head>
 
@@ -205,18 +204,19 @@ ob_end_flush();
             <div class="card-body">
               <div class="row">
 
-
-
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                   <div class="form-group">
-                    <label>Jornada </label>
-                    <select class="form-control" name="cb_jornada" id="cb_jornada">
-                      <option value="0">Seleccione una opción :</option>
-                      <option value="MATUTINA" <?php if (isset($jornada) and $jornada == "MATUTINA") {
-                                                } ?>>MATUTINA</option>
-                      <option value="VESPERTINA" <?php if (isset($jornada) and $jornada == "VESPERTINA") {
-                                                  } ?>>VESPERTINA</option>
-                    </select>
+                    <label> Charla PSS </label>
+                    <select class="form-control" name="cb_charla" id="charla"">
+                      <option disabled selected value="0">Seleccione una charla :</option>
+                        <?php
+                            $sql=$mysqli->query("SELECT id_charla, nombre_charla FROM tbl_vinculacion_gestion_charla");
+
+                            while($fila=$sql->fetch_array()){
+                                echo "<option value='".$fila['id_charla']."'>".$fila['nombre_charla']."</option>";
+                            }
+                        ?>
+                     </select>
                   </div>
                 </div>
 
@@ -229,12 +229,12 @@ ob_end_flush();
                   </div>
                 </div>
 
-                <div class="col-sm-3">
+                <!-- <div class="col-sm-3">
                   <div class="form-group">
                     <p class="text-center" style="margin-top: 30px;">
                       <button type="submit" class="btn btn-primary" id="btn_control_asistencia" name="btn_control_asistencia"><i class="zmdi zmdi-floppy"></i> Control Asistencia</button>
                   </div>
-                </div>
+                </div> -->
           </form>
 
         </div>
@@ -278,22 +278,40 @@ ob_end_flush();
               <div class="col-sm-6">
                 <div class="form-group">
                   <label>Impartida por:</label>
-                  <input class="form-control" type="text" id="txt_impartida" name="txt_impartida" value="<?php echo $_SESSION['impartida'] ?>" required onkeyup="Espacio(this, event)" maxlength="50" readonly="readonly">
+                  <input class="form-control" type="text" id="expositores" name="txt_impartida" value="<?php echo $_SESSION['impartida'] ?>" required onkeyup="Espacio(this, event)" maxlength="50" readonly="readonly">
                 </div>
               </div>
 
 
-              <div class="col-sm-3">
+              <div class="col-sm-2">
                 <div class="form-group">
                   <label>Fecha Impartida</label>
-                  <input class="form-control" type="date" id="txt_fecha_impartida" name="txt_fecha_impartida">
+                  <input class="form-control" type="text" id="fechahora" name="txt_fecha_impartida" readonly>
                 </div>
               </div>
 
+              <div class="col-sm-2">
+                <div class="form-group">
+                  <label>Jornada</label>
+                 
+                  <input class="form-control" type="text" id="jornada" name="txt_jornada" readonly>
+                </div>
+              </div>
+
+              <div class="col-sm-2">
+                <div class="form-group">
+                  <label>Hora</label>
+        
+                  <input class="form-control" type="text" id="hora" name="txt_jornada" readonly>
+                </div>
+              </div>
+            
+            
             </div>
+            
 
-            <input class="form-control" type="text" id="txt_jornada" name="txt_jornada" hidden>
-
+              
+              
 
             <table id="tabla" class="table table-bordered table-striped">
               <thead>
@@ -305,31 +323,11 @@ ob_end_flush();
 
                 </tr>
               </thead>
-              <tbody>
-                <?php while ($counter < count($sql_tabla_control["ROWS"])) { ?>
-                  <tr>
-                    <form>
-
-
-                      <td><?php echo $sql_tabla_control["ROWS"][$counter]["nombre"]; ?></td>
-                      <td><?php echo $sql_tabla_control["ROWS"][$counter]["valor"]; ?></td>
-
-                      <td style="text-align: center;">
-                        <input type="checkbox" name="asistencia[]" data-bootstrap-switch value="<?php echo $sql_tabla_control["ROWS"][$counter]["Id_charla"]; ?>">
-
-                      </td>
-
-                  </tr>
-                <?php $counter = $counter + 1;
-                } ?>
+              <tbody id="cuerpo">
+               
+                  
               </tbody>
             </table>
-
-
-
-            <p class="text-center" style="margin-top: 20px;">
-              <button type="submit" class="btn btn-primary" id="btn_guardar_asistencia" name="btn_guardar_asistencia"> <?php echo $_SESSION['btn_guardar_asistencia']; ?><i class="zmdi zmdi-floppy"></i> Guardar</button>
-            </p>
 
           </div>
           <!-- /.card-body -->
@@ -375,6 +373,7 @@ ob_end_flush();
 
       $("#txt_jornada").val(id_tipo_periodo);
     });
+
   </script>
 
   <script type="text/javascript">
@@ -389,6 +388,7 @@ ob_end_flush();
     }
   </script>
 
+<script src="../js/charla/asistencia.js"></script>
 </body>
 
 </html>

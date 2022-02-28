@@ -46,7 +46,7 @@ if (isset($_SESSION['Institucion']) and isset($_SESSION['Direccion']) and isset(
 
 {
 
-      $Id_objeto=18 ; 
+      $Id_objeto=6002 ; 
 
 
     $sql = "call proc_actualizar_empresa_practica('$_SESSION[Institucion]', '$_SESSION[Direccion]' , '$_SESSION[Departamento]' , '$_SESSION[jefe_inmediato]', '$_SESSION[Titulo_jefe]', '$_SESSION[Cargo]', '$_SESSION[correo]', '$_SESSION[telefono]' ,$_SESSION[id_persona],$_SESSION[id_empresa]) ";
