@@ -29,7 +29,7 @@ else
     $_SESSION["btneliminar"]="";
   }
 
-$usuario_x= $_SESSION['id_usuario'];
+$usuario= $_SESSION['id_usuario'];
 
 $id_falta=isset($_POST["id_falta"])?  $instancia_conexion->limpiarCadena($_POST["id_falta"]):"";
 $id_tipo_falta=isset($_POST["id_tipo_falta"])? $instancia_conexion->limpiarCadena($_POST["id_tipo_falta"]):"";
@@ -45,7 +45,7 @@ switch ($_GET["op"]){
 				$resulta_valor = $mysqli->query($sql);
 				$valor_v = $resulta_valor->fetch_array(MYSQLI_ASSOC);
 		
-				$rspta=$falta->insertar($id_tipo_falta,$fch_falta,$id_persona_alumno,$descripcion, $usuario_x);
+				$rspta=$falta->insertar($id_tipo_falta,$fch_falta,$id_persona_alumno,$descripcion, $usuario);
 				echo $rspta ? "Falta Registrada" : "Falta no se pudo registrar";
 				
 				bitacora::evento_bitacora($Id_objeto, $_SESSION['id_usuario'], 'INSERTO', 'UNA NUEVA FALTA PARA EL ALUMNO ALUMNO: '. $valor_v['nombres'] . '');
@@ -133,7 +133,7 @@ switch ($_GET["op"]){
 
 	case 'listar':
 	
-		$rspta=$falta->listar();
+		$rspta=$falta->listar($usuario);
  		//Vamos a declarar un array
  		$data= Array();
  		

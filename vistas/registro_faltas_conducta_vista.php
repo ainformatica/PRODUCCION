@@ -32,10 +32,12 @@ if($visualizacion==0){
 if (permisos::permiso_insertar($Id_objeto)==0)
   {
   $_SESSION["btnagregar"]="hidden";
+  $_SESSION["btnconstancia"]="hidden";
   }
 else
   {
     $_SESSION["btnagregar"]="";
+    $_SESSION["btnconstancia"]="";
   }
 if (permisos::permiso_modificar($Id_objeto)==0)
   {
@@ -82,7 +84,7 @@ ob_end_flush();
                   <div class="box">
                     <div class="box-header with-border">
                           <h1 align="right"><button class="btn btn-success"  name="btnagregar" id="btnagregar" <?php echo $_SESSION['btnagregar']; ?> onclick="mostrarform(true)"><i class="fa fa-plus-circle"></i> Agregar Nuevo Falta</button>
-                            <button class="btn btn-primary"  name="btnconstancia" id="btnconstancia"  onclick="mostrarform2(true)"><i class="fa fa-plus-circle"></i> Generar Constancia Alumno</button></h1>
+                            <button class="btn btn-primary"  name="btnconstancia" id="btnconstancia" <?php echo $_SESSION['btnconstancia']; ?> onclick="mostrarform2(true)"><i class="fa fa-plus-circle"></i> Generar Constancia Alumno</button></h1>
                           
 
                         <div class="box-tools pull-right">

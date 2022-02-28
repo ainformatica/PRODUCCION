@@ -50,10 +50,10 @@ Class Faltas
 	}
 
 	//Implementar un método para listar los registros
-	public function listar()
+	public function listar($usuario)
 	{
 		global $instancia_conexion;
-		$sql="SELECT * FROM view_faltas_conducta";
+		$sql="CALL vista_faltas('$usuario')";
 		return $instancia_conexion->ejecutarConsulta($sql);		
 	}
 	//Implementar un método para listar los registros
