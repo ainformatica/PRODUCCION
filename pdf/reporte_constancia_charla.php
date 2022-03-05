@@ -10,7 +10,7 @@ function fechaCastellano ($fecha) {
     $numeroDia = date('d', strtotime($fecha));
     $mes = date('F', strtotime($fecha));
     $anio = date('Y', strtotime($fecha));
-  $meses_ES = array("enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre");
+    $meses_ES = array("enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre");
     $meses_EN = array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December");
     $nombreMes = str_replace($meses_EN, $meses_ES, $mes);
     return $numeroDia." de ".$nombreMes." del ".$anio;
@@ -118,14 +118,14 @@ $pdf->Image('../dist/img/fondo.png',1,70,217);
 $pdf->cell(0,6,utf8_decode('CONSTANCIA'),0,1,'C');
 $pdf->SetFont('Arial','B',12);
 $pdf->ln(2);
-$pdf->cell(0,6,utf8_decode('UVIA-'.$row['periodo'].'-'.$row['no_constancia'].' '),0,1,'C');
+$pdf->cell(0,6,utf8_decode('UVIA-0'.$row['periodo'].'-'.$row['no_constancia'].' '),0,1,'C');
 $pdf->ln(10);
 
 $pdf->SetFillColor(232,232,232);
 $pdf->SetFont('Arial','I',12);
 
 $pdf->Image('../dist/img/cuadro.png',20,70,160);
-$pdf->SetX(210);
+$pdf->SetX(200);
 $pdf->SetY(71);
 $pdf->Cell(200, 10, ''.$row['nombre'].'', 0, 1, 'C');
 $pdf->ln(-3);
@@ -206,8 +206,5 @@ if(!file_exists($carpeta)){
   $pdf->SetTitle('CONSTANCIA CHARLA '.$row['nombre'].'');
   
   $pdf->Output('F','../Documentacion_practica/'.$row['valor'].'/01_CONSTANCIA_CHARLA_PPS.pdf');
-
-
-
 
 ?>

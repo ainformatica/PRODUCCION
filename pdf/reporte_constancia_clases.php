@@ -6,13 +6,13 @@ require 'fpdf/fpdf.php';
 require_once ('../clases/Conexion.php');
 
 
-  $_SESSION["id_persona"]= $_GET['id_persona_']; 
+  $_SESSION["id_persona"]= $_GET['id_persona']; 
 
 
 
 
-$sql = "select count(aa.id_persona) as cantidad_clase, (( count(aa.id_persona))*100)/52 as porcentaje_clase ,concat(p.nombres,' ',p.apellidos) as estudiante, px.valor as cuenta
-from tbl_asignaturas_aprobadas aa, tbl_personas p, tbl_personas_extendidas px where px.id_atributo=12 and px.id_persona=p.id_persona and p.id_persona=aa.id_persona and aa.id_persona=$_SESSION[id_persona] GROUP BY px.valor ";
+$sql = "select cp.clases_aprobadas, cp.porcentaje_clases ,concat(p.nombres,' ',p.apellidos) as estudiante, px.valor as cuenta
+from tbl_charla_practica cp, tbl_personas p, tbl_personas_extendidas px where px.id_atributo=12 and px.id_persona=p.id_persona and p.id_persona=cp.id_persona and cp.id_persona=$_SESSION[id_persona] ";
 
 
 
@@ -52,22 +52,11 @@ $fecha=date("Y-m-d H:i:s");
 	$resultado = mysqli_query($connection, $sql);
 	$row = mysqli_fetch_array($resultado);
 
-	$pdf = new PDF();
+	$pdf = new PDF('P','mm','letter',true);
 	$pdf->AliasNbPages();
 	$pdf->AddPage();
 	$pdf->SetFont('Arial','B',15);
-
-	$pdf->cell(0,6,utf8_decode('Universidad Nacional Autonoma de Honduras'),0,1,'C');
-	$pdf->ln(2);
-	$pdf->cell(0,6,utf8_decode('Facultad de Ciencias Economicas'),0,1,'C');
-	$pdf->ln(2);
-	$pdf->cell(0,6,utf8_decode('Departamento de Informatica Administrativa'),0,1,'C');
-	$pdf->ln(5);
-	$pdf->SetFont('Arial','',12);
-    $pdf->ln(5);
-
-	$pdf->ln(5);
-	$pdf->ln(5);
+	$pdf->Image('../dist/img/fondo.png',1,70,216);
 	
 
 	$pdf->Cell(0,5,utf8_decode('CONSTANCIA '),0,1,'C');
@@ -79,11 +68,9 @@ $fecha=date("Y-m-d H:i:s");
 	$pdf->SetFillColor(232,232,232);
 	$pdf->SetFont('Arial','I',12);
 	$pdf->ln(5);
-	$pdf->ln(5);
-	$pdf->ln(5);
 
 	$pdf->SetX(20);
-    $pdf->multicell(170,9,utf8_decode('La Suscrita Coordinadora de la Carrera de Informática Administrativa de la UNAH, por este medio hace constar Que: '.$row['estudiante'].' con número de cuenta '.$row['cuenta'].' ha aprobado un total de: ('.$row['cantidad_clase'].')  asignaturas  lo  cual  totaliza  un  '.$row['porcentaje_clase'].'%   del Plan  de   Estudios  de la Licenciatura en Informática. '),0);
+    $pdf->multicell(170,9,utf8_decode('La Suscrita Coordinadora de la Carrera de Informática Administrativa de la UNAH, por este medio hace constar que el estudiante '.$row['estudiante'].' con número de cuenta '.$row['cuenta'].' ha aprobado un total de '.$row['clases_aprobadas'].' asignaturas  lo  cual  totaliza  un  '.$row['porcentaje_clases'].'%  del Plan de Estudios de la Licenciatura en Informática. '),0);
 	$pdf->ln(5);
 	$pdf->SetX(20);
     $pdf->multicell(170,9,utf8_decode('Y  para   efectos   de   realizar   su   Práctica   Profesional   Supervisada   firmo   la presente en la Ciudad Universitaria "José Trinidad Reyes" el '.fechaCastellano($fecha).'. '),0);
@@ -92,12 +79,18 @@ $fecha=date("Y-m-d H:i:s");
 
 
 
-    $pdf->ln(60);
-	$pdf->SetFont('Arial','B',12);
-	$pdf->Cell(60,5,utf8_decode(''),0,0,'C');
-	$pdf->Cell(70,5,utf8_decode('Coordinador Carrera Informática Administrativa'),'T',0,'C');
+    $pdf->ln(32);
+	$pdf->Image('../dist/img/Sello.png',55,160,25);
+	$pdf->Image('../dist/img/firma.png',82,162,40);
+	$pdf->SetFont('Times','BI',14);
+	$pdf->ln(8);
+	$pdf->cell(0,6,utf8_decode('Cristian Josué Rivera Ramírez'),0,1,'C');
+	$pdf->ln(2);
+	$pdf->SetFont('Times','I',14);
+	$pdf->cell(0,6,utf8_decode('Coordinador de Comité de Vinculación Universidad - Sociedad'),0,1,'C');
+	$pdf->ln(2);
+	$pdf->cell(0,6,utf8_decode('Departamento de Informática'),0,1,'C');
 
 
 	$pdf->Output();
-
 ?>

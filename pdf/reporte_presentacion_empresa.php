@@ -123,6 +123,8 @@ class PDF extends FPDF
     if(!file_exists($carpeta)){
     mkdir($carpeta,0777,true);
 
+}
+
 	$pdf = new PDF('P','mm','Legal',true);
 	$pdf->AddPage();
 	$pdf->SetFont('Arial','',12);
@@ -189,5 +191,5 @@ class PDF extends FPDF
 
 
 	$pdf->Output('F','../Documentacion_practica/'.$row['valor'].'/02_CARTA_PRESENTACIÓN.pdf');
-	}
+	
 ?>
