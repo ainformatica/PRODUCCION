@@ -94,14 +94,12 @@ $fecha=date("Y-m-d H:i:s");
 
 
     $pdf->ln(32);
-	$pdf->Image('../dist/img/Sello.png',55,160,25);
-	$pdf->Image('../dist/img/firma.png',82,162,40);
 	$pdf->SetFont('Times','BI',14);
 	$pdf->ln(8);
-	$pdf->cell(0,6,utf8_decode('Cristian Josué Rivera Ramírez'),0,1,'C');
+	$pdf->cell(0,6,utf8_decode('Dulce Monserrat Del Cid Fiallos'),0,1,'C');
 	$pdf->ln(2);
 	$pdf->SetFont('Times','I',14);
-	$pdf->cell(0,6,utf8_decode('Coordinador de Comité de Vinculación Universidad - Sociedad'),0,1,'C');
+	$pdf->cell(0,6,utf8_decode('Coordinación Académica'),0,1,'C');
 	$pdf->ln(2);
 	$pdf->cell(0,6,utf8_decode('Departamento de Informática'),0,1,'C');
 
@@ -143,14 +141,12 @@ if(!file_exists($carpeta)){
 
 
     $pdf->ln(32);
-	$pdf->Image('../dist/img/Sello.png',55,160,25);
-	$pdf->Image('../dist/img/firma.png',82,162,40);
 	$pdf->SetFont('Times','BI',14);
 	$pdf->ln(8);
-	$pdf->cell(0,6,utf8_decode('Cristian Josué Rivera Ramírez'),0,1,'C');
+	$pdf->cell(0,6,utf8_decode('Dulce Monserrat Del Cid Fiallos'),0,1,'C');
 	$pdf->ln(2);
 	$pdf->SetFont('Times','I',14);
-	$pdf->cell(0,6,utf8_decode('Coordinador de Comité de Vinculación Universidad - Sociedad'),0,1,'C');
+	$pdf->cell(0,6,utf8_decode('Coordinación Académica'),0,1,'C');
 	$pdf->ln(2);
 	$pdf->cell(0,6,utf8_decode('Departamento de Informática'),0,1,'C');
 

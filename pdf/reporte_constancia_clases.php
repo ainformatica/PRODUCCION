@@ -19,19 +19,32 @@ from tbl_charla_practica cp, tbl_personas p, tbl_personas_extendidas px where px
 
 
 class PDF extends FPDF
-	{
-		function Header()
-		{
-			//date_default_timezone_get('America/Tegucigalpa');
-		$this->Image('../dist/img/logo_ia.jpg', 12,8,30);
-			$this->Ln(5);
-						$this->Ln(5);
+{
+    // Cabecera de página
+	function Header()
+    {
+		// Logo
+        $this->Image('../dist/img/logo.png',30,12,28);
+        // Arial bold 15
+        $this->SetFont('Arial','I',8);
+        $this->SetFillColor(255, 255, 255);;
+        // Movernos a la derecha
+        $this->Rect(0,0,220,50,'F');
+        $this->Image('../dist/img/encabezado_clase.png',10,12,195);
+        // Título
+		$this->SetY(17);
+        $this->SetX(165);
+        $this->Write(15,utf8_decode('15/10/2021'));
+		$this->SetY(21);
+        $this->SetX(185);
+        $this->Write(15,utf8_decode('01'));
+        $this->SetY(31);
+        $this->SetX(175);
+        $this->Write(15,utf8_decode('25/10/2021'));
 
-						$this->Image('../dist/img/logo-unah.jpg', 172,8, 22 );
-		}
-	
-
-}
+        $this->Ln(20);
+    }
+} 
 //date_default_timezone_get('America/Tegucigalpa');
 
 function fechaCastellano ($fecha) {
@@ -80,14 +93,12 @@ $fecha=date("Y-m-d H:i:s");
 
 
     $pdf->ln(32);
-	$pdf->Image('../dist/img/Sello.png',55,160,25);
-	$pdf->Image('../dist/img/firma.png',82,162,40);
 	$pdf->SetFont('Times','BI',14);
 	$pdf->ln(8);
-	$pdf->cell(0,6,utf8_decode('Cristian Josué Rivera Ramírez'),0,1,'C');
+	$pdf->cell(0,6,utf8_decode('Dulce Monserrat Del Cid Fiallos'),0,1,'C');
 	$pdf->ln(2);
 	$pdf->SetFont('Times','I',14);
-	$pdf->cell(0,6,utf8_decode('Coordinador de Comité de Vinculación Universidad - Sociedad'),0,1,'C');
+	$pdf->cell(0,6,utf8_decode('Coordinación Académica'),0,1,'C');
 	$pdf->ln(2);
 	$pdf->cell(0,6,utf8_decode('Departamento de Informática'),0,1,'C');
 
