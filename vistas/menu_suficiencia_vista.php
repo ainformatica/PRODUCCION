@@ -4,7 +4,7 @@ require_once('../clases/Conexion.php');
 require_once('../clases/funcion_visualizar.php');
 
 
-if (permiso_ver('122') == '1') {
+if (permiso_ver('6014') == '1') {
   $_SESSION['suficiencia'] = "...";
 } else {
   $_SESSION['suficiencia'] = "No 

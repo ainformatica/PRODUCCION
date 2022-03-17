@@ -14,7 +14,7 @@ $resultado = $mysqli->query($sql);
 $sql1 = "select * from tbl_facultades";
 $resultado1 = $mysqli->query($sql1);
 
-$Id_objeto = 30;
+$Id_objeto = 6007;
 
 
 $visualizacion = permiso_ver($Id_objeto);
