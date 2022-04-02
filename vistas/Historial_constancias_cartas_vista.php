@@ -15,7 +15,14 @@ require_once('../clases/funcion_permisos.php');
 
 $Id_objeto = 6005;
 
+
+
+
 $visualizacion = permiso_ver($Id_objeto);
+
+
+
+
 
 
 if ($visualizacion == 0) {
@@ -41,33 +48,6 @@ if ($visualizacion == 0) {
   $sql = ("select concat(p.nombres,' ', p.apellidos) as nombre ,px.valor from tbl_personas_extendidas px, tbl_personas p, tbl_usuarios u where u.id_persona='$id_persona' and p.id_persona='$id_persona' and px.id_atributo=12 and px.id_persona='$id_persona' ");
   //Obtener la fila del query
   $resultado = $mysqli->query($sql);
-}
-
-$validar_charla="SELECT count(id_persona) AS persona FROM tbl_charla_practica WHERE id_persona = $id_persona AND estado_asistencia_charla=1 AND charla_impartida=1";
-$charla = mysqli_fetch_assoc($mysqli->query($validar_charla));
-
-if ($charla['persona']==1) {
-  $btn_charla="<button type='submit'  class='btn btn-secondary btn-raised btn-sm' name= 'btn_imprimir'>Imprimir";
-}else{
-  $btn_charla="<button type='button'  class='btn btn-warning btn-raised btn-sm' name= 'btn_imprimir'>Imprimir";
-}
-
-$validar_carta="SELECT count(id_persona) AS persona FROM tbl_empresas_practica WHERE id_persona = $id_persona";
-$carta = mysqli_fetch_assoc($mysqli->query($validar_carta));
-
-if ($carta['persona']==1) {
-  $btn_carta="<button type='submit'  class='btn btn-secondary btn-raised btn-sm' name= 'btn_imprimir_carta'>Imprimir";
-}else{
-  $btn_carta="<button type='button'  class='btn btn-warning btn-raised btn-sm' name= 'btn_imprimir_carta'>Imprimir";
-}
-
-$validar_clase= "SELECT count(id_persona) AS persona FROM tbl_charla_practica WHERE id_persona=$id_persona AND id_verificacion=1";
-$clase = mysqli_fetch_assoc($mysqli->query($validar_clase));
-
-if ($clase['persona']==1) {
-  $btn_clase="<button type='submit'  class='btn btn-secondary btn-raised btn-sm' name= 'btn_imprimir'>Imprimir";
-}else{
-  $btn_clase="<button type='button'  class='btn btn-warning btn-raised btn-sm' name= 'btn_imprimir'>Imprimir";
 }
 
 
@@ -146,29 +126,22 @@ ob_end_flush();
 
                     <form class="well" action="../pdf/reporte_constancia_charla.php" method="POST" target="_blank">
                         <input type="hidden" name="id_persona" value="<?php echo $id_persona ?>">
-                        <!--<button type="submit"  class="btn btn-secondary btn-raised btn-sm" name= "btn_imprimir">Imprimir-->
-                        <?php  
-                          echo $btn_charla;
-                        ?>
+                        <button type="submit"  class="btn btn-secondary btn-raised btn-sm" name= "btn_imprimir">Imprimir
                         <i class="zmdi zmdi-local-printshop"></i>
                       </td>
                     </form>
                     <td style="text-align: center;">
 
                       <form class="well" action="../pdf/reporte_presentacion_empresa.php" method="POST" target="_blank">
-                        <?php  
-                          echo $btn_carta;
-                        ?>
+                        <button type="submit" class="btn btn-secondary btn-raised btn-sm" name="btn_imprimir">Imprimir
                           <i class="zmdi zmdi-local-printshop"></i>
                     </td>
                     </form>
                     <td style="text-align: center;">
 
-                    <form class="well" action="../pdf/reporte_constancia_clases_estudiante.php" method="POST" target="_blank">
+                    <form class="well" action="../pdf/reporte_constancia_clases.php" method="POST" target="_blank">
                         <input type="hidden" name="id_persona" value="<?php echo $id_persona ?>">
-                        <?php  
-                          echo $btn_clase;
-                        ?>
+                        <button type="submit"  class="btn btn-secondary btn-raised btn-sm" name= "btn_imprimir">Imprimir
                         <i class="zmdi zmdi-local-printshop"></i>
                       </td>
                     </form>
