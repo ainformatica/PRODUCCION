@@ -12,7 +12,7 @@ $usuario=$_SESSION['id_usuario'];
 $result= mysqli_fetch_assoc($mysqli->query($id));
 $id_persona=$result['id_persona'];
 $sql_estudiante = ("SELECT  px.valor, concat(a.nombres,' ',a.apellidos) as nombre, c.valor Correo,g.valor as direccion
-,H.valor as celular, j.valor as telefono,a.fecha_nacimiento,a.identidad
+,H.valor as celular, j.valor as telefono, L.valor as correo_alt, n.valor as lugar,a.fecha_nacimiento,a.identidad
 FROM tbl_personas AS a
 JOIN tbl_contactos c ON a.id_persona = c.id_persona
 JOIN tbl_tipo_contactos d ON c.id_tipo_contacto = d.id_tipo_contacto AND d.descripcion = 'CORREO'
@@ -22,6 +22,10 @@ JOIN tbl_contactos H ON a.id_persona = H.id_persona
 JOIN tbl_tipo_contactos I ON H.id_tipo_contacto = I.id_tipo_contacto AND I.descripcion = 'TELEFONO CELULAR'
 JOIN tbl_contactos j ON a.id_persona = j.id_persona
 JOIN tbl_tipo_contactos k ON j.id_tipo_contacto = k.id_tipo_contacto AND k.descripcion = 'TELEFONO FIJO'
+JOIN tbl_contactos L ON a.id_persona = L.id_persona
+JOIN tbl_tipo_contactos M ON L.id_tipo_contacto = M.id_tipo_contacto AND M.descripcion = 'CORREO ALTERNATIVO'
+JOIN tbl_contactos n ON a.id_persona = n.id_persona
+JOIN tbl_tipo_contactos o ON n.id_tipo_contacto = o.id_tipo_contacto AND o.descripcion = 'LUGAR DE NACIMIENTO'
 JOIN tbl_personas_extendidas as px on px.id_atributo=12 and px.id_persona=a.id_persona
 WHERE a.id_persona = $id_persona
 LIMIT 1");
@@ -104,6 +108,7 @@ class PDF extends FPDF
 	$row1 = mysqli_fetch_array($resultado);
                  
     $direccion="../archivos/PPS01_CROQUIS/".$row['valor'];
+    $foto="../foto_estudiante/".$row['valor'];
 	
 	$pdf = new PDF('P','mm','Legal',true);
 	$pdf->AliasNbPages();
@@ -115,6 +120,9 @@ class PDF extends FPDF
 	$pdf->SetY(69);
 	$pdf->SetX(47);
 	$pdf->cell(170,5,utf8_decode($row['nombre']),0);
+	$pdf->SetY(69);
+	$pdf->SetX(150);
+	$pdf->Image(listarArchivos($foto),163,68, 44, 47);
 	$pdf->SetY(78);
 	$pdf->SetX(47);
 	$pdf->cell(170,5,utf8_decode(''.$row['valor'].''),0);
@@ -124,6 +132,9 @@ class PDF extends FPDF
 	$pdf->SetY(89);
 	$pdf->SetX(47);
 	$pdf->cell(170,5,utf8_decode(''.fecha($row['fecha_nacimiento']).''),0);
+	$pdf->SetY(89);
+	$pdf->SetX(90);
+	$pdf->cell(170,5,utf8_decode(''.($row['lugar']).''),0);
 	$pdf->SetY(100);
 	$pdf->SetX(47);
 	$pdf->cell(170,5,utf8_decode(''.$row['direccion'].''),0);
@@ -136,6 +147,9 @@ class PDF extends FPDF
 	$pdf->SetY(119);
 	$pdf->SetX(47);
 	$pdf->cell(170,5,utf8_decode(''.$row['Correo'].''),0);
+	$pdf->SetY(119);
+	$pdf->SetX(147);
+	$pdf->cell(170,5,utf8_decode(''.$row['correo_alt'].''),0);
 	$pdf->SetY(148);
 	$pdf->SetX(47);
 	$pdf->cell(170,5,utf8_decode(''.$row1['modalidad'].''),0);
@@ -154,8 +168,8 @@ class PDF extends FPDF
 	$pdf->SetY(182);
 	$pdf->SetX(63);
 	$pdf->cell(170,5,utf8_decode(''.$row2['trabajai'].''),0);
-	$pdf->SetY(114);
-	$pdf->SetX(53);
+	$pdf->SetY(182);
+	$pdf->SetX(155);
 	$pdf->cell(170,5,utf8_decode(''.$row2['puesto_en_trabajo'].''),0);
 	$pdf->SetY(194);
 	$pdf->SetX(73);

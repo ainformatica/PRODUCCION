@@ -32,7 +32,7 @@ $usuario=$_SESSION['id_usuario'];
        $result= mysqli_fetch_assoc($mysqli->query($id));
        $id_persona=$result['id_persona'];
 /* Manda a llamar todos las datos de la tabla para llenar el gridview  */
-$sqltabla="Select ep.nombre_empresa, ep.jefe_inmediato, na.descripcion AS nivela ,ep.cargo_jefe_inmediato, concat(p.nombres,' ',p.apellidos)AS nombre, px.valor from tbl_empresas_practica ep, tbl_personas p, tbl_personas_extendidas px, tbl_nivel_academico na where ep.id_persona=p.id_persona and p.id_persona=$id_persona AND px.id_atributo=12 and px.id_persona=237 and ep.id_nivel_a=na.id_nivel_a";
+$sqltabla="Select ep.nombre_empresa, ep.jefe_inmediato, na.descripcion AS nivela ,ep.cargo_jefe_inmediato, concat(p.nombres,' ',p.apellidos)AS nombre, px.valor from tbl_empresas_practica ep, tbl_personas p, tbl_personas_extendidas px, tbl_nivel_academico na where ep.id_persona=p.id_persona and p.id_persona=$id_persona AND px.id_atributo=12 and px.id_persona= $id_persona and ep.id_nivel_a=na.id_nivel_a";
 
 
 class PDF extends FPDF
