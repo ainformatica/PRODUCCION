@@ -106,7 +106,7 @@ if ($msj==2)
 
 
 
-        $sql_tabla_estudiantes_practica="SELECT px.valor as valor, concat(p.nombres,' ',p.apellidos) as nombre,
+        $sql_tabla_estudiantes_practica="SELECT px.valor as valor, concat(p.nombres,' ',p.apellidos) as nombre, m.modalidad, ep.nombre_empresa,
         CASE 
         WHEN (sd.estado_coordinacion IS NULL and sd.estado_vinculacion='1') then
         'PENDIENTE' 
@@ -119,7 +119,7 @@ if ($msj==2)
         when sd.estado_coordinacion IS NULL then 'PROCESO'
         else
         sd.estado_coordinacion end as estado_coordinacion
-        from  tbl_personas p, tbl_subida_documentacion sd, tbl_personas_extendidas px where sd.id_persona=p.id_persona AND px.id_atributo=12 and px.id_persona=p.id_persona and estado_coordinacion IS NULL ";
+        from  tbl_personas p, tbl_subida_documentacion sd, tbl_personas_extendidas px, tbl_modalidad m, tbl_empresas_practica ep where sd.id_persona=p.id_persona AND px.id_atributo=12 and px.id_persona=p.id_persona and estado_coordinacion IS NULL  ";
 
 
 
@@ -262,11 +262,27 @@ $sql_datos_modal="SELECT px.valor as valor, concat(p.nombres,' ',p.apellidos) as
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                  <table id="tabla" class="table table-bordered table-striped">
+                     <div class="col-sm-4">
+                  <!-- <div class="form-group">
+                    <label>Tipo de institución</label>
+                    <select class="form-control" name="cb_empresa" id="empresa">
+                      <option selected disabled value="0">Seleccione una opción:</option>
+                      <?php
+                      $query = $mysqli->query("SELECT * FROM tbl_modalidad");
+                      while ($resultado = mysqli_fetch_array($query)) {
+                        echo '<option value="' . $resultado['id_modalidad'] . '"> ' . $resultado['modalidad'] . '</option>';
+                      }
+                      ?>
+                    </select>
+                  </div> -->
+              </div>
+                    <table id="tabla" class="table table-bordered table-striped">
                     <thead>
                       <tr>
                        <th>NOMBRE COMPLETO</th>
                        <th>CUENTA</th>   
+                       <th>EMPRESA</th>
+                       <th>MODALIDAD</th>
                        <th>PROCESO</th>
                        <th>EXPEDIENTE</th>                
                        <th>APROBAR PRACTICA</th>  
@@ -281,6 +297,8 @@ $sql_datos_modal="SELECT px.valor as valor, concat(p.nombres,' ',p.apellidos) as
                       <tr>
                         <td><?php echo strtoupper($row['nombre']); ?></td>
                         <td><?php echo $row['valor']; ?></td>
+                        <td><?php echo $row['nombre_empresa']; ?></td>
+                        <td><?php echo $row['modalidad']; ?></td>
                         <td><?php echo $row['proceso']; ?></td>
 
 
