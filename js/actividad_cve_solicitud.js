@@ -9,14 +9,7 @@ function init(){
 	mostrarform(false);
 	listar();
 	
-	// $("#formulario").on("submit",function(e)
-	// {
-	// 	guardaryeditar(e);	
-	// })
-	// $("#btnGuardarEnviar").on("submit",function(e)
-	// {
-	// 	insertaryenviar(e);	
-	// })
+	
 }
 
 //Función limpiar
@@ -35,6 +28,11 @@ function limpiar()
 		$("#id_ambito").val("");
 		$("#periodo").val("");
  		$("#id_actividad_voae").val("");
+
+ 		$("#nombre_act").val("");
+ 		$("#solicitud_act").val("");
+ 		$("#just_act").val("");
+ 		$("#id_actividad").val("");
 }
 
 //Función mostrar formulario
@@ -45,6 +43,7 @@ function mostrarform(flag)
 	{
 		$("#listadoregistros").hide();
 		$("#formularioregistros").show();
+		$("#formularioregistros2").hide();
 		$("#btnGuardarEnviar").prop("disabled",false);
 		$("#btnGuardar").prop("disabled",false);
 		$("#btnagregar").hide();
@@ -53,10 +52,31 @@ function mostrarform(flag)
 	{
 		$("#listadoregistros").show();
 		$("#formularioregistros").hide();
+		$("#formularioregistros2").hide();
 		$("#btnagregar").show();
 	}
 }
-
+function mostrarform2(flag)
+{
+	limpiar();
+	if (flag)
+	{
+		$("#listadoregistros").hide();
+		$("#formularioregistros2").show();
+		$("#btnGuardar2").prop("disabled",false);
+		$("#btnagregar").hide();
+		$("#btnagregarhoras").hide();
+		$("#btnact").hide();
+	}
+	else
+	{
+		$("#listadoregistros").show();
+		$("#formularioregistros2").hide();
+		$("#btnagregar").show();
+		$("#btnagregarhoras").show();
+		$("#btnact").show();
+	}
+}
 //Función cancelarform
 function cancelarform()
 {
@@ -293,7 +313,22 @@ function mostrar(id_actividad_voae, tipo=0)
  	})
 }
 
+function mostrar2(id_actividad_voae)
+{
+	$('.form-control').prop( "disabled", true );
+	$('#btnGuardar2').show();
+	
 
+	$.post("../Controlador/actividad_cve_controlador_solicitud.php?op=mostrar2",{id_actividad_voae : id_actividad_voae}, function(data, status)
+	{
+		data = JSON.parse(data);		
+		mostrarform2(true);
+		$("#id_actividad").val(data.id_actividad_voae);
+		$("#solicitud_act").val(data.id_actividad_voae);
+		$("#nombre_act").val(data.nombre_actividad);
+		$("#just_act").val(data.justificacion);
+ 	})
+}
 function solicitado(id_actividad_voae)
 
 {

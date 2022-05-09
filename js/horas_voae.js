@@ -138,7 +138,7 @@ function listar()
 		        titleAttr: "Exportar a Excel",
 				className: "btn btn-success",
 				exportOptions: {
-					  columns: [1, 2, 3, 4],		 
+					  columns: [1, 2, 3, 4, 5],		 
 				     },
 				title: "DEPARTAMENTO DE INFORMÁTICA",
 				messageTop: "REPORTE DE HORAS VOAE   "
@@ -160,7 +160,7 @@ function listar()
         orientation: "poltrait",
 		pageSize: "letter",
         exportOptions: {
-					  columns: [1, 2, 3, 4],		 
+					  columns: [1, 2, 3, 4, 5],		 
 				     },
 		 title: 'Reporte de Horas VOAE',
 		messageTop: "FECHA: " + fecha + " HORA: " + hora,

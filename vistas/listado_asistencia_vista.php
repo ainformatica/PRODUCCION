@@ -87,6 +87,12 @@ ob_end_flush();
                 <br><b>&nbsp;&nbsp; LUGAR: </b><?php  echo $resultado['ubicacion'];?>
                 <br><b>&nbsp;&nbsp; FECHA: </b><?php  echo $resultado['fch_inicial_actividad'];?>
                 <br><b>&nbsp;&nbsp; CATEGORIA: </b><?php  echo $resultado['nombre_ambito'];?></i></h5>
+                <br><b>&nbsp;&nbsp; </b></i></h5>
+                <form  target="_black" action="../Controlador/listado_asistencia_generarpdf.php"> 
+                                <button title="Exportar Listado de Asistencia" class="btn btn-danger"  ><i class="fas fa-file-pdf"></i> <a style="font-weight: bold;"></a> </button>
+                                <input type="text" value="$id_actividad" class="form-control"  readonly hidden>
+
+                            </form>
               </div>
 
               <div class="col-sm-3" align="right">
@@ -104,7 +110,7 @@ ob_end_flush();
 
                       <input  type="submit" name="add" id="btn_enviar" class="btn btn-info" placeholder="Importar"/>
                     </div>
-
+                    <p><br> <a class="btn btn-secondary" download="Formato Listado Asistencia" href="../archivos/repositorio_voae/formato.csv">Descargar Formato Listado </a> <p>
 
 
 
@@ -113,8 +119,8 @@ ob_end_flush();
 
             </div>
 
-            <div class="row"> 
-            <div class="col-sm-3 text-right">
+            <div class="box">
+            <div class="box-header with-border">
               <h1 align="right"><button class="btn btn-success" name="btnagregar" id="btnagregar" <?php echo $_SESSION['btnagregar']; ?> 
               onclick="mostrarform(true)"><i class="fa fa-plus-circle"></i> Agregar Estudiante</button></h1>
               <div class="box-tools pull-right">
@@ -176,18 +182,7 @@ ob_end_flush();
               <div class="col-sm-6">
                 <div class="form-group">
                   <label>CUENTA: </label>
-                  <select class="form-control-lg select2"  style="width: 100%;" id="cuenta" name="cuenta" required="" >
-                        <option  disabled="disabled" >Cuenta:</option>
-                          <?php
-                            $query = $mysqli -> query ("SELECT cuenta, nombre_alumno
-                            FROM `tbl_voae_asistencias` as a 
-                            JOIN tbl_personas_extendidas as p
-                            GROUP by a.cuenta;");
-                            while ($resultado = mysqli_fetch_array($query)) {
-                              echo '<option value="'.$resultado['cuenta'].'"> '.$resultado['cuenta'].'</option>' ;
-                            }
-                          ?>
-                    </select>
+                  <input class="form-control" type="number" id="cuenta" name="cuenta" required="" maxlength="20" >
                 </div>
               </div>
               <!-- NOMBRE -->   
@@ -201,7 +196,7 @@ ob_end_flush();
               <div class="col-sm-6">
                 <div class="form-group">
                   <label>CARRERA:</label>
-                  <select class="form-control-lg select2" id= "carrera" style="width: 100%;" name="carrera" required="">
+                  <select class="form-control" id= "carrera" style="width: 100%;" name="carrera" required="">
                     <option  value="" disabled="disabled">Seleccione una carrera:</option>
                     <?php
                     $query = $mysqli -> query ("SELECT * FROM tbl_carrera");
@@ -302,6 +297,28 @@ ob_end_flush();
       }
   }
 </script>
+ <script>
+$('input[type="file"]').on('change', function(){
+  var ext = $( this ).val().split('.').pop();
 
+  
+  if ($( this ).val() != '') {
+    if(ext == "csv" || ext == "CSV"){
+    }
+    else
+    {
+      $( this ).val('');
+      swal({
+                     title:"ALERTA",
+                     text:"EXTENSIÓN NO PERMITIDA: " + ext,
+                     type: "error",
+                     icon: "warning",
+                     showConfirmButton: false,
+                     timer: 3000
+                  });
+    }
+  }
+});
+</script>
 </body>
 </html>

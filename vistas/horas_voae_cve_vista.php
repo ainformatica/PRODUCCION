@@ -108,6 +108,7 @@ ob_end_flush();
                             <th>Opciones</th>
                             <th>Nombre Alumno</th>
                             <th>Cuenta</th>
+                            <th>Carrera</th>
                             <th>Actividades Realizadas</th>
                             <th>Horas Totales</th>
                             
@@ -138,7 +139,7 @@ ob_end_flush();
                                 <option  value="0" disabled="disabled">CUENTA --- NOMBRES</option>
                                   <?php
                                   $espacio=" --";
-                                    $query = $mysqli -> query ("select tbl_personas.id_persona, upper(concat(tbl_personas.nombres,' ',tbl_personas.apellidos)) AS nombres, tbl_personas_extendidas.valor from tbl_personas join tbl_personas_extendidas on tbl_personas.id_persona = tbl_personas_extendidas.id_persona Where id_tipo_persona=2 and id_atributo=12;");
+                                    $query = $mysqli -> query ("select tbl_personas.id_persona, concat(tbl_personas.nombres,' ',tbl_personas.apellidos) AS nombres, tbl_personas_extendidas.valor from tbl_personas join tbl_personas_extendidas on tbl_personas.id_persona = tbl_personas_extendidas.id_persona Where id_tipo_persona=2 and id_atributo=12;");
                                     while ($resultado = mysqli_fetch_array($query)) {
                                       echo '<option value="'.$resultado['id_persona'].'">'.$resultado['valor'].''.$espacio.' '.$resultado['nombres'].'</option>' ;
                                     }

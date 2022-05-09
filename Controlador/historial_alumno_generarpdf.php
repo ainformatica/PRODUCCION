@@ -46,15 +46,15 @@ $fecha= date('d-m-Y H:i');
 $this->write(5,' '.$fecha);
 
  $this->ln();
-$this->SetFont('Arial','B',10);
-$this->SetTextColor(15,57,117);
-$this->setY(60);
-$this->setX(85);
-$this->write(5,'HISTORIAL DE HORAS ALUMNO');
+$this->SetFont('Arial','B',15);
+$this->SetTextColor(0,0,0);
+$this->setY(50);
+$this->setX(65);
+$this->write(5,'HISTORIAL DE HORAS VOAE ALUMNO');
 
 
  $this->setX(25);
-$this->setY(75);
+$this->setY(68);
 $this->write(5,'Nombre: ');
 $this->setX(25);
 $this->setY(80);
@@ -65,22 +65,22 @@ $nombre = $_SESSION['nombre'];
 $cuenta = $_SESSION['cuenta'];
 //$id_memo = 6;
 global $instancia_conexion;
-$sql="select * from tbl_voae_asistencias where nombre_alumno = '$nombre'";
+$sql="select * from tbl_voae_asistencias where cuenta = '$cuenta' LIMIT 1";
 $stmt = $instancia_conexion->ejecutarConsulta($sql);
 
      while ($reg = $stmt->fetch_object()) {
 
      $this->ln();
-    $this->setY(75);
-    $this->SetX(28);
-    $this->SetFont('Arial','B',10);
-    $this->SetTextColor(15,57,117);
-    $this->write(5, $reg->nombre_alumno);
+    $this->setY(68);
+    $this->SetX(33);
+    $this->SetFont('Arial','B',15);
+    $this->SetTextColor(0,0,0);
+    $this->write(5, utf8_decode($reg->nombre_alumno));
 
      $this->setY(80);
-    $this->SetX(28);
-    $this->SetFont('Arial','B',10);
-    $this->SetTextColor(15,57,117);
+    $this->SetX(33);
+    $this->SetFont('Arial','B',15);
+    $this->SetTextColor(0,0,0);
     $this->write(5, $reg->cuenta);
     }
 
@@ -89,12 +89,11 @@ $stmt = $instancia_conexion->ejecutarConsulta($sql);
         $this->SetTextColor(255,255,255);
         $this->SetY(90);
         $this->SetX(5);
-        $this->Cell(50, 7, "ACTIVIDAD", 'B', 0, 'C',1,'F');
-        // $this->Cell(23, 7, "#EMPLEADO", 1, 0, 'C');
-        $this->Cell(40, 7, "FECHA", 'B', 0, 'C',1,'F');
-        $this->Cell(50, 7, "AMBITO", 'B', 0, 'C',1,'F');
-        $this->Cell(20, 7, "HORAS", 'B', 0, 'C',1,'F');
-        $this->Cell(45, 7, "TIPO DE ACTIVIDAD", 'B', 0, 'C',1,'F');
+        $this->Cell(50, 7, "ACTIVIDAD", 1, 0, 'C',1,'F');
+        $this->Cell(40, 7, "FECHA", 1, 0, 'C',1,'F');
+        $this->Cell(50, 7, "AMBITO", 1, 0, 'C',1,'F');
+        $this->Cell(20, 7, "HORAS", 1, 0, 'C',1,'F');
+        $this->Cell(45, 7, "TIPO DE ACTIVIDAD", 1, 0, 'C',1,'F');
         $this->ln();
  
 }
@@ -113,15 +112,15 @@ $stmt = $instancia_conexion->ejecutarConsulta($sql);
     $stmt = $instancia_conexion->ejecutarConsulta($sql);
 
         while ($reg = $stmt->fetch_object()) {
-            $this->SetFont('Arial','',10);
+            $this->SetFont('Arial','',7);
             $this->SetTextColor(0,0,0);
             $this->SetX(5);
 
-            $this->Cell(50, 7, $reg->nombre_actividad, 'B', 0, 'C');
-            $this->Cell(40, 7, $reg->fch_inicial_actividad, 'B', 0, 'C');
-            $this->Cell(50, 7, $reg->ambito, 'B', 0, 'C');
-            $this->Cell(20, 7, $reg->cant_horas, 'B', 0, 'C');
-            $this->Cell(45, 7, $reg->tipo_actividad, 'B', 0, 'C');
+            $this->Cell(50, 7, utf8_decode($reg->nombre_actividad),  1, 0, 'C');
+            $this->Cell(40, 7, $reg->fch_inicial_actividad, 1, 0, 'C');
+            $this->Cell(50, 7, $reg->ambito, 1, 0, 'C');
+            $this->Cell(20, 7, $reg->cant_horas, 1, 0, 'C');
+            $this->Cell(45, 7, $reg->tipo_actividad, 1, 0, 'C');
             $this->ln();
         }
 

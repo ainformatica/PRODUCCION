@@ -93,8 +93,9 @@ case 'guardaryeditar':
                        </form>',
  				"1"=>$reg->nombre_alumno,
  				"2"=>$reg->cuenta,
- 				"3"=>$reg->total_actividades,
- 				"4"=>$reg->total_horas
+ 				"3"=>$reg->carrera,
+ 				"4"=>$reg->total_actividades,
+ 				"5"=>$reg->total_horas
  			);
  		}
 

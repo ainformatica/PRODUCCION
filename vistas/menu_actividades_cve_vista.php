@@ -44,6 +44,12 @@ if (permiso_ver('8236')=='1') {
   $_SESSION['reporte_act']="No 
             tiene permisos para visualizar";
 }
+if (permiso_ver('8235')=='1') {
+  $_SESSION['act_cancelada']="...";
+} else {
+  $_SESSION['act_cancelada']="No 
+            tiene permisos para visualizar";
+}
 ob_end_flush();
 ?>
 <!DOCTYPE html>
@@ -158,6 +164,21 @@ ob_end_flush();
                 <i class="fas fa-edit"></i>
               </div>
               <a href="../vistas/informe_final_cve_vista.php" class="small-box-footer">
+                Ir <i class="fas fa-arrow-circle-right"></i>
+              </a>
+            </div>
+          </div>
+
+          <div class="col-6 col-sm-6 col-md-4">
+            <div class="small-box  bg-light">
+              <div class="inner">
+                <h5>Actividades<br> Actividades Canceladas </h5>
+                <p><?php echo $_SESSION['act_cancelada']; ?></p> 
+              </div>
+              <div class="icon">
+                <i class="fas fa-edit"></i>
+              </div>
+              <a href="../vistas/actividades_canceladas_cve_vista.php" class="small-box-footer">
                 Ir <i class="fas fa-arrow-circle-right"></i>
               </a>
             </div>

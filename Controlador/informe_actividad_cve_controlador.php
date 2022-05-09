@@ -62,8 +62,18 @@ switch ($_GET["op"]){
 
 		if (empty($id_informe)){ 
 
-			
+			//LOGICA PARA EL NOMBRE QUE SE REPITE
+			$sqlexiste=("select count(id_actividad) as id_actividad  from tbl_voae_informes where id_actividad='$id_actividad'");
+
+			//OBTENER LA ULTIMA FILA DEL QUERY
+			$existe = mysqli_fetch_assoc($mysqli->query($sqlexiste)); 
 			//SE MANDA A LA BITACORA LA ACCION DE INSERTAR CON EL ID DE ESTADO 13 
+
+			//CONDICION PARA QUE NO SE REPITA EL NOMBRE
+			if ($existe['id_actividad']== 1) {
+				echo 'LA ACTIVIDAD YA TIENE INFORME';
+
+			} else {
 
 			$id_estado=13;
 
@@ -71,13 +81,26 @@ switch ($_GET["op"]){
 			echo $rspta ? "Informe  Registrado" : "El informe no se pudo registrar ";
 			bitacora::evento_bitacora($Id_objeto, $_SESSION['id_usuario'], 'INSERTO', 'EL INFORME CON ID: "' . $id_informe . '"');
 		}
-		else {
+		}else {
+
+			//LOGICA PARA EL NOMBRE QUE SE REPITE
+			$sqlexiste=("select count(id_actividad) as id_actividad  from tbl_voae_informes where id_actividad='$id_actividad' and id_informe<>'$id_informe'");
+
+			//OBTENER LA ULTIMA FILA DEL QUERY
+			$existe = mysqli_fetch_assoc($mysqli->query($sqlexiste)); 
+			//SE MANDA A LA BITACORA LA ACCION DE INSERTAR CON EL ID DE ESTADO 13 
+
+			//CONDICION PARA QUE NO SE REPITA EL NOMBRE
+			if ($existe['id_actividad']== 1) {
+				echo 'LA ACTIVIDAD YA TIENE INFORME';
+
+			} else {
 			$rspta=$informe_actividad->editar($id_informe,$id_repositorio,$nombre_archivo,$dir_repositorio,$id_actividad,$introduccion,$objetivos,$desarrollo,$conclusiones,$id_usuario_registro,$id_estado);
 			echo $rspta ? "Informe  actualizado" : "El informe no se pudo actualizar ";
 			bitacora::evento_bitacora($Id_objeto, $_SESSION['id_usuario'], 'MODIFICO', 'EL INFORME CON ID: "' . $id_informe . '"');				
 
+		 }
 		}
-
 	break;
 
 
@@ -109,15 +132,14 @@ switch ($_GET["op"]){
 			while ($reg=$rspta->fetch_object()){
 				$data[]=array(
 				"0"=>' <button id="btn_editar" '.$_SESSION["btn_editar"].' class="btn btn-warning" onclick="mostrar('.$reg->id_informe.')"><i class="far fa-edit"></i></button>'.
-				' <button id="btn_eliminar" '.$_SESSION["btn_eliminar"].' class="btn btn-danger" onclick="eliminar('.$reg->id_informe.')"><i class="fas fa-trash-alt"></i></button>'.
 				'<form action="../vistas/listado_asistencia_vista.php" method="POST"   style="display:inline;">
 					<input type="hidden" name="id_actividad_cve" value="'.$reg->id_actividad_voae.'" onclick="listar('.$reg->id_actividad_voae.')">
 					<button class="btn btn-info" title="Lista de Asistencia" type="submit"><i class="fas fa-list-ol"></i></button>
 				</form>'. 
 				'<form target="_black" action="../Controlador/informe_actividad_pdf.php" method="POST" style="display:inline;">
-					   <input type="hidden" name="id_informe" value="'.$reg->id_informe.'">
+					   <input type="hidden" name="id_actividad_voae" value="'.$reg->id_actividad_voae.'">
 					   <button title="Generar PDF"  class="btn btn-danger"  type="submit" ><i class="fas fa-file-pdf"></i></button></form>',						 
-				"1"=>$reg->no_solicitud,
+				"1"=>$reg->id_actividad_voae,
 				"2"=>$reg->nombre,
 				"3"=>$reg->asistentes,
 				"4"=>$reg->fch_informe,

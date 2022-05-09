@@ -7,22 +7,23 @@ var tabla;
 //Función que se ejecuta al inicio
 function init(){
 	mostrarform(false);
-	listar2();
-	
+	listar3();
+
+
 	$("#formulario").on("submit",function(e)
 	{
 		guardaryeditar(e);	
 	})
 	$("#formulario2").on("submit",function(e)
 	{
-		cancelar(e);	
+		denegar(e);	
 	})
 }
 
 //Función limpiar
 function limpiar()
 {
-		$("#no_solicitud").val("");
+	$("#no_solicitud").val("");
 		$("#nombre_actividad").val("");
  		$("#ubicacion").val("");
  		$("#fch_inicial_actividad").val("");
@@ -48,7 +49,7 @@ function mostrarform(flag)
 	limpiar();
 	if (flag)
 	{
-		$("#listadoregistros2").hide();
+		$("#listadoregistros1").hide();
 		$("#formularioregistros").show();
 		$("#formularioregistros2").hide();
 		$("#btnGuardar").prop("disabled",false);
@@ -56,10 +57,10 @@ function mostrarform(flag)
 	}
 	else
 	{
-		$("#listadoregistros2").show();
+		$("#listadoregistros1").show();
 		$("#formularioregistros").hide();
 		$("#formularioregistros2").hide();
-		$("#btnagregar").hide();
+		$("#btnagregar").show();
 	}
 }
 function mostrarform2(flag)
@@ -67,7 +68,7 @@ function mostrarform2(flag)
 	limpiar();
 	if (flag)
 	{
-		$("#listadoregistros2").hide();
+		$("#listadoregistros1").hide();
 		$("#formularioregistros2").show();
 		$("#btnGuardar2").prop("disabled",false);
 		$("#btnagregar").hide();
@@ -76,27 +77,26 @@ function mostrarform2(flag)
 	}
 	else
 	{
-		$("#listadoregistros2").show();
+		$("#listadoregistros1").show();
 		$("#formularioregistros2").hide();
 		$("#btnagregar").show();
 		$("#btnagregarhoras").show();
 		$("#btnact").show();
 	}
 }
-
 //Función cancelarform
 function cancelarform()
 {
 	limpiar();
 	mostrarform(false);
 	$('.form-control').prop( "disabled", false );
-	
 }
 
 
-function listar2()
+//Función Listar
+function listar3()
 {
-	tabla=$('#tbllistado2').dataTable(
+	tabla=$('#tbllistado1').dataTable(
 	{
 		"aProcessing": true,//Activamos el procesamiento del datatables
 	    "aServerSide": true,//Paginación y filtrado realizados por el servidor
@@ -134,10 +134,10 @@ function listar2()
 		        titleAttr: "Exportar a Excel",
 				className: "btn btn-success",
 				exportOptions: {
-					  columns: [1, 2, 3, 4, 5, 6],		 
+					  columns: [1, 2, 3],		 
 				     },
 				title: "DEPARTAMENTO DE INFORMÁTICA",
-				messageTop: "REPORTE DE ACTIVIDADES APROBADAS/FINALIZADAS   "
+				messageTop: "REPORTE DE ACTIVIDADES CANCELADAS   "
 
 					},
 
@@ -156,9 +156,9 @@ function listar2()
         orientation: "poltrait",
 		pageSize: "letter",
         exportOptions: {
-					  columns: [1, 2, 3, 4, 5, 6],		 
+					  columns: [1, 2, 3],		 
 				     },
-		 title: 'Reporte de Actividades Aprobadas/Finalizadas',
+		 title: 'Reporte de Actividades Canceladas',
 		messageTop: "FECHA: " + fecha + " HORA: " + hora,
 
      customize: function (doc) {
@@ -198,10 +198,11 @@ function listar2()
 			},
 		},
 		        	
+		        
 		        ],
 		"ajax":
 				{
-					url: '../Controlador/actividad_cve_controlador_final.php?op=listar2',
+					url: '../Controlador/actividad_cve_controlador_canceladas.php?op=listar3',
 					type : "get",
 					dataType : "json",						
 					error: function(e){
@@ -209,104 +210,20 @@ function listar2()
 					}
 				},
 		"bDestroy": true,
-		lengthMenu: [[5, 25, 50, 100, -1], [5, 25, 50, 100, 'All']],
-		"iDisplayLength": 5,//Paginación
+		lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, 'All']],
+		"iDisplayLength": 10,//Paginación
 	    "order": [[ 0, "desc" ]]//Ordenar (columna,orden)
 	}).DataTable();
 }
 
-
-function mostrar(id_actividad_voae, tipo=0)
+function denegar(e)
 {
-	$('.form-control').prop( "disabled", false );
-	$('#btnGuardar').show();
-	if (tipo==1) {
-		$('.form-control').prop( "disabled", true );
-		$('#btnGuardar').hide();
-	
-	}
-
-	$.post("../Controlador/actividad_cve_controlador_final.php?op=mostrar",{id_actividad_voae : id_actividad_voae}, function(data, status)
-	{
-		data = JSON.parse(data);		
-		mostrarform(true);
-
-		$("#no_solicitud").val(data.no_solicitud);
-		$("#nombre_actividad").val(data.nombre_actividad);
- 		$("#ubicacion").val(data.ubicacion);
- 		$("#fch_inicial_actividad").val(data.fch_inicial_actividad);
-		$("#fch_final_actividad").val(data.fch_final_actividad);
- 		$("#descripcion").val(data.descripcion);
- 		$("#poblacion_objetivo").val(data.poblacion_objetivo);
-		$("#presupuesto").val(data.presupuesto);
-		$("#staff_alumnos").val(data.staff_alumnos);
-		$("#observaciones").val(data.observaciones);
-		$("#id_ambito").val(data.id_ambito);
-		$("#periodo").val(data.periodo);
- 		$("#id_actividad_voae").val(data.id_actividad_voae);
-
- 	})
-}
-function mostrar2(id_actividad_voae)
-{
-	$('.form-control').prop( "disabled", false );
-	$('#btnGuardar2').show();
-	
-
-	$.post("../Controlador/actividad_cve_controlador_final.php?op=mostrar2",{id_actividad_voae : id_actividad_voae}, function(data, status)
-	{
-		data = JSON.parse(data);		
-		mostrarform2(true);
-		$("#id_actividad").val(data.id_actividad_voae);
-		$("#solicitud_act").val(data.id_actividad_voae);
-		$("#nombre_act").val(data.nombre_actividad);
-		$("#just_act").val(data.justificacion);
- 	})
-}
-
-//Función para Finalizar Actividad
-function finalizar(id_actividad_voae)
-{ 
-	
-	swal({
-		
-        title: "Alerta",
-		text:
-			"¿Está seguro de Finalizar esta Actividad?",
-		icon: "warning",
-		buttons: true,
-		dangerMode: false,
-	}).then((result) => {
-		if (result) {
-			
-		 	$.post("../Controlador/actividad_cve_controlador_final.php?op=finalizar", {id_actividad_voae : id_actividad_voae}, function(e){
-        		swal({
-		
-		        title: e,
-				text:" ",
-				icon: "success",
-				buttons: false,
-				dangerMode: false,
-				timer: 3000,
-			});
-
-			tabla.ajax.reload();
-           
-        	});	
-			
-		} 
-	})
-	
-}
-//Función para cancelar Actividad
-function cancelar(e)
-{ 
 	e.preventDefault(); //No se activará la acción predeterminada del evento
 	$("#btnGuardar2").prop("disabled",true);
 	var formData = new FormData($("#formulario2")[0]);
 
 	$.ajax({
-		url: "../Controlador/actividad_cve_controlador_final.php?op=cancelar",
+		url: "../Controlador/actividad_cve_controlador_canceladas.php?op=denegar",
 	    type: "POST",
 	    data: formData,
 	    contentType: false,
@@ -331,9 +248,91 @@ function cancelar(e)
 	    }
 
 	});
-	limpiar();	
+	limpiar();
+}
+
+
+function mostrar(id_actividad_voae, tipo=0)
+{
+	$('.form-control').prop( "disabled", true );
+	$('#btnGuardar').show();
+	if (tipo==1) {
+		$('.form-control').prop( "disabled", true );
+		$('#btnGuardar').hide();
+	}
+
+	$.post("../Controlador/actividad_cve_controlador_canceladas.php?op=mostrar",{id_actividad_voae : id_actividad_voae}, function(data, status)
+	{
+		data = JSON.parse(data);		
+		mostrarform(true);
+
+		$("#no_solicitud").val(data.id_actividad_voae);
+		$("#nombre_actividad").val(data.nombre_actividad);
+ 		$("#ubicacion").val(data.ubicacion);
+ 		$("#fch_inicial_actividad").val(data.fch_inicial_actividad);
+		$("#fch_final_actividad").val(data.fch_final_actividad);
+ 		$("#descripcion").val(data.descripcion);
+ 		$("#poblacion_objetivo").val(data.poblacion_objetivo);
+		$("#presupuesto").val(data.presupuesto);
+		$("#staff_alumnos").val(data.staff_alumnos);
+		$("#observaciones").val(data.observaciones);
+		$("#id_ambito").val(data.id_ambito);
+		$("#periodo").val(data.periodo);
+ 		$("#id_actividad_voae").val(data.id_actividad_voae);
+
+ 	})
+}
+
+function mostrar2(id_actividad_voae)
+{
+	$('.form-control').prop( "disabled", true );
+	$('#btnGuardar2').show();
+	
+
+	$.post("../Controlador/actividad_cve_controlador_canceladas.php?op=mostrar2",{id_actividad_voae : id_actividad_voae}, function(data, status)
+	{
+		data = JSON.parse(data);		
+		mostrarform2(true);
+		$("#id_actividad").val(data.id_actividad_voae);
+		$("#solicitud_act").val(data.id_actividad_voae);
+		$("#nombre_act").val(data.nombre_actividad);
+		$("#just_act").val(data.justificacion);
+ 	})
+}
+
+//Función para activar registros
+function aprobar(id_actividad_voae)
+
+{
+	swal({
+		
+        title: "Alerta",
+		text:
+			"¿Está seguro de Aprobar esta Actividad?",
+		icon: "warning",
+		buttons: true,
+		dangerMode: false,
+	}).then((result) => {
+		if (result) {
+			
+		 	$.post("../Controlador/actividad_cve_controlador_canceladas.php?op=aprobar", {id_actividad_voae : id_actividad_voae}, function(e){
+        		swal({
+		
+		        title: e,
+				text:" ",
+				icon: "success",
+				buttons: false,
+				dangerMode: false,
+				timer: 3000,
+			});
+			tabla.ajax.reload();
+
+        	});	
+			
+		} 
+	})
+	
 }
 
 init();
-
 

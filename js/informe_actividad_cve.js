@@ -216,8 +216,8 @@ function mostrar(id_informe) {
         mostrarform(true);
 
 
-        $("#id_informe").val(data.id_informe, data.nombre_actividad);
-        $("#id_actividad").select2('val', data.id_actividad);
+        $("#id_informe").val(data.id_informe);
+        $("#id_actividad").val(data.id_actividad);
         $("#introduccion").val(data.introduccion);
         $("#objetivos").val(data.objetivos);
         $("#desarrollo").val(data.desarrollo);

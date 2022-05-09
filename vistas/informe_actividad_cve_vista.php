@@ -75,13 +75,13 @@ ob_end_flush();
             <div class="panel-body table-responsive" id="listadoregistros">
               <table id="tbllistado" class="table table-striped table-bordered table-condensed table-hover">
                 <thead>
-                  <th>OPCIONES</th>
-                  <th>NO ACTIVIDAD</th>
-                  <th>NOMBRE DE ACTIVIDAD</th>
-                  <th>ASISTENCIA</th>
-                  <th>FECHA INFORME</th> 
-                  <th>USUARIO</th> 
-                  <th>EVIDENCIA ACTIVIDAD</th>                                  
+                  <th>Opciones</th>
+                  <th>No Actividad</th>
+                  <th>Nombrer Actividad</th>
+                  <th>Asistencia</th>
+                  <th>Fecha Informe</th> 
+                  <th>Usuario</th> 
+                  <th>Evidencia Actividad</th>                                  
                 </thead>
                 <tbody>                            
                 </tbody>
@@ -108,12 +108,12 @@ ob_end_flush();
                   <div class="form-group col-xs-12">
                     <input type="hidden" name="id_informe" id="id_informe">
                     <label>Actividad:</label>
-                    <select class="form-control-lg select2" id= "id_actividad" style="width: 100%;" name="id_actividad" required="">
+                    <select class="form-control" style="width : 500px; heigth : 1px" id= "id_actividad" name="id_actividad" required="">
                         <option  disabled="disabled">Seleccione una actividad realizada:</option>
                           <?php
                             $query = $mysqli -> query ("call vista_act_usuario('$usuario')");
                             while ($resultado = mysqli_fetch_array($query)) {
-                              echo '<option value="'.$resultado['id_actividad_voae'].'"> '.$resultado['nombre_actividad'].'---'.$resultado['no_solicitud'].'</option>' ;
+                              echo '<option value="'.$resultado['id_actividad_voae'].'">---- '.$resultado['nombre_actividad'].' ---- '.$resultado['id_actividad_voae'].'</option>' ;
                             }
                           ?>
                     </select>
@@ -173,7 +173,7 @@ ob_end_flush();
                     <div class="col-sm-12">
                       <div class="form-group">                 
                         <label>Desarrollo </label>
-                        <p><textarea  class="form-control" name="desarrollo" id="desarrollo" rows="10" required="" maxlength="25000" value="" onkeyup="Card(event, this)"> </textarea></p>
+                        <p><textarea  class="form-control" name="desarrollo" id="desarrollo" rows="8" required="" maxlength="1000" value="" onkeyup="Card(event, this)"> </textarea></p>
                       </div>
                     </div>         
                   </div>
@@ -208,7 +208,7 @@ ob_end_flush();
                     <div class="col-sm-6">
                       <div class="form-group">                     
                         <label>Fotografías </label>
-                        <p> Solo se admite un documento en formato PDF. Se recomienda insertar las imágenes en de Word o PowerPoint y guardarlo como PDF para importar el archivo. <p>
+                        <p> Sólo se admite un documento en formato PDF. Se recomienda insertar las imágenes en Word o PowerPoint y guardarlo como PDF para importar el archivo. Tamaño máximo 2 MB. <p>
                         
                         <!-- <div class="custom-file">
                           <input type="file" class="custom-file-input" accept="application/pdf" id="fotos_pdf" name="fotos_pdf" required="">
@@ -294,6 +294,21 @@ ob_end_flush();
 <script>
 $('input[type="file"]').on('change', function(){
   var ext = $( this ).val().split('.').pop();
+  var fileSize = this.files[0].size;
+
+  if(fileSize > 2000000){
+    $( this ).val('');
+      swal({
+                     title:"ALERTA",
+                     text:"EL ARCHIVO SUPERA EL TAMAÑO REQUERIDO",
+                     type: "error",
+                     icon: "warning",
+                     showConfirmButton: false,
+                     timer: 4000
+                  });
+    this.value = '';
+    this.files[0].name = '';
+  }else
   if ($( this ).val() != '') {
     if(ext == "pdf" || ext == "PDF"){
     }

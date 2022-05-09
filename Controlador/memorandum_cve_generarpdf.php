@@ -59,9 +59,9 @@ class pdf extends FPDF
 
         $this->ln();
         $this->setY(80);
-        $this->SetFont('Arial','B',10);
-        $this->SetTextColor(15,57,117);
-        $this->setY(80);
+        $this->SetFont('Arial','B',13);
+        $this->SetTextColor(0,0,0);
+        $this->setY(65);
         $this->setX(80);
         $this->write(7,  "MEMORANDUM  " );
         $this->SetTextColor(82, 86, 89);
@@ -102,10 +102,10 @@ class pdf extends FPDF
 
             $this->ln();
             $this->setY(80);
-            $this->SetFont('Arial','B',10);
-            $this->SetTextColor(15,57,117);
-            $this->setY(80);
-            $this->setX(110);
+            $this->SetFont('Arial','B',13);
+            $this->SetTextColor(0,0,0);
+            $this->setY(65);
+            $this->setX(117);
             $this->write(7,  $reg->no_memo );
             $this->SetFont('Arial','',10);
             $this->SetTextColor(82, 86, 89);
@@ -113,18 +113,18 @@ class pdf extends FPDF
             $this->setX(40);
             $this->write(7,  $reg->remitente);
             $this->setY(120);
-            $this->setX(40);
+            $this->setX(35);
             $this->write(7,  $reg->destinatario);
             $this->setY(150);
             $this->setX(40);
             $this->write(7,  $reg->fecha);
             $this->setY(170);
-            $this->setX(40);
+            $this->setX(44);
             $this->SetFont('Arial','B',10);
             $this->write(7,  $reg->asunto);
             $this->ln();
             $this->setY(180);
-            $this->setX(40);
+            $this->setX(44);
             $this->SetFont('Arial','',10);
             $this->multicell(160,10, utf8_decode($reg->contenido), 0,'J',0);
            /// $pdf->Multicell(160, 10, $texto, 0, 'L', 0);

@@ -5,12 +5,12 @@ session_start();
 require_once ('../vistas/pagina_inicio_vista.php');
 require_once ('../clases/Conexion.php');
 
-require_once ('../clases/conexion_mantenimientos.php');
 require_once ('../clases/funcion_bitacora.php');
 require_once ('../clases/funcion_visualizar.php');
 require_once ('../clases/funcion_permisos.php');
 
-$Id_objeto=8229; 
+$Id_objeto=8235; 
+$hoy=date("y-m-d");
 
 
 $visualizacion= permiso_ver($Id_objeto);
@@ -49,8 +49,9 @@ if($visualizacion==0){
             <li class="breadcrumb-item"><a href="../vistas/pagina_principal_vista.php">Inicio</a></li>
             <li class="breadcrumb-item active"><a href="../vistas/menu_actividades_cve_vista.php">Menú Actividades</a></li>
             <li class="breadcrumb-item active"><a href="../vistas/Actividad_cve_solicitud_vista.php">Solicitud de Actividades</a></li>
-            <li class="breadcrumb-item active"><a >Gestión de Actividades</a></li>
-            <li class="breadcrumb-item active"><a href="../vistas/actividad_cve_final_vista.php" >Actividades Finalizadas</a></li>
+            <li class="breadcrumb-item active"><a href="../vistas/actividad_cve_final_vista.php">Actividades Finalizadas</a></li>
+            <li class="breadcrumb-item active"><a >Actividades Canceladas</a></li>
+            
           </ol>
         </div>
 
@@ -78,16 +79,14 @@ if($visualizacion==0){
             <div class="panel-body table-responsive" id="listadoregistros1">
               <table id="tbllistado1" class="table table-striped table-bordered table-condensed table-hover">
                 <div class="col-sm-12">
-                  <h4>GESTION DE SOLICITUDES</h4>
+                  <h4>ACTIVIDADES CANCELADAS</h4>
                  </div>
                 <thead>
                   <th>Opciones</th>
                   <th>No de Solicitud</th>
-                  <th>Fecha</th>
-                  <th>Nombre Solicitud</th>
-                  <th>Usuario</th>
+                  <th>Nombre Actividad</th>
                   <th>Periodo</th>
-                  <th>Estado</th>
+
 
                 </thead>
                 <tbody>                            
@@ -262,7 +261,7 @@ if($visualizacion==0){
 </div>
           <div  id="formularioregistros2">
             <form name="formulario2" id="formulario2" method="POST">
-             <section><h5><b><i><p>DENEGACIÓN DE ACTIVIDAD </p></i></b></h5>
+             <section><h5><b><i><p>MOTIVO CANCELACIÓN </p></i></b></h5>
                           
                           </section>
                 
@@ -295,7 +294,7 @@ if($visualizacion==0){
                 <!-- Card 2 -->
                 <div class="card card-default">
                 <div class="card-header bg-gradient-dark">
-                  <h3 class="card-title">Justifación Denegar</h3>
+                  <h3 class="card-title">Cancelación Motivo</h3>
                   <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
                       <i class="fas fa-minus"></i>
@@ -304,8 +303,8 @@ if($visualizacion==0){
                 </div>
                 <div class="card-body">
                 <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                  <label>Justificación:</label>
-                  <p><textarea class="form-control" placeholder="Motivo Denegación de Actividad" name="just_act" id="just_act" rows="8" required="" maxlength="300" value=""                                       
+                  <label>Cancelación:</label>
+                  <p><textarea disabled class="form-control" placeholder="Motivo Denegación de Actividad" name="just_act" id="just_act" rows="8" required="" maxlength="300" value=""                                       
                                       onkeyup="Card(event, this)"> </textarea></p>
                 </div>
                 </div>
@@ -313,7 +312,7 @@ if($visualizacion==0){
 
                 
                 <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                  <button class="btn btn-primary pull-right" type="submit" id="btnGuardar2"><i class="fa fa-check"></i> Denegar Actividad</button>
+                  
                   <button class="btn btn-danger pull-right" onclick="cancelarform()" type="button"><i class="fa fa-arrow-circle-left"></i> Salir</button>
                 </div>
               </form>
@@ -341,7 +340,7 @@ if($visualizacion==0){
 <script type="text/javascript" src="../public/Buttons-1.7.1/js/buttons.bootstrap4.min.js"></script>
 <script type="text/javascript" src="../public/Buttons-1.7.1/js/buttons.html5.min.js"></script>
 
-<script type="text/javascript" src="../js/actividad_cve_gestion.js"></script>
+<script type="text/javascript" src="../js/actividad_cancelada_cve.js"></script>
 <script src="../plugins/select2/js/select2.min.js"></script>
 
 

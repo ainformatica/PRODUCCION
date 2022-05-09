@@ -266,7 +266,7 @@ function mostrar(id_actividad_voae, tipo=0)
 		data = JSON.parse(data);		
 		mostrarform(true);
 
-		$("#no_solicitud").val(data.no_solicitud);
+		$("#no_solicitud").val(data.id_actividad_voae);
 		$("#nombre_actividad").val(data.nombre_actividad);
  		$("#ubicacion").val(data.ubicacion);
  		$("#fch_inicial_actividad").val(data.fch_inicial_actividad);
@@ -294,7 +294,7 @@ function mostrar2(id_actividad_voae)
 		data = JSON.parse(data);		
 		mostrarform2(true);
 		$("#id_actividad").val(data.id_actividad_voae);
-		$("#solicitud_act").val(data.no_solicitud);
+		$("#solicitud_act").val(data.id_actividad_voae);
 		$("#nombre_act").val(data.nombre_actividad);
 		$("#just_act").val(data.justificacion);
  	})

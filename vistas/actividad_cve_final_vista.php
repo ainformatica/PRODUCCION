@@ -48,6 +48,8 @@ if($visualizacion==0){
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="../vistas/pagina_principal_vista.php">Inicio</a></li>
             <li class="breadcrumb-item active"><a href="../vistas/menu_actividades_cve_vista.php">Menú Actividades</a></li>
+            <li class="breadcrumb-item active"><a >Actividades Finalizadas</a></li>
+            <li class="breadcrumb-item active"><a href="../vistas/actividades_canceladas_cve_vista.php">Actividades Canceladas</a></li>
           </ol>
         </div>
 
@@ -98,6 +100,7 @@ if($visualizacion==0){
 
               <div id="formularioregistros">
                 <form name="formulario" id="formulario" method="POST" >
+                  
                   <!-- Card 1 Datos Generales de la Actividad -->
                   <div class="card card-default">
                     <div class="card-header bg-gradient-dark">
@@ -111,38 +114,34 @@ if($visualizacion==0){
                     <!-- /. card-header-->
                     <div class="card-body">
                       <div class="row">
-                        <!-- N de Solicitud -->
-                        <div class="col-sm-6">
-                          <div class="form-group">
-                           <label>No.Solicitud:</label>
-                           <input type="hidden" name="id_actividad_voae" id="id_actividad_voae">
-                           <input type="text" class="form-control" name="no_solicitud" id="no_solicitud" maxlength="10" style="text-transform: uppercase "placeholder="No de Solicitud" onkeypress="return soloLetras(event)" oncopy="return false" onpaste="return false"  required="" />
-                         </div>
-                       </div>
+                        
                        <!-- Nombre de la Actividad -->
                        <div class="col-sm-6">
                         <div class="form-group">
                           <label>Nombre de la Actividad:</label>
-                          <input type="text" class="form-control" name="nombre_actividad" id="nombre_actividad" maxlength="50" placeholder= "Nombre de la Actividad" required> 
+                          <input type="hidden" name="id_actividad_voae" id="id_actividad_voae">
+                          <input type="text" class="form-control" name="nombre_actividad" oncopy="return false" onpaste="return false" id="nombre_actividad" maxlength="100" placeholder= "Nombre de la Actividad" required> 
                         </div>
                       </div>
                       <!-- Ubicacion de la Actividad -->
                       <div class="col-sm-6">
                         <div class="form-group">
-                          <label>Ubicacion</label>
-                          <input type="text" class="form-control" name="ubicacion" id="ubicacion" maxlength="50" placeholder= "Ubicacion de la Actividad" required> 
+                          <label>Ubicación</label>
+                          <input type="text" class="form-control" oncopy="return false" onpaste="return false" name="ubicacion" id="ubicacion" maxlength="100" placeholder= "Ubicación de la Actividad"onkeypress="return soloLetras(event)" required> 
                         </div>
                       </div>
                       <!-- Periodo Academico -->
                       <div class="col-sm-6">
                         <div class="form-group">
-                          <label>Periodo Academico:</label>
-                          <select name="periodo" id="periodo"class="form-control" name="periodo" id="nombre" maxlength="50" placeholder="Seleccione el Periodo" required>
-                            <option value="Primer Periodo">Primer Periodo</option>
-                            <option value="Segundo Periodo">Segundo Periodo</option>
-                            <option value="Tercer Periodo">Tercer Periodo</option>
+                          <label>Período Académico:</label>
+                          <select name="periodo" id="periodo"class="form-control" oncopy="return false" onpaste="return false" name="periodo" id="nombre" required>
+                            <option disabled>Seleccione un Período</option>
+                            <option value="I">I</option>
+                            <option value="II">II</option>
+                            <option value="III">III</option>
                           </select> 
                         </div>
+
                       </div>
 
                     </div>
@@ -166,19 +165,16 @@ if($visualizacion==0){
                     <div class="col-sm-6">
                       <div class="form-group">
                         <label>Fecha Incial:</label>
-                        <input type="date" class="form-control" placeholder="FECHA" name="fch_inicial_actividad" id="fch_inicial_actividad" required="" required min=<?php $hoy=date("Y-m-d"); echo $hoy;?>
-                        />
+                        <input type="date" class="form-control" placeholder="FECHA" name="fch_inicial_actividad" id="fch_inicial_actividad" required>
                     </div>
                     </div>
                     <!-- Fecha Final-->
                     <div class="col-sm-6">
                       <div class="form-group">
                        <label>Fecha Final:</label>
-                       <input type="date" class="form-control" name="fch_final_actividad" id="fch_final_actividad" required="" required min=<?php $hoy=date("Y-m-d"); echo $hoy;?>
-                       >
+                       <input type="date" class="form-control" name="fch_final_actividad" id="fch_final_actividad" required>
                      </div>
                    </div>
-
                  </div>
                </div>
              </div>
@@ -201,21 +197,24 @@ if($visualizacion==0){
                 <div class="col-sm-6">
                   <div class="form-group">
                    <label>Descripcion:</label>
-                   <input type="text" class="form-control" name="descripcion" id="descripcion" maxlength="50" placeholder="Descripcion" required>
+                   <p><textarea  class="form-control" placeholder="Descripción de la Actividad" name="descripcion" id="descripcion" rows="8" required="" maxlength="300" value=""                                       
+                                      onkeyup="Card(event, this)"> </textarea></p>
                  </div>
                </div>
                <!-- Poblacion Objetivo -->
                <div class="col-sm-6">
                 <div class="form-group">
-                  <label>Poblacion Objetiva:</label>
-                  <input type="text" class="form-control" name="poblacion_objetivo" id="poblacion_objetivo" maxlength="50" placeholder="Poblacion Objetiva" required>
+                  <label>Población Objetivo:</label>
+                  <p><textarea  class="form-control" placeholder="Población Objetivo de la Actividad" name="poblacion_objetivo" id="poblacion_objetivo" rows="8" required="" maxlength="300" value=""                                       
+                                      onkeyup="Card(event, this)"> </textarea></p>
+
                 </div>
               </div>
               <!-- Presupuesto -->
               <div class="col-sm-6">
                 <div class="form-group">
                  <label>Presupuesto:</label>
-                 <input type="text" class="form-control" name="presupuesto" id="presupuesto" maxlength="50" placeholder="Presupuesto" required>
+                 <input style="width : 150px; heigth : 1px" type="number" class="form-control" oncopy="return false" onpaste="return false" name="presupuesto" id="presupuesto" placeholder="Monto" required>
                </div>
              </div>
              <!-- Staff Alumnos -->
@@ -223,17 +222,18 @@ if($visualizacion==0){
               <div class="form-group">
                 <label>Staff Alumnos:</label>
                 <input type="hidden" class="form-control" name="id_estado" id="id_estado">
-                <input type="text" class="form-control" name="staff_alumnos" id="staff_alumnos" maxlength="50" placeholder="Staff Alumnos" required>
+                 <p><textarea  class="form-control" placeholder="Miembros del Staff de la Actividad" name="staff_alumnos" id="staff_alumnos" rows="8" required="" maxlength="300" value=""                                       
+                                      onkeyup="Card(event, this)"> </textarea></p>
               </div>
             </div>
             <!-- Ambito -->
             <div class="col-sm-6">
               <div class="form-group">
-               <label>Ambito:</label>
-               <select class="form-control select2" name="id_ambito" id="id_ambito" style="width: 100%;">
-                 <option value="0" disabled="disabled" >Seleccione un Ambito:</option>
+               <label>Ámbito:</label>
+               <select class="form-control" name="id_ambito" id="id_ambito" style="width: 100%;">
+                 <option value="0" selected disabled="disabled" >Seleccione un Ámbito:</option>
                  <?php
-                 $query = $mysqli -> query ("SELECT * FROM tbl_voae_ambitos where condicion = 1");
+                 $query = $mysqli -> query ("SELECT id_ambito, nombre_ambito FROM tbl_voae_ambitos where condicion = 1");
                  while ($resultado = mysqli_fetch_array($query)) {
                   echo '<option value="'.$resultado['id_ambito'].'"> '.$resultado['nombre_ambito'].'</option>' ;
                 }
@@ -244,8 +244,9 @@ if($visualizacion==0){
           <!-- Observaciones -->
           <div class="col-sm-6">
             <div class="form-group">
-              <label>Observaciones:</label>
-              <input type="text" class="form-control" name="observaciones" id="observaciones" maxlength="50" placeholder="Observaciones" required>
+              <label>Observaciones:</label>    
+              <p><textarea  class="form-control" placeholder="Observaciones" name="observaciones" id="observaciones" rows="8" required="" maxlength="300" value=""                                       
+                                      onkeyup="Card(event, this)"> </textarea></p>
             </div>
           </div>
 
@@ -256,11 +257,71 @@ if($visualizacion==0){
 
 
   <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
-    <button class="btn btn-primary pull-right" type="submit" id="btnGuardar"><i class="fa fa-solid fa-check"></i> Guardar</button>
+    
+     
+    
     <button class="btn btn-danger pull-right" onclick="cancelarform()" type="button"><i class="fa fa-arrow-circle-left"></i> Salir</button>
   </div>
 </form>
 </div>
+<div  id="formularioregistros2">
+            <form name="formulario2" id="formulario2" method="POST">
+             <section><h5><b><i><p>CANCELACIÓN DE ACTIVIDAD </p></i></b></h5>
+                          
+                          </section>
+                
+                <!-- Card 1 -->
+                <div class="card card-default">
+                <div class="card-header bg-gradient-dark">
+                  <h3 class="card-title">Actividad y Número de Solicitud</h3>
+                  <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                      <i class="fas fa-minus"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                  <label>Actividad:</label>
+                   <input type="hidden" class="form-control" name="id_actividad" id="id_actividad"  required>
+                  <input style="width : 400px; heigth : 1px" disabled  maxlength="300" type="text"  onkeypress="return soloLetras(event)" required name="nombre_act" id="nombre_act" placeholder="nombre_act">
+                </div>
+                 <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                  <label>Numero de Solicitud:</label>
+                  <input type="text" name="solicitud_act" id="solicitud_act"  onkeypress="return soloLetras(event)" disabled required>
+                </div>
+                </div>
+                </div>
+                </div>
+               
+
+                <!-- Card 2 -->
+                <div class="card card-default">
+                <div class="card-header bg-gradient-dark">
+                  <h3 class="card-title">Motivo Cancelación</h3>
+                  <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                      <i class="fas fa-minus"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="card-body">
+                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <label>Motivo:</label>
+                  <p><textarea class="form-control" placeholder="Escriba el por qué cancela la actividad" name="just_act" id="just_act" rows="8" required="" maxlength="300" value=""                                       
+                                      onkeyup="Card(event, this)"> </textarea></p>
+                </div>
+                </div>
+                </div>
+
+                
+                <div class="form-group col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                  <button class="btn btn-primary pull-right" type="submit" id="btnGuardar2"><i class="fa fa-check"></i> Cancelar Actividad</button>
+                  <button class="btn btn-danger pull-right" onclick="cancelarform()" type="button"><i class="fa fa-arrow-circle-left"></i> Salir</button>
+                </div>
+              </form>
+            </div>
 <!--Fin centro -->
 </div><!-- /.box -->
 </div><!-- /.col -->

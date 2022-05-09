@@ -10,7 +10,7 @@ require_once ('../clases/funcion_visualizar.php');
 require_once ('../clases/funcion_bitacora.php');
 
 $actividad=new Actividad();
-$Id_objeto=8229;
+$Id_objeto=8235;
 $usuario= $_SESSION['id_usuario'];
 
 $id_actividad_voae=isset($_POST["id_actividad_voae"])? $instancia_conexion->limpiarCadena($_POST["id_actividad_voae"]):"";
@@ -92,22 +92,19 @@ switch ($_GET["op"]){
  		//Codificar el resultado utilizando json
  		echo json_encode($rspta);
 	break;
-	case 'listar1':
-		$rspta=$actividad->listar1();
+	case 'listar3':
+		$rspta=$actividad->listar3($usuario);
  		//Vamos a declarar un array
  		$data= Array();
 
  		while ($reg=$rspta->fetch_object()){
  			$data[]=array(
- 				"0"=>'<button title="Ver Solicitud" class="btn btn-warning"onclick="mostrar('.$reg->id_actividad_voae.',1)"><i class="far fa-eye"></i></button>'.
- 				'<button id="btn_aprobar"title="Aprobar Solicitud" class="btn btn-success" '.$_SESSION["btn_aprobar"].' onclick="aprobar('.$reg->id_actividad_voae.')"><i class="fa fa-solid fa-check"></i></button>'.
- 				'<button id="btn_denegar"title="Denegar Solicitud " class="btn btn-danger pull-right"  '.$_SESSION["btn_denegar"].' onclick="mostrar2('.$reg->id_actividad_voae.')"><i class="fa fa-arrow-circle-left"></i></button>',
+ 				"0"=>'<button title="Ver Datos Actividad" class="btn btn-warning"onclick="mostrar('.$reg->id_actividad_voae.',1)"><i class="far fa-eye"></i></button>'.
+ 				'<button id="btn_denegar"title="Ver Motivo Cancelación " class="btn btn-danger pull-right"  '.$_SESSION["btn_denegar"].' onclick="mostrar2('.$reg->id_actividad_voae.')"><i class="fa fa-info"></i></button>',
  				"1"=>$reg->id_actividad_voae,
- 				"2"=>$reg->fch_solicitud,
- 				"3"=>$reg->nombre_actividad,
- 				"4"=>$reg->usuario,
- 				"5"=>$reg->periodo,
- 				"6"=>$reg->id_estado
+ 				"2"=>$reg->nombre_actividad,
+ 				"3"=>$reg->periodo
+
  				
  				);
  		}

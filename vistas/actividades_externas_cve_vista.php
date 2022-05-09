@@ -120,9 +120,9 @@ ob_end_flush();
                 <div class="card-body">
                 <div class="row">
                 <input type="hidden" name="id_actividad_voae" id="id_actividad_voae">
-                <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12"> 
+                <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">  
                    <label>Nombre:</label>
-                  <input type="text" class="form-control" name="nombre_actividad" id="nombre_actividad" style="text-transform: uppercase;" onkeypress="return soloLetras(event)" required maxlength="50" placeholder="Nombre Actividad" required>
+                  <input type="text" class="form-control" name="nombre_actividad" oncopy="return false" onpaste="return false" id="nombre_actividad" maxlength="100" placeholder= "Nombre de la Actividad" required>
                 </div>
                 </div>
                 </div>
@@ -144,18 +144,19 @@ ob_end_flush();
                   <div class="row">
                  <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12 maxlength">
                   <label>Ente Organizador:</label>
-                  <input type="text" class="form-control" name="staff_alumnos" id="staff_alumnos"  maxlength="50" placeholder="Ente Organizador" style="text-transform: uppercase;" onkeypress="return soloLetras(event)" required>
+                 <p><textarea  class="form-control" placeholder="Ente Organizador" name="staff_alumnos" id="staff_alumnos" rows="8" required="" maxlength="300" value=""                                       
+                                      onkeyup="Card(event, this)"> </textarea></p>
                 </div>
                 <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12 maxlength"><label>Ámbito:</label>
-                              <select class="form-control select2" name="id_ambito" id="id_ambito" style="width: 100%;" required="">
-                                <option value="0" disabled="disabled" >Seleccione un ámbito:</option>
-                                  <?php
-                                    $query = $mysqli -> query ("SELECT * FROM tbl_voae_ambitos where condicion = 1");
-                                    while ($resultado = mysqli_fetch_array($query)) {
-                                      echo '<option value="'.$resultado['id_ambito'].'"> '.$resultado['nombre_ambito'].'</option>' ;
-                                    }
-                                  ?>
-                              </select>
+                              <select class="form-control" name="id_ambito" id="id_ambito" style="width: 100%;">
+                 <option value="0" selected disabled="disabled" >Seleccione un Ámbito:</option>
+                 <?php
+                 $query = $mysqli -> query ("SELECT id_ambito, nombre_ambito FROM tbl_voae_ambitos where condicion = 1");
+                 while ($resultado = mysqli_fetch_array($query)) {
+                  echo '<option value="'.$resultado['id_ambito'].'"> '.$resultado['nombre_ambito'].'</option>' ;
+                }
+                ?>
+              </select>
                 </div>
                 </div>
                 </div>
@@ -174,11 +175,12 @@ ob_end_flush();
                 </div>
                 <div class="card-body">
                 <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12 maxlength"><label>Periodo Académico:</label>
-                  <select class="form-control select2" name="periodo" id="periodo" class="form-control"  maxlength="50" required>
-                    <option value="PRIMER PERIODO">Primer Periodo</option>
-                    <option value="SEGUNDO PERIODO">Segundo Periodo</option>
-                    <option value="TERCER PERIODO">Tercer Periodo</option>
-                  </select> 
+                  <select name="periodo" id="periodo"class="form-control" oncopy="return false" onpaste="return false" name="periodo" id="nombre" required>
+                            <option disabled>Seleccione un Período</option>
+                            <option value="I">I</option>
+                            <option value="II">II</option>
+                            <option value="III">III</option>
+                          </select> 
                 </div>
                 </div>
                 </div>
