@@ -177,10 +177,10 @@ ob_end_flush();
                 </div>
                 <div class="card-body">
                   <div class="row">
-                <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group col-lg-6">
                   <label>Año:</label>
-                  <select class="form-control-lg select2" name="año" id="año" style="width: 100%;" required>
-                        <option value="0"></option>
+                  <select class="form-control" name="año" id="año" style="width: 100%;" required>
+                        <option value="0" selected disabled="disabled">Seleccione Año</option>
                         <?php $year = date("Y");
                               for ($i=2017; $i<=$year; $i++){
                                   echo '<option value="'.$i.'">'.$i.'</option>';
