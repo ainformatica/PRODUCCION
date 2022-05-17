@@ -97,7 +97,7 @@ Class Actividad
 	public function listar2($usuario)
 	{
 		global $instancia_conexion;
-		$sql="select * from vista_actividad_cve_2";
+		$sql="CALL vista_finalizar('$usuario')";
 		return $instancia_conexion->ejecutarConsulta($sql);		
 	}
 	//Implementar un método para listar los registros
