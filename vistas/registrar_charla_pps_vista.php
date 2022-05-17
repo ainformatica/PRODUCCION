@@ -201,7 +201,7 @@ if ($visualizacion == 0) {
                 </div>
 
 
-                <div class="col-sm-6">
+                <div class="col-sm-3">
                   <div class="form-group">
                     <label>Nº de Cuenta</label>
                     <input class="form-control" type="text" id="txt_cuenta" name="txt_cuenta" value="<?php echo $cuenta; ?>" required onkeyup="Espacio(this, event)" maxlength="11" readonly>
@@ -209,22 +209,12 @@ if ($visualizacion == 0) {
                 </div>
 
 
-                <div class="col-sm-6">
+                <div class="col-sm-3">
                   <div class="form-group">
                     <label>Clases Aprobadas</label>
                     <input class="form-control" type="text" id="txt_clases_aprobadas" name="txt_clases_aprobadas" value="" required onkeyup="Espacio(this, event)" onkeypress="return Numeros(event)" maxlength="2">
                   </div>
                 </div>
-
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label>Promedio Global</label>
-                    <input class="form-control" type="text" id="txt_promedio" name="txt_promedio" value="" required onkeyup="Espacio(this, event)" onkeypress="return Numeros(event)" maxlength="3">
-                  </div>
-                </div>
-
-
-
 
               </div>
 

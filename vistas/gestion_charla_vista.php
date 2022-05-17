@@ -171,7 +171,7 @@ ob_end_flush();
                 <div class="col-sm-2">
                   <div class="form-group">
                     <label>Cupos</label>
-                    <input class="form-control" type="text" maxlength="2" id="txt_cupos" name="txt_cupos" required onkeyup="espacio(this, event)" onkeypress="return numeros(event)">
+                    <input class="form-control" type="text" maxlength="3" id="txt_cupos" name="txt_cupos" required onkeyup="espacio(this, event)" onkeypress="return numeros(event)">
                   </div>
                 </div>
 
