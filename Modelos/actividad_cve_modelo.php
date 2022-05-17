@@ -97,7 +97,7 @@ Class Actividad
 	public function listar2($usuario)
 	{
 		global $instancia_conexion;
-		$sql="CALL vista_finalizar('$usuario')";
+		$sql="CALL vista_finalizar(154)";
 		return $instancia_conexion->ejecutarConsulta($sql);		
 	}
 	//Implementar un método para listar los registros
@@ -109,5 +109,6 @@ Class Actividad
 	}
 
 }
+
 
 ?>
