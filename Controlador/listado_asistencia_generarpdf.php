@@ -79,7 +79,7 @@ class pdf extends FPDF
 
         global $instancia_conexion;
         $id_actividad = $_SESSION['id_actividad_cve'];
-        $sql2="select * from tbl_voae_actividades where id_actividad_voae = '$id_actividad'";
+        $sql2="select tbl_voae_actividades.id_actividad_voae, tbl_voae_actividades.ubicacion, tbl_voae_actividades.nombre_actividad, tbl_voae_actividades.fch_inicial_actividad, tbl_voae_actividades.id_ambito, tbl_voae_ambitos.nombre_ambito, tbl_voae_ambitos.id_ambito from tbl_voae_actividades JOIN tbl_voae_ambitos on tbl_voae_actividades.id_ambito = tbl_voae_ambitos.id_ambito where id_actividad_voae = '$id_actividad'";
         $stmt2 = $instancia_conexion->ejecutarConsulta($sql2);
 
          while ($reg = $stmt2->fetch_object()) {
@@ -92,7 +92,7 @@ class pdf extends FPDF
         $this->setY(65);
         $this->SetX(32);
         $this->SetFont('Arial','B');
-        $this->write(5, utf8_decode($reg->id_ambito));
+        $this->write(5, utf8_decode($reg->nombre_ambito));
         $this->setY(70);
         $this->SetX(29);
         $this->SetFont('Arial','B');
