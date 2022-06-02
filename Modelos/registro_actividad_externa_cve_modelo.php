@@ -28,7 +28,7 @@ Class Externa
 	public function editar($id_actividad_voae,$nombre_act,$fecha_inicio,$fecha_final,$ente,$usuario,$ambito,$periodo)
 	{
 		global $instancia_conexion;
-		$sql="UPDATE tbl_voae_actividades SET nombre_actividad=trim(upper('$nombre_act')),fch_inicial_actividad='$fecha_inicio',fch_final_actividad='$fecha_final',staff_alumnos=trim(upper('$ente')),id_ambito='$ambito',periodo='$periodo' WHERE id_actividad_voae='$id_actividad_voae'";
+		$sql="UPDATE tbl_voae_actividades SET nombre_actividad='$nombre_act',fch_inicial_actividad='$fecha_inicio',fch_final_actividad='$fecha_final',staff_alumnos='$ente',id_ambito='$ambito',periodo='$periodo' WHERE id_actividad_voae='$id_actividad_voae'";
 		return $instancia_conexion->ejecutarConsulta($sql);
 	}
 	

@@ -40,6 +40,8 @@ function mostrarform(flag) {
         $("#form_import").show();
         $("#btnGuardar").prop("disabled", false);
         $("#btnagregar").hide();
+        $("#btnlistado").hide();
+        $("#btnpdf").hide();
         $("#btn_enviar").hide();
         $("#file-input").hide();
 
@@ -49,6 +51,8 @@ function mostrarform(flag) {
         $("#formularioregistros").hide();
         $("#form_import").show();
         $("#btnagregar").show();
+        $("#btnlistado").show();
+        $("#btnpdf").show();
         $("#btn_enviar").show();
         $("#file-input").show();
     }

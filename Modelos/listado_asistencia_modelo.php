@@ -20,7 +20,7 @@ Class listado_asistencia
 	{
 		global $instancia_conexion;
 		$sql = "INSERT INTO `tbl_voae_asistencias` ( `id_actividad_voae`, `cuenta`, `nombre_alumno`, `cant_horas`, `carrera`) 
-				VALUES ('$id_actividad_voae','$cuenta', trim(upper('$nombre_alumno')),'$cant_horas', trim(upper( '$carrera'))); 
+				VALUES ('$id_actividad_voae','$cuenta', '$nombre_alumno','$cant_horas', '$carrera'); 
 		";
 		return $instancia_conexion->ejecutarConsulta($sql);
 
@@ -31,7 +31,7 @@ Class listado_asistencia
 	public function editar(	$id_asistencia,$cuenta,$nombre_alumno,$cant_horas, $carrera)
 	{
 		global $instancia_conexion;
-		$sql="UPDATE tbl_voae_asistencias SET cuenta = '$cuenta', nombre_alumno =  trim(upper('$nombre_alumno')), cant_horas = '$cant_horas', carrera =  trim(upper( '$carrera'))
+		$sql="UPDATE tbl_voae_asistencias SET cuenta = '$cuenta', nombre_alumno =  '$nombre_alumno', cant_horas = '$cant_horas', carrera = '$carrera'
 		 WHERE  id_asistencia='$id_asistencia';";
 		return $instancia_conexion->ejecutarConsulta($sql);
 	}

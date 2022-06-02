@@ -177,10 +177,10 @@ ob_end_flush();
                 </div>
                 <div class="card-body">
                   <div class="row">
-                <div class="form-group col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="form-group col-lg-6">
                   <label>Año:</label>
-                  <select class="form-control-lg select2" name="año" id="año" style="width: 100%;" required>
-                        <option value="0"></option>
+                  <select class="form-control" name="año" id="año" style="width: 100%;" required>
+                        <option value="0" selected disabled="disabled">Seleccione Año</option>
                         <?php $year = date("Y");
                               for ($i=2017; $i<=$year; $i++){
                                   echo '<option value="'.$i.'">'.$i.'</option>';
@@ -225,17 +225,31 @@ ob_end_flush();
 <script type="text/javascript" src="../public/Buttons-1.7.1/js/buttons.html5.min.js"></script>
 
 <script type="text/javascript" src="../js/informe_final_cve.js"></script>
-<script src="//cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.js"></script>
 <script src="../plugins/select2/js/select2.min.js"></script>
-
+<script src="//cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.js"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+
+<script type="text/javascript" language="javascript">
+    $(document).ready(function() {
+
+        $('.select2').select2({
+            placeholder: 'Seleccione una opcion',
+            theme: 'bootstrap4',
+            tags: false,
+        });
+
+    });
+</script>
+
 <script>
   function soloLetras(e) {
     var key = e.keyCode || e.which,
-      tecla = String.fromCharCode(key).toUpperCase(),
-      letras = " ÀÈÌÒÙABCDEFGHIJKLMNÑOPQRSTUVWXYZ0123456789",
-      especiales = [8, 37, 39, 44, 45, 46, 58, 59],
-      tecla_especial = false;
+    tecla = String.fromCharCode(key).toUpperCase(),
+    letras = " ÀÈÌÒÙABCDEFGHIJKLMNÑOPQRSTUVWXYZ-",
+
+    especiales = [8, 37, 39, 46],
+    tecla_especial = false;
 
     for (var i in especiales) {
       if (key == especiales[i]) {
@@ -249,18 +263,20 @@ ob_end_flush();
     }
   }
 </script>
+<script>
+document.getElementById("formulario").addEventListener("keydown", teclear);
 
-<!--script>
-document.getElementById("formularioregistros").addEventListener("submit", function(e) {
-  var estado = document.getElementById("no_memo").value;
-  if (estado.match("^[a-zA-Z]{2}-[0-9]{4}$")) {
-    alert("Cumple el patron");
-  } else {
-    alert("No cumple el patron");
-    e.preventDefault(); // no se envia el formulario
+var flag = false;
+var teclaAnterior = "";
+
+function teclear(event) {
+  teclaAnterior = teclaAnterior + " " + event.keyCode;
+  var arregloTA = teclaAnterior.split(" ");
+  if (event.keyCode == 32 && arregloTA[arregloTA.length - 2] == 32) {
+    event.preventDefault();
   }
-})
-</script-->
+}
+</script>
 
 </body>
 </html>

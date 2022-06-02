@@ -89,7 +89,7 @@ ob_end_flush();
                 <br><b>&nbsp;&nbsp; CATEGORIA: </b><?php  echo $resultado['nombre_ambito'];?></i></h5>
                 <br><b>&nbsp;&nbsp; </b></i></h5>
                 <form  target="_black" action="../Controlador/listado_asistencia_generarpdf.php"> 
-                                <button title="Exportar Listado de Asistencia" class="btn btn-danger"  ><i class="fas fa-file-pdf"></i> <a style="font-weight: bold;"></a> </button>
+                                <button name="btnpdf" id="btnpdf" title="Exportar Listado de Asistencia" class="btn btn-danger"  ><i class="fas fa-file-pdf"></i> <a style="font-weight: bold;"></a> </button>
                                 <input type="text" value="$id_actividad" class="form-control"  readonly hidden>
 
                             </form>
@@ -110,7 +110,7 @@ ob_end_flush();
 
                       <input  type="submit" name="add" id="btn_enviar" class="btn btn-info" placeholder="Importar"/>
                     </div>
-                    <p><br> <a class="btn btn-secondary" download="Formato Listado Asistencia" href="../archivos/repositorio_voae/formato.csv">Descargar Formato Listado </a> <p>
+                    <p><br> <a class="btn btn-secondary" name="btnlistado" id="btnlistado" download="Formato Listado Asistencia" href="../archivos/repositorio_voae/formato.csv">Descargar Formato Listado </a> <p>
 
 
 
@@ -149,11 +149,11 @@ ob_end_flush();
     <div class="table-responsive" id="listadoregistros">
       <table id="tbllistado" class="table table-striped table-bordered table-condensed table-hover">
         <thead>
-          <th>OPCIÓN</th>
-          <th>CUENTA</th>
-          <th>ESTUDIANTE</th>
-          <th>cant_horas</th>
-          <th>CARRERA</th>
+          <th>Opciones</th>
+          <th>Cuenta</th>
+          <th>Estudiante</th>
+          <th>Horas</th>
+          <th>Carrera</th>
         </thead>
         <tbody>                            
         </tbody>
@@ -181,21 +181,21 @@ ob_end_flush();
               <!-- CUENTA-->   
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label>CUENTA: </label>
-                  <input class="form-control" type="number" id="cuenta" name="cuenta" required="" maxlength="20" >
+                  <label>Cuenta: </label>
+                  <input class="form-control" type="number" id="cuenta" name="cuenta" required="" min="1" >
                 </div>
               </div>
               <!-- NOMBRE -->   
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label>NOMBRE: </label>
-                  <input class="form-control" type="text" id="nombre_alumno" name="nombre_alumno" required="" maxlength="50" style="text-transform: uppercase"   onkeypress="return Letras(event)"  onkeypress="return comprobar(this.value, event, this.id)">
+                  <label>Nombre: </label>
+                  <input class="form-control" type="text" id="nombre_alumno" name="nombre_alumno" required="" maxlength="50" >
                 </div>
               </div> 
               <!-- CARRERA -->   
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label>CARRERA:</label>
+                  <label>Carrera:</label>
                   <select class="form-control" id= "carrera" style="width: 100%;" name="carrera" required="">
                     <option  value="" disabled="disabled">Seleccione una carrera:</option>
                     <?php
@@ -210,8 +210,8 @@ ob_end_flush();
               <!-- HORAS -->   
               <div class="col-sm-6">
                 <div class="form-group">
-                  <label>cant_horas: </label>
-                  <input class="form-control" type="number" id="cant_horas" name="cant_horas" required="" min="1" style="text-transform: uppercase" >
+                  <label>Horas: </label>
+                  <input class="form-control" type="number" id="cant_horas" name="cant_horas" required="" min="1">
                 </div>
               </div>         
             </div>
