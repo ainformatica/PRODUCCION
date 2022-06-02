@@ -11,7 +11,7 @@ require_once('../clases/funcion_permisos.php');
 
 
 
-$Id_objeto = 23;
+$Id_objeto = 2017;
 
 $visualizacion = permiso_ver($Id_objeto);
 

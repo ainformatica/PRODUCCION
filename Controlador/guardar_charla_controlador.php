@@ -28,7 +28,7 @@ $fecha_valida=strtoupper ($_POST['txt_fecha_valida']);
                                 VALUES ('$primer_expositor', '$segundo_expositor', '$fecha_charla', '$hora_charla', '$cupos', '$jornada', '1', '$nombre_charla', '$periodo', '$fecha_valida')";
         $resultadop = $mysqli->query($sql);
     
-        if($resultadop){
+        if($resultadop === TRUE ){
             echo '<script type="text/javascript">
             swal({
                 title:"",
@@ -50,7 +50,6 @@ $fecha_valida=strtoupper ($_POST['txt_fecha_valida']);
                 });
                 $(".FormularioAjax")[0];
             </script>'; 
-        }
     }else{
         echo '<script type="text/javascript">
                                     swal({
@@ -63,6 +62,7 @@ $fecha_valida=strtoupper ($_POST['txt_fecha_valida']);
                                         $(".FormularioAjax")[0];
                                     </script>'; 
     }
+}
 }  
 ob_end_flush();
 ?>

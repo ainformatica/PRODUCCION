@@ -5,7 +5,7 @@ require_once('../clases/Conexion.php');
 require_once('../clases/funcion_visualizar.php');
 
 
-if (permiso_ver('24') == '1') {
+if (permiso_ver('2018') == '1') {
 
   $_SESSION['registrar_proyecto_menu'] = "...";
 } else {
@@ -13,7 +13,7 @@ if (permiso_ver('24') == '1') {
   tiene permisos para visualizar";
 }
 
-if (permiso_ver('25') == '1') {
+if (permiso_ver('2019') == '1') {
 
   $_SESSION['gestion_proyectos_menu'] = "...";
 } else {

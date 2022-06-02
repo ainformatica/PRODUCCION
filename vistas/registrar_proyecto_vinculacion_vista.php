@@ -11,7 +11,7 @@ require_once('../clases/funcion_permisos.php');
 
 
 //Objeto de egresado
-$Id_objeto = 24;
+$Id_objeto = 2018;
 
 
 $visualizacion = permiso_ver($Id_objeto);

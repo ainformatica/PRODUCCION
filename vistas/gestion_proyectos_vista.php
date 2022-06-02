@@ -13,7 +13,7 @@ $sql_tabla_proyectos = "select Id_proyecto, nombre  , tipo_proyecto ,codigo_proy
 $resultadotabla_proyectos = $mysqli->query($sql_tabla_proyectos);
 
 
-$Id_objeto = 23;
+$Id_objeto = 2019;
 
 $visualizacion = permiso_ver($Id_objeto);
 

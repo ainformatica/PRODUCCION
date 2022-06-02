@@ -106,7 +106,7 @@ if ($msj==2)
 
 
 
-        $sql_tabla_estudiantes_practica="SELECT px.valor as valor, concat(p.nombres,' ',p.apellidos) as nombre, m.modalidad, ep.nombre_empresa,
+        $sql_tabla_estudiantes_practica="SELECT p.id_persona as id, px.valor as valor, concat(p.nombres,' ',p.apellidos) as nombre, m.modalidad, ep.nombre_empresa,
         CASE 
         WHEN (sd.estado_coordinacion IS NULL and sd.estado_vinculacion='1') then
         'PENDIENTE' 
@@ -119,7 +119,7 @@ if ($msj==2)
         when sd.estado_coordinacion IS NULL then 'PROCESO'
         else
         sd.estado_coordinacion end as estado_coordinacion
-        from  tbl_personas p, tbl_subida_documentacion sd, tbl_personas_extendidas px, tbl_modalidad m, tbl_empresas_practica ep where sd.id_persona=p.id_persona AND px.id_atributo=12 and px.id_persona=p.id_persona and estado_coordinacion IS NULL  ";
+        from  tbl_personas p, tbl_subida_documentacion sd, tbl_personas_extendidas px, tbl_modalidad m, tbl_empresas_practica ep, tbl_practica_estudiantes pe where sd.id_persona=p.id_persona AND m.id_modalidad=pe.id_modalidad AND px.id_atributo=12 and px.id_persona=p.id_persona and estado_coordinacion IS NULL";
 
 
 
@@ -131,7 +131,9 @@ if ($msj==2)
         $_SESSION['Estado_proceso']=$resultadotabla_estudiantes_practica['proceso'];
         $_SESSION['estado_vin']=$resultadotabla_estudiantes_practica['estado_vinculacion'];
         $_SESSION['estado_coor']=$resultadotabla_estudiantes_practica['estado_coordinacion'];
-                $resultadotabla_estudiantes_practica = $mysqli->query($sql_tabla_estudiantes_practica);
+        $_SESSION['id']=$resultadotabla_estudiantes_practica['id'];
+        $_SESSION['modalidad']=$resultadotabla_estudiantes_practica['modalidad'];
+        $resultadotabla_estudiantes_practica = $mysqli->query($sql_tabla_estudiantes_practica);
 
 
 
@@ -139,7 +141,7 @@ if ($msj==2)
  if (isset($_REQUEST['cuenta']))
         {
   
-$sql_datos_modal="SELECT px.valor as valor, concat(p.nombres,' ',p.apellidos) as nombre from  tbl_personas p, tbl_subida_documentacion sd , tbl_personas_extendidas px where sd.id_persona=p.id_persona AND px.id_atributo=12 and px.id_persona=p.id_persona and px.valor=$_REQUEST[cuenta]";
+$sql_datos_modal="SELECT p.id_persona as id, px.valor as valor, concat(p.nombres,' ',p.apellidos) as nombre from  tbl_personas p, tbl_subida_documentacion sd , tbl_personas_extendidas px where sd.id_persona=p.id_persona AND px.id_atributo=12 and px.id_persona=p.id_persona and px.valor=$_REQUEST[cuenta]";
           $resultado_datos = mysqli_fetch_assoc($mysqli->query($sql_datos_modal));
           $_SESSION['txt_estudiante']=$resultado_datos['nombre'];
           $_SESSION['cuenta']=$resultado_datos['valor'];
@@ -180,7 +182,7 @@ $sql_datos_modal="SELECT px.valor as valor, concat(p.nombres,' ',p.apellidos) as
      if (isset($_REQUEST['cuenta_coordinacion']))
         {
 
-          $sql_datos_modal="SELECT px.valor as valor, concat(p.nombres,' ',p.apellidos) as nombre , sd.estado_vinculacion,ep.nombre_empresa   from  tbl_personas p, tbl_subida_documentacion sd,tbl_empresas_practica ep ,tbl_personas_extendidas px where p.id_persona=sd.id_persona AND px.id_atributo=12 and px.id_persona=p.id_persona and px.valor=$_REQUEST[cuenta_coordinacion]";
+          $sql_datos_modal="SELECT px.valor as valor, concat(p.nombres,' ',p.apellidos) as nombre , sd.estado_vinculacion,ep.nombre_empresa,m.modalidad from  tbl_personas p, tbl_subida_documentacion sd,tbl_empresas_practica ep ,tbl_personas_extendidas px, tbl_practica_estudiantes pe, tbl_modalidad m where p.id_persona=sd.id_persona AND m.id_modalidad=pe.id_modalidad AND px.id_atributo=12 and px.id_persona=p.id_persona and px.valor=$_REQUEST[cuenta_coordinacion]";
           $resultado_datos = mysqli_fetch_assoc($mysqli->query($sql_datos_modal));
           $_SESSION['txt_estudiante']=$resultado_datos['nombre'];
           $_SESSION['cuenta']=$resultado_datos['valor'];
@@ -267,12 +269,7 @@ $sql_datos_modal="SELECT px.valor as valor, concat(p.nombres,' ',p.apellidos) as
                     <label>Tipo de institución</label>
                     <select class="form-control" name="cb_empresa" id="empresa">
                       <option selected disabled value="0">Seleccione una opción:</option>
-                      <?php
-                      $query = $mysqli->query("SELECT * FROM tbl_modalidad");
-                      while ($resultado = mysqli_fetch_array($query)) {
-                        echo '<option value="' . $resultado['id_modalidad'] . '"> ' . $resultado['modalidad'] . '</option>';
-                      }
-                      ?>
+                      
                     </select>
                   </div> -->
               </div>
@@ -286,6 +283,7 @@ $sql_datos_modal="SELECT px.valor as valor, concat(p.nombres,' ',p.apellidos) as
                        <th>PROCESO</th>
                        <th>EXPEDIENTE</th>                
                        <th>APROBAR PRACTICA</th>  
+                       <th>CONSTANCIA</th> 
                        <th>CHECKBOX</th>               
 
                      </tr>
@@ -316,6 +314,13 @@ $sql_datos_modal="SELECT px.valor as valor, concat(p.nombres,' ',p.apellidos) as
                       </a>
                     </td>
 
+                    <td style="text-align: center;">
+
+                            <a href="../pdf/constancia_aprobacion_rechazo.php?" target="_blank" class="btn btn-primary btn-raised btn-xs">
+                              <i class="far fa-edit"></i>
+                            </a>
+                     </td>
+
                     <td><label class="checkbox-inline"><input id="" type="checkbox"class="ch" value="">Adjuntar</label></td>
                     
 
@@ -345,7 +350,7 @@ $sql_datos_modal="SELECT px.valor as valor, concat(p.nombres,' ',p.apellidos) as
 
 <!--<form action="../Controlador/aprobar_practica_coordinacion_controlador.php" method="post"  data-form="update" autocomplete="off"  >-->
 
-<form method="post" id="formulario">
+<form action="../Controlador/aprobar_practica_coordinacion_controlador.php" method="post" data-form="save" id="formulario" autocomplete="off" class="FormularioAjax">
 
  <div class="modal fade" id="modal_aprobacion_practica">
   <div class="modal-dialog modal-xl">
@@ -370,9 +375,27 @@ $sql_datos_modal="SELECT px.valor as valor, concat(p.nombres,' ',p.apellidos) as
                <input class="form-control" type="text" id="txt_estudiante_documento" name="txt_estudiante_documento" value="<?php echo strtoupper($_SESSION['txt_estudiante']) ?>" readonly="readonly">
              </div></div>
 
+            <div class="col-sm-3">
+             <div class="form-group">
+               <label>Número de cuenta</label>
+             <input class="form-control" type="text" id="txt_estudiante_cuenta" name="txt_estudiante_cuenta" value="<?php echo strtoupper( $_SESSION['cuenta']) ?>" readonly="readonly">
+             </div></div>
 
-             <input class="form-control" type="text" id="txt_estudiante_cuenta" name="txt_estudiante_cuenta" hidden value="<?php echo strtoupper( $_SESSION['cuenta']) ?>" readonly="readonly">
-             <input class="form-control" type="text" id="txt_empresa" name="txt_empresa" hidden value="<?php echo strtoupper( $_SESSION['empresa']) ?>" readonly="readonly">
+
+             <input class="form-control" type="text" id="txt_estudiante_id" name="txt_estudiante_id" hidden value="<?php echo strtoupper( $_SESSION['id']) ?>" readonly="readonly">
+
+
+             <div class="col-sm-3">
+             <div class="form-group">
+               <label>Modalidad</label>
+             <input class="form-control" type="text" id="txt_estudiante_cuenta" name="txt_estudiante_cuenta" value="<?php echo strtoupper( $_SESSION['modalidad']) ?>" readonly="readonly">
+             </div></div>
+
+             <div class="col-sm-6">
+             <div class="form-group">
+               <label>Empresa</label>
+             <input class="form-control" type="text" id="txt_empresa" name="txt_empresa" value="<?php echo strtoupper( $_SESSION['empresa']) ?>" readonly="readonly">
+             </div></div>
 
 
               <div class="col-sm-6">
@@ -380,8 +403,13 @@ $sql_datos_modal="SELECT px.valor as valor, concat(p.nombres,' ',p.apellidos) as
                 <label>Horas Practica</label>
                 <select class="form-control" name="cb_horas_practica" id="cb_horas_practica">
                   <option value="0">Seleccione una opción :</option>
-                  <option value="400">400</option>
-                  <option value="800">800</option>
+                  <?php
+                           $sql=$mysqli->query("SELECT * FROM tbl_horas");
+
+                           while($fila=$sql->fetch_array()){
+                              echo "<option value='".$fila['id_horas']."'>".$fila['descripcion']."</option>";
+                           }
+                  ?>
                 </select>
               </div>
             </div>
@@ -392,12 +420,16 @@ $sql_datos_modal="SELECT px.valor as valor, concat(p.nombres,' ',p.apellidos) as
                         
                         <center> <label for="cars">Fecha de inicio</label>  </center>
                         <input type="date" placeholder="Escribe tu nombre" name="fecha_inicio" class="form-control" id="fecha_inicio" required autofocus title="Ingresa tu nombre porfavor">
-                        <center> <h5>Días de Trabajo</h5></center>
+                        <center> <label>Días de Trabajo</label></center>
                           <select class="form-control"name="dias" id="dias">
                           <option value="">Seleccione una opción :</option>
-                          <option value="4">Lu-Ju</option>
-                          <option value="5">Lu-Vi</option>
-                          <option value="5.5">Lu-Sa</option>
+                          <?php
+                           $sql=$mysqli->query("SELECT * FROM tbl_dias_practica");
+
+                           while($fila=$sql->fetch_array()){
+                              echo "<option value='".$fila['id_dias']."'>".$fila['descripcion']."</option>";
+                           }
+                  ?>
                           </select>
                           <br>
                   </div>
@@ -418,7 +450,7 @@ $sql_datos_modal="SELECT px.valor as valor, concat(p.nombres,' ',p.apellidos) as
                <div class="form-group">
                          <center> <h5>Fecha de finalización de PPS</h5></center>
                          <center><label>Fecha</label>  </center>
-                         <input type="date" placeholder="Escribe tu nombre" name="fecha_finalizacion" class="form-control" id="fecha_finalizacion"  autofocus title="Fecha Finalizacion PPS" disabled>
+                         <input type="date" placeholder="Escribe tu nombre" name="fecha_finalizacion" class="form-control" id="fecha_finalizacion"  autofocus title="Fecha Finalizacion PPS">
                          
               </div>
             </div>
@@ -430,17 +462,18 @@ $sql_datos_modal="SELECT px.valor as valor, concat(p.nombres,' ',p.apellidos) as
                     
               </div>
             </div>
-            </form>
             <div class="col-sm-12">
                <div class="form-group">
                 <label>Aprobar PPS</label>
                 <select class="form-control" name="cb_practica" id="cb_practica"  onchange="Mostrar_motivo();">
                   <option value="0">Seleccione una opción :</option>
-                  <option value="SI">SI</option>
-                  <option value="NO">NO</option>
-                 <option value="INCOMPLETA">REQUISITOS INCOMPLETOS</option>
+                  <?php
+                           $sql=$mysqli->query("SELECT * FROM tbl_estado_vinculacion");
 
-
+                           while($fila=$sql->fetch_array()){
+                              echo "<option value='".$fila['id_estado_vinculacion']."'>".$fila['descripcion']."</option>";
+                           }
+                  ?>
                 </select>
              
               </div>
@@ -473,7 +506,7 @@ $sql_datos_modal="SELECT px.valor as valor, concat(p.nombres,' ',p.apellidos) as
     <!--Footer del modal-->
     <div class="modal-footer justify-content-between">
       <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-      <button type="button" class="btn btn-primary" id="btn_aprobacion_rechazo_practica" name="btn_aprobacion_rechazo_practica"  <?php echo $_SESSION['btn_aprobacion_rechazo_practica']; ?>>Guardar Cambios</button>
+      <button type="submit" class="btn btn-primary" id="btn_aprobacion_rechazo_practica" <?php echo $_SESSION['btn_aprobacion_rechazo_practica']; ?>>Guardar Cambios</button>
     </div>
 
 
@@ -482,9 +515,9 @@ $sql_datos_modal="SELECT px.valor as valor, concat(p.nombres,' ',p.apellidos) as
 </div>
 <!-- /.modal-dialog -->
 </div>
-<div class="RespuestaAjax"></div>
+  <div class="RespuestaAjax"></div>
 
-<!-- /.  finaldel modal -->
+<!-- /.  final del modal -->
 
 
 </form>
@@ -589,6 +622,22 @@ $sql_datos_modal="SELECT px.valor as valor, concat(p.nombres,' ',p.apellidos) as
 
 
 
+$(document).ready(function () {
+
+    $('#btnEnviar').on('click', function () {
+
+        var url = "../Controlador/calculo_fecha_pps_controlador.php?op=fecha";
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: $("#formulario").serialize(),
+            success: function (data) {
+                $("#fecha_finalizacion").val(data);
+
+            }
+        });
+    });
+});
 
 //motivo rechazo PPS
 
@@ -601,7 +650,7 @@ function Mostrar_motivo()
   var aprobar = document.getElementById("cb_practica").value;
 
 
- if(aprobar == "INCOMPLETA" || aprobar =="NO") {
+ if(aprobar == "3" || aprobar =="2") {
    
     $('#txt_motivo_rechazo').prop("readonly", false);
    document.getElementById("txt_motivo_rechazo").value = "";

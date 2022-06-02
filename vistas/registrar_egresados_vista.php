@@ -12,7 +12,7 @@ $ano_graduacion = date('Y');
 
 
 //Objeto de egresado
-$Id_objeto = 22;
+$Id_objeto = 2016;
 
 
 $visualizacion = permiso_ver($Id_objeto);

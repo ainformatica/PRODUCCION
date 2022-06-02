@@ -5,7 +5,7 @@ require_once('../clases/Conexion.php');
 require_once('../clases/funcion_visualizar.php');
 
 
-if (permiso_ver('22') == '1') {
+if (permiso_ver('2016') == '1') {
 
   $_SESSION['registrar_egresados_menu'] = "...";
 } else {
@@ -13,7 +13,7 @@ if (permiso_ver('22') == '1') {
   tiene permisos para visualizar";
 }
 
-if (permiso_ver('23') == '1') {
+if (permiso_ver('2017') == '1') {
 
   $_SESSION['gestion_egresado_menu'] = "...";
 } else {

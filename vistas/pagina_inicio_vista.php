@@ -246,7 +246,7 @@ if (session_status() === PHP_SESSION_NONE) {
                 <li class="nav-item" style="display:<?php echo $_SESSION['final_practica'] ?>">
                   <a href="../vistas/revision_finalizacion_vista" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p> Finalizacion de Practica </p>
+                    <p> Finalización de Practica </p>
                   </a>
                 </li>
                 <li class="nav-item" style="display:<?php echo $_SESSION['cambio_carrera'] ?>">
@@ -266,7 +266,7 @@ if (session_status() === PHP_SESSION_NONE) {
                 <li class="nav-item" style="display:<?php echo $_SESSION['cancelar_clases'] ?>">
                   <a href="../vistas/revision_cancelar_clases" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Cancelacion de clases</p>
+                    <p>Cancelación de clases</p>
                   </a>
                 </li>
                 <!-- CARGA ACADEMICA -->
@@ -315,7 +315,7 @@ if (session_status() === PHP_SESSION_NONE) {
                 <li class="nav-item" style="display:<?php echo $_SESSION['reactivacion_cuenta'] ?>">
                   <a href="../vistas/revision_reactivacion_vista" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Reactivacion de cuenta</p>
+                    <p>Reactivación de cuenta</p>
                   </a>
                 </li>
               </ul>
@@ -419,13 +419,13 @@ if (session_status() === PHP_SESSION_NONE) {
                 <li class="nav-item" style="display:<?php echo $_SESSION['solicitud_practica'] ?>">
                   <a href="../vistas/menu_estudiantes_practica_vista" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p> Solicitud de Practica </p>
+                    <p> Solicitud de Práctica </p>
                   </a>
                 </li>
                 <li class="nav-item" style="display:<?php echo $_SESSION['solicitud_final_practica'] ?>">
                   <a href="../vistas/solicitud_finalizacion_vista" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p> Finalizacion de Practica </p>
+                    <p> Finalizacion de Práctica </p>
                   </a>
                 </li>
                 <li class="nav-item" style="display:<?php echo $_SESSION['solicitud_cambio_carrera'] ?>">
@@ -449,7 +449,7 @@ if (session_status() === PHP_SESSION_NONE) {
                 <li class="nav-item" style="display:<?php echo $_SESSION['solicitud_cancelar_clases'] ?>">
                   <a href="../vistas/cancelar_clases_vista" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p>Cancelacion de clases</p>
+                    <p>Cancelación de clases</p>
                   </a>
                 </li>
 
@@ -477,7 +477,7 @@ if (session_status() === PHP_SESSION_NONE) {
                 <li class="nav-item" style="display:<?php echo $_SESSION['reactivacion_cuenta'] ?>">
                   <a href="../vistas/reactivacion_cuenta_vista" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p> Reactivacion de Cuenta </p>
+                    <p> Reactivación de Cuenta </p>
                   </a>
                 </li>
 

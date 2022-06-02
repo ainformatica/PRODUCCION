@@ -6,6 +6,13 @@ $numero_cuenta=strtoupper($_POST['txt_cuenta_estudiante']);
 $contrasena=$_POST['txt_clave'];
 $confirmar_contrasena=$_POST['txt_confirmar_clave'];
 $nombre_estudiante=$_POST['txt_nombre_estudiante'];
+$dni=$_POST['txt_dni_estudiante'];
+$lugar_nac=$_POST['txt_ln_estudiante'];
+$fecha_nac=$_POST['txt_fn_estudiante'];
+$direccion=$_POST['txt_direccion_estudiante'];
+$telefono=$_POST['txt_telefono_estudiante'];
+$celular=$_POST['txt_celular_estudiante'];
+$correo_alternativo=$_POST['txt_correo_estudiante'];
 $correo=$_POST['txt_correo_estudiante'];
 $apellido_estudiante=$_POST['txt_apellido_estudiante'];
 $sexo=$_POST['sexo'];
@@ -87,7 +94,7 @@ if(strlen($contrasena) < $tamano_min['valor']  )
 
               }else{
                 $clave=cifrado::encryption($contrasena);
-                      $sql = "call   proc_insertar_estudiante( '$nombre_estudiante','$apellido_estudiante','$numero_cuenta','$correo','$clave','$sexo','$usuario_final')";
+                      $sql = "call   proc_insertar_estudiante( '$nombre_estudiante','$apellido_estudiante','$numero_cuenta','$correo','$clave','$sexo','$usuario_final, $lugar_nac, $fecha_nac, $direccion, $telefono, $celular, $correo_alternativo, $dni')";
 
                         $result = $mysqli->query($sql);
                           if($result === TRUE)
