@@ -62,7 +62,7 @@ class primera_visita
       $sql="SELECT concat(p.nombres,' ',p.apellidos) as nombres, vap.id_persona 
       FROM tbl_vinculacion_aprobacion_practica vap, tbl_personas p, tbl_practica_estudiantes pe
       
-      WHERE p.id_persona=vap.id_persona AND vap.id_estado_vinculacion=1 AND vap.id_horas=800 AND pe.docente_supervisor=$id_sup;";
+      WHERE p.id_persona=vap.id_persona AND p.id_persona=pe.id_persona AND vap.id_estado_vinculacion=1 AND vap.id_horas=800 AND pe.docente_supervisor!=0;";
       
         return $instancia_conexion->ejecutarConsulta($sql);
 
