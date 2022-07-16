@@ -10,7 +10,7 @@ function agregaform_u(datos){
 	$('#cuenta').val(d[0]);
 	$('#email').val(d[7]);
 	$('#telefono').val(d[8]);
-	$('#labora').val(d[16]);
+	$('#labora').val(d[15]);
 	
 }
 //Funcion que llena el modal de la empresa
@@ -21,12 +21,11 @@ function agregaform(datos){
 	$('#nombree').val(d[2]);
 	$('#direccion').val(d[3]);
 	$('#tipo').val(d[9]);
-	$('#departamento').val(d[10]);
-	$('#jefe').val(d[11]);
-	$('#titulo').val(d[12]);
-	$('#cargo').val(d[13]);
-	$('#correo').val(d[14]);
-	$('#telefonoj').val(d[15]);
+	$('#jefe').val(d[10]);
+	$('#titulo').val(d[11]);
+	$('#cargo').val(d[12]);
+	$('#correo').val(d[13]);
+	$('#telefonoj').val(d[14]);
 	
 	
 }

@@ -107,8 +107,6 @@ require_once('../clases/funcion_permisos.php');
                     <input type="text" name="" id="direccion" class="form-control input-sm" readonly onmousedown="return false;">
                     <label>Tipo de Empresa</label>
                     <input type="text" name="" id="tipo" class="form-control input-sm" readonly onmousedown="return false;">
-                    <label>Departamento Empresa</label>
-                    <input type="text" name="" id="departamento" class="form-control input-sm" readonly onmousedown="return false;">
                     <label>Jefe Inmediato</label>
                     <input type="text" name="" id="jefe" class="form-control input-sm" readonly onmousedown="return false;">
                     <label>Titulo del Jefe Inmediato</label>

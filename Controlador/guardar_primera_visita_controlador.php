@@ -5,15 +5,17 @@ $modelo=new primera_visita();
 
 
 $numero_cuenta=isset($_POST["cuenta_pv"])? ($_POST["cuenta_pv"]):"";
+$id_sup=isset($_POST["supervisor_pv"])? ($_POST["supervisor_pv"]):"";
 $funciones=isset($_POST["funciones_analisis_pv"])?$_POST["funciones_analisis_pv"]:"";
-$funciones_diseno=isset($_POST["funciones_diseno_pv"])?$_POST["funciones_diseno_pv"]:"";
-$funciones_redes=isset($_POST["funciones_redes_pv"])?$_POST["funciones_redes_pv"]:"";
-$funciones_capacitacion=isset($_POST["funciones_capacitacion_pv"])?$_POST["funciones_capacitacion_pv"]:"";
+$funciones_diseno=isset($_POST["funciones_desarrollo_pv"])?$_POST["funciones_desarrollo_pv"]:"";
+$funciones_redes=isset($_POST["funciones_bases_pv"])?$_POST["funciones_bases_pv"]:"";
+$funciones_capacitacion=isset($_POST["funciones_testing_pv"])?$_POST["funciones_testing_pv"]:"";
 $funciones_seguridad=isset($_POST["funciones_seguridad_pv"])?$_POST["funciones_seguridad_pv"]:"";
-$funciones_auditoria=isset($_POST["funciones_auditoria_pv"])?$_POST["funciones_auditoria_pv"]:"";
-$funciones_base=isset($_POST["funciones_base_pv"])?$_POST["funciones_base_pv"]:"";
+$funciones_auditoria=isset($_POST["funciones_negocios_pv"])?$_POST["funciones_negocios_pv"]:"";
+$funciones_base=isset($_POST["funciones_redes_pv"])?$_POST["funciones_redes_pv"]:"";
 $funciones_soporte=isset($_POST["funciones_soporte_pv"])?$_POST["funciones_soporte_pv"]:"";
-$funciones_programacion=isset($_POST["funciones_programacion_pv"])?$_POST["funciones_programacion_pv"]:"";
+$funciones_programacion=isset($_POST["funciones_monitoreo_pv"])?$_POST["funciones_monitoreo_pv"]:"";
+$otros=isset($_POST["otras_funciones_pv"])?$_POST["otras_funciones_pv"]:"";
 $comunicacion=isset($_POST["comunicacion_pv"])? ($_POST["comunicacion_pv"]):"";
 $puntualidad=isset($_POST["puntualidad_pv"])? ($_POST["puntualidad_pv"]):"";
 $responsabilidad=isset($_POST["responsabilidad_pv"])? ($_POST["responsabilidad_pv"]):"";
@@ -32,7 +34,7 @@ $aspecto_a=isset($_POST["aspectos_auditoria_pv"])? ($_POST["aspectos_auditoria_p
 $aspecto_s=isset($_POST["aspectos_seguridad_pv"])? ($_POST["aspectos_seguridad_pv"]):"";
 $comentario=isset($_POST["comentarios_pv"])? ($_POST["comentarios_pv"]):"";
 $calificacion=isset($_POST["calificacion_uv"])? ($_POST["calificacion_uv"]):"";
-$solicitar=isset($_POST["solicitar_practicante_pv"])? ($_POST["solicitar_practicante_pv"]):"";
+$solicitar=isset($_POST["supervisor_pv"])? ($_POST["supervisor_pv"]):"";
 $representante=isset($_POST["representante_pv"])? ($_POST["representante_pv"]):"";
 $lugar=isset($_POST["lugar_pv"])? ($_POST["lugar_pv"]):"";
 $fecha=isset($_POST["fecha_pv"])? ($_POST["fecha_pv"]):"";
@@ -50,7 +52,7 @@ switch ($_GET["op"]){
 	case 'guardar':
 		
             $rspta=$modelo->insertar($numero_cuenta,$funciones,$funciones_diseno,$funciones_redes,$funciones_capacitacion,$funciones_seguridad
-                                   ,$funciones_auditoria,$funciones_base,$funciones_soporte,$funciones_programacion,$comunicacion
+                                   ,$funciones_auditoria,$funciones_base,$funciones_soporte,$funciones_programacion, $otros, $comunicacion
                                     ,$puntualidad,$responsabilidad,$creatividad,$presentacion,$atencion,$colaborativo,$trabajo_equipo
                                     ,$proactivo,$relaciones,$analisis,$diseno,$programador,$mantenimiento,$comentario
                                     ,$calificacion,$solicitar,$representante,$lugar,$fecha,$aspecto_a,$aspecto_s);

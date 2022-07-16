@@ -57,7 +57,7 @@ if(isset($_POST['nombre_empresa']) && $_POST['id_persona']!=="" && $_POST['cb_em
                     if (!file_exists($micarpeta)) {
                          mkdir($micarpeta, 0777, true);
                         }else{
-                            $documento = glob('../archivos/carta_egresado/'.$ncuenta.'/*'); // obtiene los documentos
+                            $documento = glob('../archivos/PPS01_CROQUIS/'.$ncuenta.'/*'); // obtiene los documentos
                             foreach($documento as $documento){ // itera los documentos
                             if(is_file($documento)) 
                             unlink($documento); // borra los documentos
@@ -66,15 +66,15 @@ if(isset($_POST['nombre_empresa']) && $_POST['id_persona']!=="" && $_POST['cb_em
                 for ($i = 0; $i <=count($documento_nombre_temporal)-1 ; $i++) {
                 
                     move_uploaded_file($documento_nombre_temporal[$i],"$micarpeta/$documento_nombre[$i]");
-                    $ruta= '../archivos/carta_egresado/'.$ncuenta.'/'.$documento_nombre[$i];
+                    $ruta= '../archivos/PPS01_CROQUIS/'.$ncuenta.'/'.$documento_nombre[$i];
                     $direccion[]= $ruta;
                 }
                 $documento = json_encode($direccion);
 
                
                 
-                $sql= "INSERT INTO tbl_empresas_practica ( id_persona, nombre_empresa, direccion_empresa, id_tipo_empresa, id_trabaja_i, puesto_en_trabajo, jefe_inmediato, id_nivel_a, cargo_jefe_inmediato, correo_jefe_inmediato, telefono_jefe_inmediato, celular_jefe_inmediato, perfil_empresa, croquis_empresa, fecha_inicio_laborar)
-                             VALUES ('$id_persona','$nombreEmpresa','$direccion_empresa','$cb_empresa','$cb_trabaja','$cargo_trabajo','$nombre_jefe','$cb_nivel','$cargo_jefe','$correo_jefe','$telefono_jefe', '$celular_jefe','$perfil_empresa','$documento','$fecha_ingreso')";
+                $sql= "INSERT INTO tbl_empresas_practica ( id_persona, nombre_empresa, direccion_empresa, id_tipo_empresa, id_trabaja_i, puesto_en_trabajo, jefe_inmediato, id_nivel_a, cargo_jefe_inmediato, correo_jefe_inmediato, telefono_jefe_inmediato, perfil_empresa, croquis_empresa, fecha_inicio_laborar)
+                             VALUES ('$id_persona','$nombreEmpresa','$direccion_empresa','$cb_empresa','$cb_trabaja','$cargo_trabajo','$nombre_jefe','$cb_nivel','$cargo_jefe','$correo_jefe','$telefono_jefe','$perfil_empresa','$documento','$fecha_ingreso')";
                
                 $resultadop = $mysqli->query($sql);
                 
@@ -92,7 +92,7 @@ if(isset($_POST['nombre_empresa']) && $_POST['id_persona']!=="" && $_POST['cb_em
                 else {
                     // echo "Error: " . $sql ;
 
-                    echo json_encode("Fallo"); 
+                    echo json_encode($_POST); 
                     }
 
 
@@ -182,6 +182,72 @@ if (isset($_POST['cb_modalidad'])) {
 
 }
 
+
+
+
+if (isset($_POST['cuenta'])) {
+    
+    $persona_id=$_POST['idpersona_solicita'];
+    $ncuenta=$_POST['cuenta'];
+    $documento_nombre[] = $_FILES['m_solicitud']['name'];
+
+ 
+//     echo json_encode( $archivo);
+// return false;
+    
+  
+   //VERIFICAMOS QUE NO TENGA REGISTRO EL ESTUDIANTE PARA EVITAR DUPLICIDAD
+     $consulta="SELECT * FROM tbl_practica_por_trabajo
+     WHERE id_persona= $persona_id";
+     $verificar = $mysqli->query($consulta);
+ 
+     if ($verificar->num_rows>=1) {
+  
+      header("location:../vistas/registrar_solicitud_practica_trabajo.php?msj=3"); 
+     }else{
+
+        $documento_nombre = $_FILES['m_solicitud']['name'];
+        $documento_nombre_temporal = $_FILES['m_solicitud']['tmp_name'];
+
+        $micarpeta = '../Documentacion_practica/Practica_por_Trabajo/'.$ncuenta;
+                    if (!file_exists($micarpeta)) {
+                         mkdir($micarpeta, 0777, true);
+                        }else{
+                            $documento = glob('../Documentacion_practica/Practica_por_Trabajo/'.$ncuenta.'/*'); // obtiene los documentos
+                            foreach($documento as $documento){ // itera los documentos
+                            if(is_file($documento)) 
+                            unlink($documento); // borra los documentos
+                        }
+                        }
+                
+                
+                    move_uploaded_file($documento_nombre_temporal,"$micarpeta/$documento_nombre");
+                    $ruta= '../Documentacion_practica/Practica_por_Trabajo/'.$ncuenta.'/'.$documento_nombre;
+                    $direccion= $ruta;
+               
+                $documento = json_encode($direccion);
+
+    //INSERTAMOS EL REGITRO DE PRACTICA
+    $sql="INSERT INTO tbl_practica_por_trabajo (id_persona,id_modalidad_prac_trabajo,ubicacion_carta)
+    VALUES ('$persona_id',4,'$documento')";
+     $resultado = $mysqli->query($sql);
+     
+ 
+     //VERIFICAMOS QUE SE INSERTO EL REGISTRO
+     if ($resultado) {
+        header("location:../vistas/registrar_solicitud_practica_trabajo.php?msj=1"); 
+        
+    }else{
+ 
+        header("location:../vistas/registrar_solicitud_practica_trabajo.php?msj=2"); 
+
+    
+ 
+     }
+    
+ 
+ }
+}
     
 
 ?>

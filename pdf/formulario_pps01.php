@@ -108,7 +108,6 @@ class PDF extends FPDF
 	$row1 = mysqli_fetch_array($resultado);
                  
     $direccion="../archivos/PPS01_CROQUIS/".$row['valor'];
-    $foto="../foto_estudiante/".$row['valor'];
 	
 	$pdf = new PDF('P','mm','Legal',true);
 	$pdf->AliasNbPages();
@@ -120,9 +119,6 @@ class PDF extends FPDF
 	$pdf->SetY(69);
 	$pdf->SetX(47);
 	$pdf->cell(170,5,utf8_decode($row['nombre']),0);
-	$pdf->SetY(69);
-	$pdf->SetX(150);
-	$pdf->Image(listarArchivos($foto),163,68, 44, 47);
 	$pdf->SetY(78);
 	$pdf->SetX(47);
 	$pdf->cell(170,5,utf8_decode(''.$row['valor'].''),0);
@@ -247,6 +243,9 @@ class PDF extends FPDF
 	$pdf->SetY(89);
 	$pdf->SetX(47);
 	$pdf->cell(170,5,utf8_decode(''.fecha($row['fecha_nacimiento']).''),0);
+	$pdf->SetY(89);
+	$pdf->SetX(90);
+	$pdf->cell(170,5,utf8_decode(''.($row['lugar']).''),0);
 	$pdf->SetY(100);
 	$pdf->SetX(47);
 	$pdf->cell(170,5,utf8_decode(''.$row['direccion'].''),0);
@@ -259,6 +258,9 @@ class PDF extends FPDF
 	$pdf->SetY(119);
 	$pdf->SetX(47);
 	$pdf->cell(170,5,utf8_decode(''.$row['Correo'].''),0);
+	$pdf->SetY(119);
+	$pdf->SetX(147);
+	$pdf->cell(170,5,utf8_decode(''.$row['correo_alt'].''),0);
 	$pdf->SetY(148);
 	$pdf->SetX(47);
 	$pdf->cell(170,5,utf8_decode(''.$row1['modalidad'].''),0);
@@ -277,8 +279,8 @@ class PDF extends FPDF
 	$pdf->SetY(182);
 	$pdf->SetX(63);
 	$pdf->cell(170,5,utf8_decode(''.$row2['trabajai'].''),0);
-	$pdf->SetY(114);
-	$pdf->SetX(53);
+	$pdf->SetY(182);
+	$pdf->SetX(155);
 	$pdf->cell(170,5,utf8_decode(''.$row2['puesto_en_trabajo'].''),0);
 	$pdf->SetY(194);
 	$pdf->SetX(73);

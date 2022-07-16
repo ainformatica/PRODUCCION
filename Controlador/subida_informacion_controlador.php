@@ -3,7 +3,7 @@ ob_start();
 session_start();
 
 require_once ('../clases/Conexion.php');
-
+$id=$_POST['txt_id'];
    
     if($_FILES['txt_cedula']['name']!=null){
             
@@ -42,6 +42,11 @@ require_once ('../clases/Conexion.php');
                     $direccion[]= $ruta;
                 }
                 $documento = json_encode($direccion);
+
+                $sql= "INSERT INTO tbl_subida_documentacion (id_persona, estado_vinculacion)
+                                VALUES ('$id', '4')";
+                $resultadop = $mysqli->query($sql);
+
                 
 				echo '<script type="text/javascript">
 				swal({

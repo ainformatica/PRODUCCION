@@ -159,6 +159,7 @@ ob_end_flush();
                                                                                                                         } else {
                                                                                                                           echo "";
                                                                                                                         } ?>" required onkeyup="Espacio(this, event)" maxlength="50" readonly="readonly">
+                <input type="hidden" id="txt_ids" name="txt_id" value="<?php echo $id_persona ?> " >
               </div>
             </div>
 

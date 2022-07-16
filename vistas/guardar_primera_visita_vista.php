@@ -15,7 +15,10 @@ ob_end_flush();
 
 
 
-
+$usuario=$_SESSION['id_usuario'];
+        $id="SELECT id_persona AS supervisor from tbl_usuarios where id_usuario='$usuario'";
+        $result= mysqli_fetch_assoc($mysqli->query($id));
+        $id_supervisor=$result['supervisor'];
 ?>
 
 
@@ -29,7 +32,7 @@ ob_end_flush();
   <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
   <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
   <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
-  </h <body>
+  </h> <body>
 
 
   <div class="content-wrapper">
@@ -78,10 +81,6 @@ ob_end_flush();
               <div class="row">
 
                 <div class="col-sm-12">
-                  <label>DATOS GENERALES</label>
-                  <hr>
-                </div>
-                <div class="col-sm-12">
                   <div class="form-group">
                     <p><label>Seleccione un Alumno</label>
                       <select class="form-control" name="curso" id="curso" onclick='llenarCampos(this);'>
@@ -95,31 +94,74 @@ ob_end_flush();
 
                 <input type="text" id="idInput" name="idInput" class="input" hidden />
 
+                <div class="col-sm-12">
+                  <label>INFORMACIÓN DEL ESTUDIANTE</label>
+                  <hr>
+                </div>
+                
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label>Nombre del estudiante</label>
+                    <input class="form-control" type="text" id="estudiante_pv" name="estudiante_pv" maxlength="60" readonly>
+                  </div>
+                </div>
 
-
-
-
+                  <div class="form-group">
+                    <input class="form-control" type="hidden" id="supervisor_pv" name="supervisor_pv" value="<?php echo $id_supervisor ?>" maxlength="60" readonly>
+                  </div>
 
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label>N de cuenta</label>
+                    <label>Número de cuenta</label>
                     <input class="form-control" type="text" id="cuenta_pv" name="cuenta_pv" readonly maxlength="60">
+                  </div>
+                </div>
+
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label>DNI</label>
+                    <input class="form-control" type="text" id="DNI_pv" name="DNI_pv" readonly maxlength="60">
+                  </div>
+                </div>
+
+                <div class="col-sm-3">
+                  <div class="form-group">
+                    <label>Celular</label>
+                    <input class="form-control" type="text" id="celular_e_pv" name="celular_e_pv" readonly maxlength="60">
+                  </div>
+                </div>
+
+                <div class="col-sm-5">
+                  <div class="form-group">
+                    <label>Correo Electrónico</label>
+                    <input class="form-control" type="text" id="correo_e_pv" name="correo_e_pv" readonly maxlength="60">
                   </div>
                 </div>
 
                 <input hidden="true" name="id_primera_visita" id="id_primera_visita">
 
-
-
-
-
-
+                <div class="col-sm-12">
+                  <label>INFORMACIÓN DE LA INSTITUCIÓN</label>
+                  <hr>
+                </div>
 
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label>Nombre de la empresa o institución</label>
+                    <label>Nombre de la institución</label>
                     <input class="form-control" type="text" id="empresa_pv" name="empresa_pv" maxlength="60" readonly>
                   </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label>Dirección de la institución</label>
+                    <input class="form-control" type="text" id="empresa_d_pv" name="empresa_d_pv" maxlength="60" readonly>
+                  </div>
+                </div>
+                
+                <div class="col-sm-12">
+                  <label>INFORMACIÓN DEL JEFE INMEDIATO</label>
+                  <hr>
                 </div>
 
                 <div class="col-sm-6">
@@ -128,10 +170,18 @@ ob_end_flush();
                     <input class="form-control" type="text" id="jefe_pv" name="jefe_pv" maxlength="60" readonly>
                   </div>
                 </div>
+
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label>Titulo del jefe inmediato o representante de la institución</label>
+                    <label>Nivel Académico</label>
                     <input class="form-control" type="text" id="titulo_pv" name="titulo_pv" maxlength="60" readonly>
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label>Cargo</label>
+                    <input class="form-control" type="text" id="cargo_pv" name="cargo_pv" maxlength="60" readonly>
                   </div>
                 </div>
 
@@ -146,38 +196,54 @@ ob_end_flush();
 
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label>No. de teléfono de la organización</label>
+                    <label>Teléfono</label>
                     <input class="form-control" type="text" id="telefono_pv" name="telefono_pv" data-inputmask='"mask": " 9999-9999"' data-mask readonly>
                   </div>
                 </div>
 
-
-
-
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label>Nombre del estudiante</label>
-                    <input class="form-control" type="text" id="estudiante_pv" name="estudiante_pv" maxlength="60" readonly>
+                    <label>Celular</label>
+                    <input class="form-control" type="text" id="celular_pv" name="celular_pv" data-inputmask='"mask": " 9999-9999"' data-mask readonly>
+                  </div>
+                </div>
+                
+                <div class="col-sm-12">
+                  <label>INFORMACIÓN DE PRÁCTICA PROFESIONAL</label>
+                  <hr>
+                </div>
+                 
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label>Modalidad</label>
+                    <input class="form-control" type="text" id="modalidad_pv" name="modalidad_pv" maxlength="60" readonly>
                   </div>
                 </div>
 
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                   <div class="form-group">
                     <label>Fecha de inicio</label>
                     <input class="form-control" type="text" id="inicio_pv" name="inicio_pv" maxlength="60" readonly>
                   </div>
                 </div>
 
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label>Fecha de finalización</label>
+                    <input class="form-control" type="text" id="finalizacion_pv" name="finalizacion_pv" maxlength="60" readonly>
+                  </div>
+                </div>
+                
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label>Fecha de finalizacion</label>
-                    <input class="form-control" type="text" id="finalizacion_pv" name="finalizacion_pv" maxlength="60" readonly>
+                    <label>Jornada Laboral</label>
+                    <input class="form-control" type="text" id="jornada_pv" name="jornada_pv" maxlength="60" readonly>
                   </div>
                 </div>
 
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label>Horas</label>
+                    <label>Horario Laboral</label>
                     <input class="form-control" type="text" id="horas_pv" name="horas_pv" maxlength="60" readonly>
                   </div>
                 </div>
@@ -201,22 +267,29 @@ ob_end_flush();
                 </div>
 
                 <div class="col-sm-6">
-                  <input type="checkbox" value="Análisis de Sistemas" name="funciones_analisis_pv" /> <label> 1. Análisis de Sistemas</label><br />
-                  <input type="checkbox" value="Diseño de Sistemas" name="funciones__diseno_pv" /> <label> 2. Diseño de Sistemas</label><br />
-                  <input type="checkbox" value="Redes y Comunicación de Datos" name="funciones_redes_pv" /> <label> 3. Redes y Comunicación de Datos</label><br />
+                  <input type="checkbox" value="Análisis y diseño de sistemas" name="funciones_analisis_pv" /> <label> 1. Análisis y diseño de sistemas</label><br />
+                  <input type="checkbox" value="Desarrollo de aplicaciones" name="funciones_desarrollo_pv" /> <label> 2. Desarrollo de aplicaciones </label><br />
+                  <input type="checkbox" value="Bases de datos" name="funciones_bases_pv" /> <label> 3. Bases de datos</label><br />
                 </div>
 
 
                 <div class="col-sm-6">
-                  <input type="checkbox" value="Capacitación en el área Tecnológica" name="funciones_capacitacion_pv" /> <label> 7. Capacitación en el área Tecnológica</label><br />
+                  <input type="checkbox" value="Testing" name="funciones_testing_pv" /> <label> 7.Testing </label><br />
                   <input type="checkbox" value="Seguridad Informática" name="funciones_seguridad_pv" /> <label> 8. Seguridad Informática</label><br />
-                  <input type="checkbox" value="Auditoria de Sistema" name="funciones_auditoria_pv" /> <label> 9. Auditoria de Sistema</label><br />
+                  <input type="checkbox" value="Inteligencia de negocios" name="funciones_negocios_pv" /> <label> 9. Inteligencia de negocios</label><br />
                 </div>
 
                 <div class="col-sm-6">
-                  <input type="checkbox" value="Base de Datos" name="funciones_base_pv" /> <label> 4. Base de Datos</label><br />
-                  <input type="checkbox" value="Soporte de Aplicaciones" name="funciones_soporte_pv" /> <label> 5. Soporte de Aplicaciones</label><br />
-                  <input type="checkbox" value="Programación de Aplicaciones" name="funciones_programacion_pv" /> <label> 6. Programación de Aplicaciones</label><br />
+                  <input type="checkbox" value="Redes y comunicación de datos" name="funciones_redes_pv" /> <label> 4. Redes y comunicación de datos </label><br />
+                  <input type="checkbox" value="Soporte técnico y atención a usuarios" name="funciones_soporte_pv" /> <label> 5. Soporte técnico y atención a usuarios</label><br />
+                  <input type="checkbox" value="Monitoreo de procedimientos y políticas tecnológicas" name="funciones_monitoreo_pv" /> <label> 6. Monitoreo de procedimientos y políticas tecnológicas</label><br />
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label>Otros (especifique)</label>
+                    <input class="form-control" type="text" id="otras_funciones_pv" name="otras_funciones_pv" maxlength="60" require>
+                  </div>
                 </div>
 
                 <div class="col-sm-6">
@@ -240,11 +313,18 @@ ob_end_flush();
                 </div>
 
                 <div class="col-sm-12">
-                  <label>Valores y cualidades</label>
+                  <label>A.	ACTITUDES PERSONALES</label>
                 </div>
                 <br>
                 <br>
-
+                <p> 1.	Deficiente: El aspecto evaluado no es aceptable.
+                <br>
+                    2.	Regular: El aspecto evaluado satisface expectativas mínimas.
+                    <br>
+                    3.	Bueno: El aspecto evaluado es satisfactorio.
+                    <br>
+                    4.	Excelente: El aspecto evaluado es destacado.
+                 </p>
 
 
                 <div class="col-sm-12">
@@ -254,101 +334,114 @@ ob_end_flush();
 
                       <th scope="row"></th>
 
-                      <th>Excelente &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                      <th>Deficiente &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 
-                      <th>Muy Bueno&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                      <th>Regular&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 
                       <th>Bueno&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 
-                      <th>Regular&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                      <th>Excelente&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 
                     </tr>
 
 
                     <tr>
 
-                      <th>Comunicación</th>
+                      <th>Disposición al trabajo asignado</th>
 
-                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="comunicacion_pv" value="Excelente" require></td>
+                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="comunicacion_pv" value="Deficiente" require></td>
 
-                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="comunicacion_pv" value="Muy bueno" require></td>
+                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="comunicacion_pv" value="Regular" require></td>
 
                       <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="comunicacion_pv" value="Bueno" require></td>
 
-                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="comunicacion_pv" value="Regular" require></td>
+                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="comunicacion_pv" value="Excelente" require></td>
 
                     </tr>
 
                     <tr>
 
-                      <th>Puntualidad</th>
+                      <th>Capacidad de comunicación</th>
 
-                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="puntualidad_pv" value="Excelente" require></td>
+                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="puntualidad_pv" value="Deficiente" require></td>
 
-                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="puntualidad_pv" value="Muy bueno" require></td>
+                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="puntualidad_pv" value="Regular" require></td>
 
                       <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="puntualidad_pv" value="Bueno" require></td>
 
-                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="puntualidad_pv" value="Regular" require></td>
+                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="puntualidad_pv" value="Excelente" require></td>
 
                     </tr>
 
                     <tr>
 
-                      <th>Responsabilidad</th>
+                      <th>Trabajo en equipo</th>
 
-                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="responsabilidad_pv" value="Excelente" require></td>
+                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="responsabilidad_pv" value="Deficiente" require></td>
 
-                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="responsabilidad_pv" value="Muy Bueno" require></td>
+                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="responsabilidad_pv" value="Regular" require></td>
 
                       <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="responsabilidad_pv" value="Bueno" require></td>
 
-                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="responsabilidad_pv" value="Regular" require></td>
+                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="responsabilidad_pv" value="Excelente" require></td>
 
                     </tr>
 
                     <tr>
 
-                      <th>Creatividad</th>
+                      <th>Orientación al cambio</th>
 
-                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="creatividad_pv" value="Excelente" require></td>
+                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="creatividad_pv" value="Deficiente" require></td>
 
-                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="creatividad_pv" value="Muy Bueno" require></td>
+                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="creatividad_pv" value="Regular" require></td>
 
                       <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="creatividad_pv" value="Bueno" require></td>
 
-                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="creatividad_pv" value="Regular" require></td>
+                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="creatividad_pv" value="Excelente" require></td>
 
                     </tr>
 
                     <tr>
 
-                      <th>Presentación</th>
+                      <th>Innovación y creatividad</th>
 
-                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="presentacion_pv" value="Excelente" require> </td>
+                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="presentacion_pv" value="Deficiente" require> </td>
 
-                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="presentacion_pv" value="Muy Bueno" require> </td>
+                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="presentacion_pv" value="Regular" require> </td>
 
                       <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="presentacion_pv" value="Bueno" require> </td>
 
-                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="presentacion_pv" value="Regular" require> </td>
+                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="presentacion_pv" value="Excelente" require> </td>
 
                     </tr>
 
                     <tr>
 
-                      <th>Atención al Cliente</th>
+                      <th>Responsabilidad y compromiso</th>
 
-                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="atencion_pv" value="Excelente" require></td>
+                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="atencion_pv" value="Deficiente" require></td>
 
-                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="atencion_pv" value="Muy Bueno" require></td>
+                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="atencion_pv" value="Regular" require></td>
 
                       <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="atencion_pv" value="Bueno" require></td>
 
-                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="atencion_pv" value="Regular" require></td>
+                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="atencion_pv" value="Excelente" require></td>
 
                     </tr>
 
+                    <tr>
+
+                      <th>Empatía, cortesía y buen trato hacia compañeros de trabajo</th>
+
+                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="programador_pv" value="Deficiente" require></td>
+
+                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="programador_pv" value="Regular" require></td>
+
+                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="programador_pv" value="Bueno" require></td>
+
+                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="programador_pv" value="Excelente" require></td>
+
+                    </tr>
 
                   </table>
                 </div>
@@ -362,7 +455,7 @@ ob_end_flush();
                 <div class="col-sm-12">
                   <br><br>
                   <br>
-                  <label>Competencias/Capacidades observadas</label><br>
+                  <label>B.	INTEGRACIÓN INSTITUCIONAL</label><br>
                   <br>
                 </div>
 
@@ -376,189 +469,116 @@ ob_end_flush();
 
                       <th scope="row"></th>
 
-                      <th>Básico &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                      <th>Deficiente &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 
-                      <th>Intermedio&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                      <th>Regular&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 
-                      <th>Avanzado&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                      <th>Bueno&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 
-                      <th>No Aplica&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                      <th>Excelente&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 
                     </tr>
 
 
                     <tr>
 
-                      <th>Colaborativo</th>
+                      <th>Capacidad de identificación de objetivos institucionales</th>
 
-                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="colaborativo_pv" value="Básico" require></td>
+                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="colaborativo_pv" value="Deficiente" require></td>
 
-                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="colaborativo_pv" value="Intermedio" require></td>
+                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="colaborativo_pv" value="Regular" require></td>
 
-                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="colaborativo_pv" value="Avanzado" require></td>
+                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="colaborativo_pv" value="Bueno" require></td>
 
-                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="colaborativo_pv" value="No Aplica" require></td>
-
-                    </tr>
-
-                    <tr>
-
-                      <th>Trabajo en equipo</th>
-
-                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="trabajo_equipo_pv" value="Básico" require></td>
-
-                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="trabajo_equipo_pv" value="Intermedio" require></td>
-
-                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="trabajo_equipo_pv" value="Avanzado" require></td>
-
-                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="trabajo_equipo_pv" value="No Aplica" require></td>
+                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="colaborativo_pv" value="Excelente" require></td>
 
                     </tr>
 
                     <tr>
 
-                      <th>Proactivo con Iniciativa</th>
+                      <th>Comprensión del sector o rubro de negocio</th>
 
-                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="proactivo_iniciativa_pv" value="Básico" require></td>
+                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="trabajo_equipo_pv" value="Deficiente" require></td>
 
-                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="proactivo_iniciativa_pv" value="Intermedio" require></td>
+                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="trabajo_equipo_pv" value="Regular" require></td>
 
-                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="proactivo_iniciativa_pv" value="Avanzado" require></td>
+                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="trabajo_equipo_pv" value="Bueno" require></td>
 
-                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="proactivo_iniciativa_pv" value="No Aplica" require></td>
-
-                    </tr>
-
-                    <tr>
-
-                      <th>Relaciones Interpersonales</th>
-
-                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="relaciones_pv" value="Básico" require></td>
-
-                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="relaciones_pv" value="Intermedio" require></td>
-
-                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="relaciones_pv" value="Avanzado" require></td>
-
-                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="relaciones_pv" value="No Aplica" require></td>
+                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="trabajo_equipo_pv" value="Excelente" require></td>
 
                     </tr>
 
                     <tr>
 
-                      <th>Analisis de Sistemas</th>
+                      <th>Comprensión de normativas y políticas institucionales</th>
 
-                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="analisis_pv" value="Básico" require></td>
+                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="proactivo_iniciativa_pv" value="Deficiente" require></td>
 
-                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="analisis_pv" value="Intermedio" require></td>
+                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="proactivo_iniciativa_pv" value="Regular" require></td>
 
-                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="analisis_pv" value="Avanzado" require></td>
+                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="proactivo_iniciativa_pv" value="Bueno" require></td>
 
-                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="analisis_pv" value="No Aplica" require></td>
-
-                    </tr>
-
-                    <tr>
-
-                      <th>Diseño de Aplicaciones</th>
-
-                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="diseno_pv" value="Básico" require></td>
-
-                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="diseno_pv" value="Intermedio" require></td>
-
-                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="diseno_pv" value="Avanzado" require></td>
-
-                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="diseno_pv" value="No Aplica" require></td>
+                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="proactivo_iniciativa_pv" value="Excelente" require></td>
 
                     </tr>
 
                     <tr>
 
-                      <th>Programador de Aplicaciones</th>
+                      <th>Comprensión de asignaciones y requerimientos</th>
 
-                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="programador_pv" value="Básico" require></td>
+                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="relaciones_pv" value="Deficiente" require></td>
 
-                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="programador_pv" value="Intermedio" require></td>
+                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="relaciones_pv" value="Regular" require></td>
 
-                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="programador_pv" value="Avanzado" require></td>
+                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="relaciones_pv" value="Bueno" require></td>
 
-                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="programador_pv" value="No Aplica" require></td>
+                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="relaciones_pv" value="Excelente" require></td>
 
                     </tr>
 
                     <tr>
 
-                      <th>Mantenimiento de Aplicaciones</th>
+                      <th>Disciplina para realizar actividades</th>
 
-                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="mantenimiento_pv" value="Básico" require></td>
+                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="analisis_pv" value="Deficiente" require></td>
 
-                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="mantenimiento_pv" value="Intermedio" require></td>
+                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="analisis_pv" value="Regular" require></td>
 
-                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="mantenimiento_pv" value="Avanzado" require></td>
+                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="analisis_pv" value="Bueno" require></td>
 
-                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="mantenimiento_pv" value="No Aplica"></td>
-
-                    </tr>
-
-                    <th>Aspectos de auditoria de Sistemas</th>
-
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="aspectos_auditoria_pv" value="Básico" require></td>
-
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="aspectos_auditoria_pv" value="Intermedio" require></td>
-
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="aspectos_auditoria_pv" value="Avanzado" require></td>
-
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="aspectos_auditoria_pv" value="No Aplica" require></td>
+                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="analisis_pv" value="Excelente" require></td>
 
                     </tr>
 
-                    <th>Aspectos de auditoria Informática </th>
+                    <tr>
 
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="aspectos_seguridad_pv" value="Básico" require></td>
+                      <th>Interés para adquirir conocimientos</th>
 
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="aspectos_seguridad_pv" value="Intermedio" require></td>
+                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="diseno_pv" value="Deficiente" require></td>
 
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="aspectos_seguridad_pv" value="Avanzado" require></td>
+                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="diseno_pv" value="Regular" require></td>
 
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="aspectos_seguridad_pv" value="No Aplica" require></td>
+                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="diseno_pv" value="Bueno" require></td>
 
+                      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="diseno_pv" value="Excelente" require></td>
 
                     </tr>
-
 
                   </table>
                 </div>
-
-
-
-
-
-
-
-                <div class="col-sm-12"><br>
-                  <br>
-                  <div class="form-group">
-                    <label for="exampleFormControlTextarea1">Observaciones que crea pertinentes</label>
-                    <textarea class="form-control" id="comentarios_pv" rows="3" require></textarea>
-                  </div>
-                </div>
-
-
+                <hr>
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label>¿Solicitaría nuevamente uno de nuestros estudiantes para practica profesional supervisada en su empresa?</label>
-                    <select class="form-control" name="solicitar_practicante_pv" id="solicitar_practicante_pv" require>
-                      <option value="">Seleccione</option>
-                      <option value="Si">SI</option>
-                      <option value="No">NO</option>
-                    </select>
-                  </div>
-                </div>
-
-
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label>Nombre completo del representante de la carrera de informática que le ha contactado</label>
+                    <label>Representante de la institución</label>
                     <input class="form-control" type="text" id="representante_pv" name="representante_pv" maxlength="60" require>
+                  </div>
+                </div>
+
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label>Supervisor</label>
+                    <input class="form-control" type="text" id="supervisor_pv" name="supervisor_pv" maxlength="60" require>
                   </div>
                 </div>
 
@@ -567,6 +587,13 @@ ob_end_flush();
                   <div class="form-group">
                     <label>Lugar</label>
                     <input class="form-control" type="text" id="lugar_pv" name="lugar_pv" maxlength="60" require>
+                  </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label>Fecha</label>
+                    <input class="form-control" type="date" id="fecha_pv" name="fecha_pv" maxlength="60" require>
                   </div>
                 </div>
 
@@ -643,19 +670,27 @@ ob_end_flush();
         console.log(data);
         //mostrarform(true);
         //TBL_PRACTICA_ESTUDIANTES
+        $("#modalidad_pv").val(data.modalidad);
         $("#inicio_pv").val(data.fecha_inicio);
-        $("#finalizacion_pv").val(data.fecha_finaliza);
+        $("#finalizacion_pv").val(data.fecha_finalizacion);
+        $("#jornada_pv").val(data.horario);
         $("#horas_pv").val(data.horas);
         //TBL_PERSONAS_EXTENDIDAS
         $("#cuenta_pv").val(data.valor);
         //TBL_EMPRESAS_PRACTICA
         $("#empresa_pv").val(data.nombre_empresa);
+        $("#empresa_d_pv").val(data.direccion_empresa);
         $("#jefe_pv").val(data.jefe_inmediato);
-        $("#titulo_pv").val(data.titulo_jefe_inmediato);
-        //	$("#correo_pv").val(data.correo_jefe_inmediato);
+        $("#cargo_pv").val(data.cargo_jefe_inmediato);
+        $("#titulo_pv").val(data.nivel_a);
+        $("#celular_pv").val(data.celular_jefe_inmediato);
+        $("#correo_pv").val(data.correo_jefe_inmediato);
         $("#telefono_pv").val(data.telefono_jefe_inmediato);
         //TBL_PERSONAS
         $("#estudiante_pv").val(data.nombres);
+        $("#DNI_pv").val(data.identidad);
+        $("#celular_e_pv").val(data.Celular);
+        $("#correo_e_pv").val(data.Correo);
 
 
 

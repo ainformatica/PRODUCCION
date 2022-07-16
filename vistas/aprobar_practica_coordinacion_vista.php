@@ -102,11 +102,7 @@ if ($msj==2)
         }
 
 
-          
-
-
-
-        $sql_tabla_estudiantes_practica="SELECT p.id_persona as id, px.valor as valor, concat(p.nombres,' ',p.apellidos) as nombre, m.modalidad, ep.nombre_empresa,
+        $sql_tabla_estudiantes_practica="SELECT DISTINCT p.id_persona as id, px.valor as valor, concat(p.nombres,' ',p.apellidos) as nombre, m.modalidad, ep.nombre_empresa,
         CASE 
         WHEN (sd.estado_coordinacion IS NULL and sd.estado_vinculacion='1') then
         'PENDIENTE' 
@@ -119,12 +115,10 @@ if ($msj==2)
         when sd.estado_coordinacion IS NULL then 'PROCESO'
         else
         sd.estado_coordinacion end as estado_coordinacion
-        from  tbl_personas p, tbl_subida_documentacion sd, tbl_personas_extendidas px, tbl_modalidad m, tbl_empresas_practica ep, tbl_practica_estudiantes pe where sd.id_persona=p.id_persona AND m.id_modalidad=pe.id_modalidad AND px.id_atributo=12 and px.id_persona=p.id_persona and estado_coordinacion IS NULL";
-
-
-
+        from tbl_personas p, tbl_subida_documentacion sd, tbl_personas_extendidas px, tbl_modalidad m, tbl_empresas_practica ep, tbl_practica_estudiantes pe where sd.id_persona=p.id_persona AND m.id_modalidad=pe.id_modalidad AND px.id_atributo=12 and px.id_persona=p.id_persona and estado_coordinacion IS NULL and ep.id_persona=p.id_persona and pe.id_persona=p.id_persona";
 
   $resultadotabla_estudiantes_practica = mysqli_fetch_assoc($mysqli->query($sql_tabla_estudiantes_practica));
+        $id_estudent=$resultadotabla_estudiantes_practica['id'];
 
         $_SESSION['txt_estudiante']=$resultadotabla_estudiantes_practica['nombre'];
         $_SESSION['cuenta']=$resultadotabla_estudiantes_practica['valor'];
@@ -135,15 +129,23 @@ if ($msj==2)
         $_SESSION['modalidad']=$resultadotabla_estudiantes_practica['modalidad'];
         $resultadotabla_estudiantes_practica = $mysqli->query($sql_tabla_estudiantes_practica);
 
+        $validar_aprobacion="SELECT count(tbl2.id_persona) AS persona FROM tbl_vinculacion_aprobacion_practica tbl2
+          WHERE tbl2.id_persona = $id_estudent AND tbl2.id_estado_vinculacion=1 OR tbl2.id_estado_vinculacion=2";
+          $aprobacion = mysqli_fetch_assoc($mysqli->query($validar_aprobacion));
 
-
+          if ($aprobacion['persona']==1) {
+            $btn_aprobacion="<button type='submit'  class='btn btn-secondary btn-raised btn-sm' name= 'btn_imprimir'>Imprimir";
+          }else{
+            $btn_aprobacion="<button type='button'  class='btn btn-warning btn-raised btn-sm' name= 'btn_imprimir'>Imprimir";
+        }
 
  if (isset($_REQUEST['cuenta']))
         {
   
-$sql_datos_modal="SELECT p.id_persona as id, px.valor as valor, concat(p.nombres,' ',p.apellidos) as nombre from  tbl_personas p, tbl_subida_documentacion sd , tbl_personas_extendidas px where sd.id_persona=p.id_persona AND px.id_atributo=12 and px.id_persona=p.id_persona and px.valor=$_REQUEST[cuenta]";
+$sql_datos_modal="SELECT p.id_persona, px.valor as valor, concat(p.nombres,' ',p.apellidos) as nombre from  tbl_personas p, tbl_subida_documentacion sd , tbl_personas_extendidas px where sd.id_persona=p.id_persona AND px.id_atributo=12 and px.id_persona=p.id_persona and px.valor=$_REQUEST[cuenta]";
           $resultado_datos = mysqli_fetch_assoc($mysqli->query($sql_datos_modal));
           $_SESSION['txt_estudiante']=$resultado_datos['nombre'];
+          $_SESSION['id_es']=$resultado_datos['id_persona'];
           $_SESSION['cuenta']=$resultado_datos['valor'];
 
         ?>
@@ -182,11 +184,13 @@ $sql_datos_modal="SELECT p.id_persona as id, px.valor as valor, concat(p.nombres
      if (isset($_REQUEST['cuenta_coordinacion']))
         {
 
-          $sql_datos_modal="SELECT px.valor as valor, concat(p.nombres,' ',p.apellidos) as nombre , sd.estado_vinculacion,ep.nombre_empresa,m.modalidad from  tbl_personas p, tbl_subida_documentacion sd,tbl_empresas_practica ep ,tbl_personas_extendidas px, tbl_practica_estudiantes pe, tbl_modalidad m where p.id_persona=sd.id_persona AND m.id_modalidad=pe.id_modalidad AND px.id_atributo=12 and px.id_persona=p.id_persona and px.valor=$_REQUEST[cuenta_coordinacion]";
+          $sql_datos_modal="SELECT px.valor as valor, p.id_persona as id, concat(p.nombres,' ',p.apellidos) as nombre , sd.estado_vinculacion,ep.nombre_empresa,m.modalidad from  tbl_personas p, tbl_subida_documentacion sd,tbl_empresas_practica ep ,tbl_personas_extendidas px, tbl_practica_estudiantes pe, tbl_modalidad m where p.id_persona=sd.id_persona AND m.id_modalidad=pe.id_modalidad AND px.id_atributo=12 and px.id_persona=p.id_persona and px.valor=$_REQUEST[cuenta_coordinacion] and ep.id_persona=p.id_persona and pe.id_persona=p.id_persona";
           $resultado_datos = mysqli_fetch_assoc($mysqli->query($sql_datos_modal));
           $_SESSION['txt_estudiante']=$resultado_datos['nombre'];
           $_SESSION['cuenta']=$resultado_datos['valor'];
+          $_SESSION['id_e']=$resultado_datos['id'];
           $_SESSION['empresa']=$resultado_datos['nombre_empresa'];
+          $_SESSION['mod']=$resultado_datos['modalidad'];
 
        
      
@@ -209,6 +213,7 @@ $sql_datos_modal="SELECT p.id_persona as id, px.valor as valor, concat(p.nombres
 
 
       }
+
       ob_end_flush();
 
       ?>
@@ -283,8 +288,7 @@ $sql_datos_modal="SELECT p.id_persona as id, px.valor as valor, concat(p.nombres
                        <th>PROCESO</th>
                        <th>EXPEDIENTE</th>                
                        <th>APROBAR PRACTICA</th>  
-                       <th>CONSTANCIA</th> 
-                       <th>CHECKBOX</th>               
+                       <th>CONSTANCIA</th>                
 
                      </tr>
                    </thead>
@@ -316,13 +320,13 @@ $sql_datos_modal="SELECT p.id_persona as id, px.valor as valor, concat(p.nombres
 
                     <td style="text-align: center;">
 
-                            <a href="../pdf/constancia_aprobacion_rechazo.php?" target="_blank" class="btn btn-primary btn-raised btn-xs">
-                              <i class="far fa-edit"></i>
-                            </a>
-                     </td>
-
-                    <td><label class="checkbox-inline"><input id="" type="checkbox"class="ch" value="">Adjuntar</label></td>
-                    
+                      <form class="well" action="../pdf/constancia_aprobacion_rechazo.php?id_persona=<?php echo $row['id']; ?>" method="POST" target="_blank">
+                        <?php  
+                          echo $btn_aprobacion;
+                        ?>
+                          <i class="zmdi zmdi-local-printshop"></i>
+                    </td>
+                    </form>
 
                   </tr>
                 <?php  } 
@@ -362,7 +366,12 @@ $sql_datos_modal="SELECT p.id_persona as id, px.valor as valor, concat(p.nombres
         </button>
       </div>
 
-
+      <?php 
+          $cuenta=$_GET['cuenta_coordinacion'];
+          $id=("select id_persona from tbl_personas_extendidas where valor='$cuenta'");
+          $result= mysqli_fetch_assoc($mysqli->query($id));
+          $id_persona=$result['id_persona'];
+      ?>
 
       <!--Cuerpo del modal-->
       <div class="modal-body">
@@ -382,13 +391,13 @@ $sql_datos_modal="SELECT p.id_persona as id, px.valor as valor, concat(p.nombres
              </div></div>
 
 
-             <input class="form-control" type="text" id="txt_estudiante_id" name="txt_estudiante_id" hidden value="<?php echo strtoupper( $_SESSION['id']) ?>" readonly="readonly">
+             <input class="form-control" type="text" id="txt_estudiante_id" name="txt_estudiante_id" hidden value="<?php echo strtoupper( $_SESSION['id_e']) ?>" readonly="readonly">
 
 
              <div class="col-sm-3">
              <div class="form-group">
                <label>Modalidad</label>
-             <input class="form-control" type="text" id="txt_estudiante_cuenta" name="txt_estudiante_cuenta" value="<?php echo strtoupper( $_SESSION['modalidad']) ?>" readonly="readonly">
+             <input class="form-control" type="text" id="txt_estudiante_cuenta" name="txt_estudiante_cuenta" value="<?php echo strtoupper( $_SESSION['mod']) ?>" readonly="readonly">
              </div></div>
 
              <div class="col-sm-6">

@@ -55,7 +55,23 @@ require_once('../clases/funcion_visualizar.php');
     align-items: center;
     justify-content: center;">
 
+            <div class="col-6 col-sm-6 col-md-4">
+              <div class="small-box bg-light">
+                <div class="inner">
+                  <h5>Asignar docente supervisor </h5>
+                  <br>
+                  <br>
+                </div>
+                <div class="icon">
 
+                  <i class="fas fa-user-plus"></i>
+                </div>
+                <a href="../vistas/gestion_docente_supervisor_vista.php" class="small-box-footer">
+                  Ir <i class="fas fa-arrow-circle-right"></i>
+                </a>
+              </div>
+              <!-- /.info-box -->
+            </div>
 
             <div class="col-6 col-sm-6 col-md-4">
               <div class="small-box bg-light">
@@ -94,7 +110,7 @@ require_once('../clases/funcion_visualizar.php');
             </div>
 
 
-            <div class="col-6 col-sm-6 col-md-4">
+            <!-- <div class="col-6 col-sm-6 col-md-4">
               <div class="small-box bg-light">
                 <div class="inner">
                   <h5>Única Supervisión </h5>
@@ -109,28 +125,7 @@ require_once('../clases/funcion_visualizar.php');
                   Ir <i class="fas fa-arrow-circle-right"></i>
                 </a>
               </div>
-              <!-- /.info-box -->
-            </div>
-
-            <div class="col-6 col-sm-6 col-md-4">
-              <div class="small-box bg-light">
-                <div class="inner">
-                  <h5>Asignar docente supervisor </h5>
-                  <br>
-                  <br>
-                </div>
-                <div class="icon">
-
-                  <i class="fas fa-user-plus"></i>
-                </div>
-                <a href="../vistas/gestion_docente_supervisor_vista.php" class="small-box-footer">
-                  Ir <i class="fas fa-arrow-circle-right"></i>
-                </a>
-              </div>
-              <!-- /.info-box -->
-            </div>
-
-
+            </div> -->
 
             <div class="col-6 col-sm-6 col-md-4">
               <div class="small-box bg-primary">

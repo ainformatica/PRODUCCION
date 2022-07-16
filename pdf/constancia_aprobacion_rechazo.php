@@ -5,7 +5,9 @@
 require 'fpdf/fpdf.php';
 require_once ('../clases/Conexion.php');
 
-$sql = "SELECT concat(p.nombres,' ',p.apellidos) as nombre, ep.nombre_empresa, m.modalidad, ev.descripcion as estado, h.descripcion as horas, vp.fecha_inicio, vp.fecha_finalizacion, concat(dp.descripcion,' DE ',vp.horario_entrada,' A ',vp.horario_salida) as horario  from  tbl_personas p,tbl_empresas_practica ep ,tbl_personas_extendidas px, tbl_practica_estudiantes pe, tbl_modalidad m, tbl_vinculacion_aprobacion_practica vp,tbl_estado_vinculacion ev, tbl_horas h, tbl_dias_practica dp where m.id_modalidad=pe.id_modalidad AND vp.id_estado_vinculacion=ev.id_estado_vinculacion AND vp.id_horas=h.id_horas AND vp.id_dias=dp.id_dias AND px.id_atributo=12 and px.id_persona=p.id_persona AND vp.id_persona=p.id_persona and p.id_persona=$_SESSION[id]";
+$id = $_GET['id_persona']; 
+
+$sql = "SELECT concat(p.nombres,' ',p.apellidos) as nombre, ep.nombre_empresa, m.modalidad, ev.descripcion as estado, h.id_horas as horas, vp.fecha_inicio, vp.fecha_finalizacion, concat(dp.descripcion,' DE ',vp.horario_entrada,' A ',vp.horario_salida) as horario  from  tbl_personas p,tbl_empresas_practica ep ,tbl_personas_extendidas px, tbl_practica_estudiantes pe, tbl_modalidad m, tbl_vinculacion_aprobacion_practica vp,tbl_estado_vinculacion ev, tbl_horas h, tbl_dias_practica dp where m.id_modalidad=pe.id_modalidad AND vp.id_estado_vinculacion=ev.id_estado_vinculacion AND vp.id_horas=h.id_horas AND pe.Id_empresa= ep.Id_empresa AND vp.id_dias=dp.id_dias AND px.id_atributo=12 and px.id_persona=p.id_persona and pe.id_persona=p.id_persona AND vp.id_persona=p.id_persona and p.id_persona=$id";
 
 function fechaCastellano ($fecha) {
     $fecha = substr($fecha, 0, 10);
@@ -64,7 +66,7 @@ class PDF extends FPDF
 	$pdf->Cell(128, 10, ''.$row['nombre_empresa'].'', 0, 1, 'C');
 	$pdf->ln(-3);
 	$pdf->SetY(82);
-	$pdf->Cell(128, 10, utf8_decode(''.$row['modalidad'].''), 0, 1, 'C');
+	$pdf->Cell(134, 10, utf8_decode(''.$row['modalidad'].''), 0, 1, 'C');
 	$pdf->ln(-3);
 	$pdf->SetY(91);
 	$pdf->Cell(136, 10, utf8_decode(''.fecha($row['fecha_inicio'].'')), 0, 1, 'C');

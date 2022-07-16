@@ -250,7 +250,7 @@ $resultadotabla_modal = $mysqli->query($sql_tabla__modal_clases_aprobadas);
                           <td>'.$row['descripcion'].'</td>
                           <td style="text-align: center;">
 
-                            <a href="../pdf/reporte_constancia_clases.php?id_persona='.$row['id_persona'].'" target="_blank" class="btn btn-primary btn-raised btn-xs">
+                            <a href="../pdf/reporte_constancia_clases.php?id_persona='.$row['id'].'" target="_blank" class="btn btn-primary btn-raised btn-xs">
                               <i class="far fa-edit"></i>
                             </a>
                           </td>

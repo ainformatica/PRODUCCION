@@ -53,12 +53,12 @@ class asignaturas
 	public function mostrar_datos_alumno($id_supervisor)
 	{
         global $instancia_conexion;
-		$sql="SELECT px.valor, concat(a.nombres,' ',a.apellidos) as nombre, ep.nombre_empresa, ep.direccion_empresa,pe.fecha_inicio, pe.fecha_finaliza, c.valor Correo, e.valor Celular, ep.jefe_inmediato, ep.titulo_jefe_inmediato
+		$sql="SELECT px.valor, concat(a.nombres,' ',a.apellidos) as nombre, ep.nombre_empresa, ep.direccion_empresa,pe.fecha_inicio, pe.fecha_finalizacion, c.valor Correo, e.valor Celular, ep.jefe_inmediato, ep.id_nivel_a
 
 		FROM tbl_empresas_practica AS ep
 		JOIN tbl_personas AS a
 		ON ep.id_persona = a.id_persona
-		JOIN tbl_practica_estudiantes AS pe
+		JOIN tbl_vinculacion_aprobacion_practica AS pe
 		ON pe.id_persona = a.id_persona
 		JOIN tbl_contactos c ON a.id_persona = c.id_persona
 		JOIN tbl_tipo_contactos d ON c.id_tipo_contacto = d.id_tipo_contacto AND d.descripcion = 'CORREO'
@@ -79,12 +79,12 @@ class asignaturas
 	public function listar()
 	{
         global $instancia_conexion;
-		$sql="SELECT distinctrow px.valor, concat(a.nombres,' ',a.apellidos) as nombre, ep.nombre_empresa, ep.direccion_empresa, pe.fecha_inicio, pe.fecha_finaliza, ep.id_persona
+		$sql="SELECT distinctrow  px.valor, concat(a.nombres,' ',a.apellidos) as nombre, ep.nombre_empresa, ep.direccion_empresa, vap.fecha_inicio, vap.fecha_finalizacion, ep.id_persona
 
-		FROM tbl_empresas_practica ep, tbl_personas a, tbl_practica_estudiantes pe, tbl_personas_extendidas px
+		FROM tbl_empresas_practica ep, tbl_personas a, tbl_vinculacion_aprobacion_practica vap, tbl_practica_estudiantes pe, tbl_personas_extendidas px
 		WHERE
-		pe.id_persona = a.id_persona AND
-	    px.id_atributo=12 and ep.id_persona=pe.id_persona and ep.Id_empresa=pe.Id_empresa and px.id_persona=pe.id_persona and pe.docente_supervisor='';";
+		pe.id_persona = a.id_persona AND ep.id_persona = a.id_persona AND vap.id_persona = a.id_persona AND
+	    px.id_atributo=12 and ep.id_persona=pe.id_persona and ep.Id_empresa=pe.Id_empresa and px.id_persona=pe.id_persona and vap.id_persona=pe.id_persona and vap.id_estado_vinculacion=1;";
 		return $instancia_conexion->ejecutarConsulta($sql);
 	}
 }

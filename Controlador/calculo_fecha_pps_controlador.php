@@ -27,8 +27,8 @@ $h2 = new DateTime($horario_fin);
 $horast = date_diff($h1, $h2);
 $horas_diarias = $horast->format('%H')-1    ; //Me da el calculo de horas diarias 
 $horas_semanales=($horas_diarias*$dias);// Me da el calculo de horas semanales
-$dias_trabajo= (800/$horas_diarias);//me da el calculo de dias totales de trabajo
-$semanas_trabajo=(800/$horas_semanales);//me da el calculo de semanas que va trabajar
+$dias_trabajo= ($cb_horas_practica/$horas_diarias);//me da el calculo de dias totales de trabajo
+$semanas_trabajo=($cb_horas_practica/$horas_semanales);//me da el calculo de semanas que va trabajar
 $sabados_domingos=($semanas_trabajo*2);//me da la suma de sabados y domigos a tomar en cuenta 
 $dias_totales_trabajo=($dias_trabajo+$sabados_domingos);
 

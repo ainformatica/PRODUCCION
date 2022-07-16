@@ -99,23 +99,68 @@ ob_end_flush();
 
                 <input type="text" id="idInput" name="idInput" class="input" hidden />
 
-
-
-
+                <div class="col-sm-12">
+                  <label>INFORMACIÓN DEL ESTUDIANTE</label>
+                  <hr>
+                </div>
+                
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label>N de Cuenta</label>
-                    <input class="form-control" type="text" id="cuenta_sv" name="cuenta_sv" maxlength="60" readonly>
+                    <label>Nombre del estudiante</label>
+                    <input class="form-control" type="text" id="estudiante_sv" name="estudiante_sv" maxlength="60" readonly>
                   </div>
                 </div>
 
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label>Número de cuenta</label>
+                    <input class="form-control" type="text" id="cuenta_sv" name="cuenta_sv" readonly maxlength="60">
+                  </div>
+                </div>
 
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label>DNI</label>
+                    <input class="form-control" type="text" id="DNI_sv" name="DNI_sv" readonly maxlength="60">
+                  </div>
+                </div>
+
+                <div class="col-sm-3">
+                  <div class="form-group">
+                    <label>Celular</label>
+                    <input class="form-control" type="text" id="celular_e_sv" name="celular_e_sv" readonly maxlength="60">
+                  </div>
+                </div>
+
+                <div class="col-sm-5">
+                  <div class="form-group">
+                    <label>Correo Electrónico</label>
+                    <input class="form-control" type="text" id="correo_e_sv" name="correo_e_sv" readonly maxlength="60">
+                  </div>
+                </div>
+
+                <div class="col-sm-12">
+                  <label>INFORMACIÓN DE LA INSTITUCIÓN</label>
+                  <hr>
+                </div>
 
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label>Nombre de la empresa o institución</label>
+                    <label>Nombre de la institución</label>
                     <input class="form-control" type="text" id="empresa_sv" name="empresa_sv" maxlength="60" readonly>
                   </div>
+                </div>
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label>Dirección de la institución</label>
+                    <input class="form-control" type="text" id="empresa_d_sv" name="empresa_d_sv" maxlength="60" readonly>
+                  </div>
+                </div>
+                
+                <div class="col-sm-12">
+                  <label>INFORMACIÓN DEL JEFE INMEDIATO</label>
+                  <hr>
                 </div>
 
                 <div class="col-sm-6">
@@ -127,14 +172,22 @@ ob_end_flush();
 
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label>Titulo del jefe inmediato o representante de la institución</label>
+                    <label>Nivel Académico</label>
                     <input class="form-control" type="text" id="titulo_sv" name="titulo_sv" maxlength="60" readonly>
                   </div>
                 </div>
 
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label>Correo electrónico</label>
+                    <label>Cargo</label>
+                    <input class="form-control" type="text" id="cargo_sv" name="cargo_sv" maxlength="60" readonly>
+                  </div>
+                </div>
+
+
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label>Correo electrónico </label>
                     <input class="form-control" type="text" id="correo_sv" name="correo_sv" maxlength="60" readonly>
                   </div>
                 </div>
@@ -142,36 +195,54 @@ ob_end_flush();
 
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label>No. de teléfono de la organización</label>
-                    <input class="form-control" type="text" id="telefono_sv" name="telefono_sv" maxlength="60" readonly>
+                    <label>Teléfono</label>
+                    <input class="form-control" type="text" id="telefono_sv" name="telefono_sv" data-inputmask='"mask": " 9999-9999"' data-mask readonly>
                   </div>
                 </div>
-
 
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label>Nombre del estudiante</label>
-                    <input class="form-control" type="text" id="estudiante_sv" name="estudiante_sv" maxlength="60" readonly>
+                    <label>Celular</label>
+                    <input class="form-control" type="text" id="celular_sv" name="celular_sv" data-inputmask='"mask": " 9999-9999"' data-mask readonly>
+                  </div>
+                </div>
+                
+                <div class="col-sm-12">
+                  <label>INFORMACIÓN DE PRÁCTICA PROFESIONAL</label>
+                  <hr>
+                </div>
+                 
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label>Modalidad</label>
+                    <input class="form-control" type="text" id="modalidad_sv" name="modalidad_sv" maxlength="60" readonly>
                   </div>
                 </div>
 
-                <div class="col-sm-6">
+                <div class="col-sm-4">
                   <div class="form-group">
                     <label>Fecha de inicio</label>
                     <input class="form-control" type="text" id="inicio_sv" name="inicio_sv" maxlength="60" readonly>
                   </div>
                 </div>
 
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label>Fecha de finalización</label>
+                    <input class="form-control" type="text" id="finalizacion_sv" name="finalizacion_sv" maxlength="60" readonly>
+                  </div>
+                </div>
+                
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label>Fecha de finalizacion</label>
-                    <input class="form-control" type="text" id="finalizacion_sv" name="finalizacion_sv" maxlength="60" readonly>
+                    <label>Jornada Laboral</label>
+                    <input class="form-control" type="text" id="jornada_sv" name="jornada_sv" maxlength="60" readonly>
                   </div>
                 </div>
 
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label>Horas</label>
+                    <label>Horario Laboral</label>
                     <input class="form-control" type="text" id="horas_sv" name="horas_sv" maxlength="60" readonly>
                   </div>
                 </div>
@@ -206,10 +277,23 @@ ob_end_flush();
                   <hr>
                 </div>
 
+                <p>INSTRUCCIONES: Lea detenidamente y seleccione el nivel que corresponda en cada uno de los aspectos objeto de evaluación, considerando la siguiente escala de valoración:
+                <br>
+                <br>
+                1.	Deficiente: El aspecto evaluado no es aceptable.
+                <br>
+                2.	Regular: El aspecto evaluado satisface expectativas mínimas.
+                <br>
+                3.	Bueno: El aspecto evaluado es satisfactorio.
+                <br>
+                4.	Excelente: El aspecto evaluado es destacado.
+                <br>
+                N/A: No aplica 
 
+                 </p>
 
                 <div class="col-sm-12">
-                  <label>Aspectos relevantes</label>
+                  <label>A.	ACTITUD PROFESIONAL</label>
                 </div>
                 <br>
                 <br>
@@ -222,119 +306,344 @@ ob_end_flush();
 
                     <th scope="row"></th>
 
-                    <th>Excelente &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                    <th>Deficiente &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 
-                    <th>Bueno&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                    <th>Regular &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 
-                    <th>Regular&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                    <th>Bueno &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 
-                    <th>Debe Mejorar&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+                    <th>Excelente &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+
+                    <th>N/A &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
 
                   </tr>
 
 
                   <tr>
 
-                    <th>La asistencia del practicante durante el período de práctica a su lugar de trabajo fue :</th>
+                    <th>Adaptación al ámbito profesional </th>
 
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="asistencia_sv" value="Excelente" require></td>
-
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="asistencia_sv" value="Bueno" require></td>
-
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="asistencia_sv" value="Regular" require></td>
-
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="asistencia_sv" value="Debe Mejorar" require></td>
-
-                  </tr>
-
-                  <tr>
-
-                    <th>Los horarios establecidos por la empresa para el practicante fueron cumplidos en forma :</th>
-
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="horarios_sv" value="Excelente" require></td>
-
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="horarios_sv" value="Bueno" require></td>
-
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="horarios_sv" value="Regular" require></td>
-
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="horarios_sv" value="Debe Mejorar" require></td>
-
-
-
-                  </tr>
-
-                  <tr>
-
-                    <th>La adaptación del practicante al equipo de trabajo asignado y al medio ambiente laboral fue :</th>
-
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="adaptacion_sv" value="Excelente" require></td>
-
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="adaptacion_sv" value="Bueno" require></td>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="adaptacion_sv" value="Deficiente" require></td>
 
                     <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="adaptacion_sv" value="Regular" require></td>
 
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="adaptacion_sv" value="Debe Mejorar" require></td>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="adaptacion_sv" value="Bueno" require></td>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="adaptacion_sv" value="Excelente" require></td>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="adaptacion_sv" value="N/A" require></td>
 
                   </tr>
 
                   <tr>
 
-                    <th>El grado de cumplimiento de las tareas encomendadas al practicante fue :</th>
+                    <th>Lenguaje apropiado </th>
 
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="cumplimiento_sv" value="Excelente" require></td>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="lenguaje_sv" value="Deficiente" require></td>
 
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="cumplimiento_sv" value="Bueno" require></td>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="lenguaje_sv" value="Regular" require></td>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="lenguaje_sv" value="Bueno" require></td>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="lenguaje_sv" value="Excelente" require></td>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="lenguaje_sv" value="N/A" require></td>
+
+                  </tr>
+
+                  <tr>
+
+                    <th>Capacidad de redacción </th>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="capacidad_sv" value="Deficiente" require></td>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="capacidad_sv" value="Regular" require></td>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="capacidad_sv" value="Bueno" require></td>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="capacidad_sv" value="Excelente" require></td>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="capacidad_sv" value="N/A" require></td>
+
+                  </tr>
+
+                  <tr>
+
+                    <th>Cumplimiento de horarios </th>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="cumplimiento_sv" value="Deficiente" require></td>
 
                     <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="cumplimiento_sv" value="Regular" require></td>
 
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="cumplimiento_sv" value="Debe Mejorar" require></td>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="cumplimiento_sv" value="Bueno" require></td>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="cumplimiento_sv" value="Excelente" require></td>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="cumplimiento_sv" value="N/A" require></td>
 
                   </tr>
 
                   <tr>
 
-                    <th>La calidad del trabajo desarrollado por el practicante fue :</th>
+                    <th>Responsabilidad y cumplimiento de actividades </th>
 
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="calidad_sv" value="Excelente" require></td>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="responsabilidad_sv" value="Deficiente" require></td>
 
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="calidad_sv" value="Bueno" require></td>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="responsabilidad_sv" value="Regular" require></td>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="responsabilidad_sv" value="Bueno" require></td>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="responsabilidad_sv" value="Excelente" require></td>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="responsabilidad_sv" value="N/A" require></td>
+
+                  </tr>
+
+                  <tr>
+
+                    <th>Capacidad de investigación y análisis</th>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="capacidadIA_sv" value="Deficiente" require></td>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="capacidadIA_sv" value="Regular" require></td>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="capacidadIA_sv" value="Bueno" require></td>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="capacidadIA_sv" value="Excelente" require></td>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="capacidadIA_sv" value="N/A" require></td>
+
+                  </tr>
+
+                  <tr>
+
+                    <th>Disposición para atender recomendaciones</th>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="disposicion_sv" value="Deficiente" require></td>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="disposicion_sv" value="Regular" require></td>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="disposicion_sv" value="Bueno" require></td>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="disposicion_sv" value="Excelente" require></td>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="disposicion_sv" value="N/A" require></td>
+
+                  </tr>
+
+                  <tr>
+
+                    <th>Liderazgo</th>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="liderazgo_sv" value="Deficiente" require></td>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="liderazgo_sv" value="Regular" require></td>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="liderazgo_sv" value="Bueno" require></td>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="liderazgo_sv" value="Excelente" require></td>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="liderazgo_sv" value="N/A" require></td>
+
+                  </tr>
+
+                  <tr>
+
+                    <th>Resolución de problemas</th>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="resolucion_sv" value="Deficiente" require></td>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="resolucion_sv" value="Regular" require></td>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="resolucion_sv" value="Bueno" require></td>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="resolucion_sv" value="Excelente" require></td>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="resolucion_sv" value="N/A" require></td>
+
+                  </tr>
+
+                  <tr>
+
+                    <th>Toma de decisiones acertadas y oportunas</th>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="tomadecisiones_sv" value="Deficiente" require></td>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="tomadecisiones_sv" value="Regular" require></td>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="tomadecisiones_sv" value="Bueno" require></td>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="tomadecisiones_sv" value="Excelente" require></td>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="tomadecisiones_sv" value="N/A" require></td>
+
+                  </tr>
+
+                  <tr>
+
+                    <th>Nivel de proactividad demostrado</th>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="proactividad_sv" value="Deficiente" require></td>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="proactividad_sv" value="Regular" require></td>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="proactividad_sv" value="Bueno" require></td>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="proactividad_sv" value="Excelente" require></td>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="proactividad_sv" value="N/A" require></td>
+
+                  </tr>
+
+                </table>
+              </div>
+
+              <div class="col-sm-12">
+                  <label></label>
+                  <hr>
+                </div>
+
+              <div class="col-sm-12">
+                  <label>B.	DESEMPEÑO PROFESIONAL</label>
+                </div>
+                <br>
+                <br>
+
+
+
+                <table class="table">
+
+                  <tr>
+
+                    <th scope="row"></th>
+
+                    <th>Deficiente &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+
+                    <th>Regular &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+
+                    <th>Bueno &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+
+                    <th>Excelente &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+
+                    <th>N/A &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+
+                  </tr>
+
+
+                  <tr>
+
+                    <th>Planificación para el desarrollo de actividades </th>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="planificacion_sv" value="Deficiente" require></td>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="planificacion_sv" value="Regular" require></td>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="planificacion_sv" value="Bueno" require></td>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="planificacion_sv" value="Excelente" require></td>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="planificacion_sv" value="N/A" require></td>
+
+                  </tr>
+
+                  <tr>
+
+                    <th>Calidad del trabajo realizado </th>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="calidad_sv" value="Deficiente" require></td>
 
                     <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="calidad_sv" value="Regular" require></td>
 
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="calidad_sv" value="Debe Mejorar" require></td>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="calidad_sv" value="Bueno" require></td>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="calidad_sv" value="Excelente" require></td>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="calidad_sv" value="N/A" require></td>
 
                   </tr>
 
                   <tr>
 
-                    <th>Su percepción respecto a la preparación del alumno en términos de conocimientos para realizar su trabajo de práctica fue :</th>
+                    <th>Presentación continua de avances y reportes de estado  </th>
 
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="percepcion_conocimientos_sv" value="Excelente" require></td>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="presentacion_sv" value="Deficiente" require></td>
 
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="percepcion_conocimientos_sv" value="Bueno" require></td>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="presentacion_sv" value="Regular" require></td>
 
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="percepcion_conocimientos_sv" value="Regular" require></td>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="presentacion_sv" value="Bueno" require></td>
 
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="percepcion_conocimientos_sv" value="Debe Mejorar" require></td>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="presentacion_sv" value="Excelente" require></td>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="presentacion_sv" value="N/A" require></td>
 
                   </tr>
 
                   <tr>
 
-                    <th>Su percepción respecto a la preparación del alumno en términos de habilidades para realizar su trabajo de práctica fue :</th>
+                    <th>Participación en proyectos y presentación de entregables </th>
 
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="percepcion_habilidades_sv" value="Excelente" require></td>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="participacion_sv" value="Deficiente" require></td>
 
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="percepcion_habilidades_sv" value="Bueno" require></td>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="participacion_sv" value="Regular" require></td>
 
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="percepcion_habilidades_sv" value="Regular" require></td>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="participacion_sv" value="Bueno" require></td>
 
-                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="percepcion_habilidades_sv" value="Debe Mejorar" require></td>
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="participacion_sv" value="Excelente" require></td>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="participacion_sv" value="N/A" require></td>
 
                   </tr>
 
+                  <tr>
 
-                </table>
+                    <th>Aplicación de estándares y buenas prácticas </th>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="aplicacion_sv" value="Deficiente" require></td>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="aplicacion_sv" value="Regular" require></td>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="aplicacion_sv" value="Bueno" require></td>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="aplicacion_sv" value="Excelente" require></td>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="aplicacion_sv" value="N/A" require></td>
+
+                  </tr>
+
+                  <tr>
+
+                    <th>Creación de valor agregado </th>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="creacion_sv" value="Deficiente" require></td>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="creacion_sv" value="Regular" require></td>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="creacion_sv" value="Bueno" require></td>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="creacion_sv" value="Excelente" require></td>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="creacion_sv" value="N/A" require></td>
+
+                  </tr>
+
+                  <tr>
+
+                    <th>Nivel de actualización en áreas de conocimiento</th>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="actualizacion_sv" value="Deficiente" require></td>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="actualizacion_sv" value="Regular" require></td>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="actualizacion_sv" value="Bueno" require></td>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="actualizacion_sv" value="Excelente" require></td>
+
+                    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" name="actualizacion_sv" value="N/A" require></td>
+
+                  </tr>
+
+                  <tr>
+                  </table>
               </div>
 
 
@@ -349,21 +658,14 @@ ob_end_flush();
 
               <div class="col-sm-12">
                 <div class="form-group">
-                  <label for="exampleFormControlTextarea1">Comentarios sobre la evaluación del desempeño</label>
-                  <textarea class="form-control" id="comentarios_sv" rows="3" style="text-transform:uppercase" require></textarea>
+                  <label for="exampleFormControlTextarea1">Especifique las áreas o aspectos que el estudiante debe fortalecer para desempeñarse eficientemente como futuro profesional. </label>
+                  <textarea class="form-control" id="areas_refuerzo_sv" name="areas_refuerzo_sv" rows="3" style="text-transform:uppercase" require></textarea>
                 </div>
               </div>
 
               <div class="col-sm-12">
                 <div class="form-group">
-                  <label for="exampleFormControlTextarea1">Por favor anotar ¿Cuales de las áreas cree usted que deben reforzar o adquirir nuevos conocimientos?</label>
-                  <textarea class="form-control" id="areas_refuerzo_sv" rows="3" style="text-transform:uppercase" require></textarea>
-                </div>
-              </div>
-
-              <div class="col-sm-12">
-                <div class="form-group">
-                  <label>¿Cual seria su calificación global de 0 a 10 para el o la practicante?</label>
+                  <label>En una escala de 1 a 10 en función del desempeño observado, indique la calificación final del estudiante.</label>
                   <select class="form-control" name="calificacion_sv" id="calificacion_sv" require>
                     <option value="">Seleccione</option>
                     <option value="0">0</option>
@@ -379,12 +681,12 @@ ob_end_flush();
                   </select>
                 </div>
               </div>
-
+              
               <div class="col-sm-12">
                 <div class="form-group">
-                  <label>¿Solicitaría nuevamente uno de nuestros estudiantes para practica profesional supervisada en su empresa?</label>
-                  <select class="form-control" name="solicitar_practicante_sv" id="solicitar_practicante_sv" require>
-                    <option value="">Seleccione</option>
+                  <label>¿Solicitaría nuevamente a uno de nuestros estudiantes para realizar práctica profesional en su institución?</label>
+                  <select class="form-control" name="solicitar_practicante_sv" id="solicitar_practicante_sv" onchange="Mostrar_motivo();" require>
+                    <option value="0">Seleccione</option>
                     <option value="Si">SI</option>
                     <option value="No">NO</option>
                   </select>
@@ -393,25 +695,33 @@ ob_end_flush();
 
               <div class="col-sm-12">
                 <div class="form-group">
-                  <label>¿El estudiante tendrá alguna oportunidad de empleo en la organización?</label>
-                  <select class="form-control" name="oportunidad_empleo_sv" id="oportunidad_empleo_sv" require>
-                    <option value="">Seleccione</option>
-                    <option value="Si">SI</option>
-                    <option value="No">NO</option>
-                    <option value="No">PROBABLEMENTE</option>
-                  </select>
+                  <label for="exampleFormControlTextarea1">En caso de que su respuesta anterior sea NO, especifique el porqué.</label>
+                  <textarea class="form-control" id="casono_sv" name="casono_sv" rows="3" style="text-transform:uppercase" require></textarea>
                 </div>
               </div>
 
               <div class="col-sm-12">
                 <div class="form-group">
-                  <label>Nombre completo del representante de la carrera de informática que le ha contactado</label>
+                  <label for="exampleFormControlTextarea1">Otras observaciones sobre el practicante.</label>
+                  <textarea class="form-control" id="otrasobservaciones_sv" name="otrasobservaciones_sv" rows="3" style="text-transform:uppercase" require></textarea>
+                </div>
+              </div>
+
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label>Representante de la institución</label>
                   <input class="form-control" type="text" id="representante_sv" name="representante_sv" style="text-transform:uppercase" maxlength="60" require>
                 </div>
               </div>
 
+              <div class="col-sm-4">
+                <div class="form-group">
+                  <label>Supervisor</label>
+                  <input class="form-control" type="text" id="supervisor_sv" name="supervisor_sv" style="text-transform:uppercase" maxlength="60" require>
+                </div>
+              </div>
 
-              <div class="col-sm-12">
+              <div class="col-sm-4">
                 <div class="form-group">
                   <label>Lugar</label>
                   <input class="form-control" type="text" id="lugar_sv" name="lugar_sv" style="text-transform:uppercase" maxlength="60" require>
@@ -489,22 +799,29 @@ ob_end_flush();
 
         data = JSON.parse(data);
         console.log(data);
-        //mostrarform(true);
 
         //TBL_PRACTICA_ESTUDIANTES
+        $("#modalidad_sv").val(data.modalidad);
         $("#inicio_sv").val(data.fecha_inicio);
-        $("#finalizacion_sv").val(data.fecha_finaliza);
+        $("#finalizacion_sv").val(data.fecha_finalizacion);
+        $("#jornada_sv").val(data.horario);
         $("#horas_sv").val(data.horas);
         //TBL_PERSONAS_EXTENDIDAS
         $("#cuenta_sv").val(data.valor);
         //TBL_EMPRESAS_PRACTICA
         $("#empresa_sv").val(data.nombre_empresa);
+        $("#empresa_d_sv").val(data.direccion_empresa);
         $("#jefe_sv").val(data.jefe_inmediato);
-        $("#titulo_sv").val(data.titulo_jefe_inmediato);
+        $("#cargo_sv").val(data.cargo_jefe_inmediato);
+        $("#titulo_sv").val(data.nivel_a);
+        $("#celular_sv").val(data.celular_jefe_inmediato);
         $("#correo_sv").val(data.correo_jefe_inmediato);
         $("#telefono_sv").val(data.telefono_jefe_inmediato);
         //TBL_PERSONAS
         $("#estudiante_sv").val(data.nombres);
+        $("#DNI_sv").val(data.identidad);
+        $("#celular_e_sv").val(data.Celular);
+        $("#correo_e_sv").val(data.Correo);
 
 
 
@@ -512,14 +829,27 @@ ob_end_flush();
       })
 
     }
+
+    function Mostrar_motivo()
+    {
+      /* Para obtener el valor */
+      var aprobar = document.getElementById("solicitar_practicante_sv").value;
+
+
+    if(aprobar == "No") {
+      
+        $('#casono_sv').prop("readonly", false);
+      document.getElementById("casono_sv").value = "";
+
+    }
+    else
+
+      {
+        $('#casono_sv').prop("readonly", true);
+      }
+
+    }
   </script>
-
-
-
-
-
-
-
 
 </body>
 
