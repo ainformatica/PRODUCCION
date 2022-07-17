@@ -6,7 +6,14 @@ $numero_cuenta=strtoupper($_POST['txt_cuenta_estudiante']);
 $contrasena=$_POST['txt_clave'];
 $confirmar_contrasena=$_POST['txt_confirmar_clave'];
 $nombre_estudiante=$_POST['txt_nombre_estudiante'];
-$correo=$_POST['txt_correo_estudiante'];
+$dni=$_POST['txt_dni_estudiante'];
+$lugar_nac=$_POST['txt_ln_estudiante'];
+$fecha_nac=$_POST['txt_fn_estudiante'];
+$direccion=$_POST['txt_direccion_estudiante'];
+$telefono=$_POST['txt_telefono_estudiante'];
+$celular=$_POST['txt_celular_estudiante'];
+$correo_alternativo=$_POST['txt_correo_estudiante'];
+$correo=$_POST['txt_correo_inst_estudiante'];
 $apellido_estudiante=$_POST['txt_apellido_estudiante'];
 $sexo=$_POST['sexo'];
 //Tomar la primera letra del string
@@ -87,9 +94,32 @@ if(strlen($contrasena) < $tamano_min['valor']  )
 
               }else{
                 $clave=cifrado::encryption($contrasena);
-                      $sql = "call   proc_insertar_estudiante( '$nombre_estudiante','$apellido_estudiante','$numero_cuenta','$correo','$clave','$sexo','$usuario_final')";
+                      $sql = "call   proc_insertar_estudiante( '$nombre_estudiante','$apellido_estudiante','$numero_cuenta','$correo','$clave','$sexo','$usuario_final, $lugar_nac, $fecha_nac, $direccion, $telefono, $celular, $correo_alternativo, $dni')";
 
-                        $result = $mysqli->query($sql);
+                        // $result = $mysqli->query($sql);
+                        
+                        //         $documento_nombre[] = $_FILES['txt_foto']['name'];
+                               
+
+                        //         $documento_nombre_temporal[] = $_FILES['txt_foto']['tmp_name'];
+                               
+
+                        //         $micarpeta = '../Documentacion_practica/'.$numero_cuenta;
+                        //             if (!file_exists($micarpeta)) {
+                        //                  mkdir($micarpeta, 0777, true);
+                        //                 }else{
+                        //                     $documento = glob('../Documentacion_practica/'.$numero_cuenta.'/*'); // obtiene los documentos
+                        //                     foreach($documento as $documento){ // itera los documentos
+                                           
+                        //                 }
+                        //                 }
+                        //         for ($i = 0; $i <=count($documento_nombre_temporal)-1 ; $i++) {
+                                
+                        //             move_uploaded_file($documento_nombre_temporal[$i],"$micarpeta/$documento_nombre[$i]");
+                        //             $ruta= '../Documentacion_practica/'.$numero_cuenta.'/'.$documento_nombre[$i];
+                        //             $direccion[]= $ruta;
+                        //         }
+                        //         $documento = json_encode($direccion);
                           if($result === TRUE)
                           {
 
