@@ -94,7 +94,7 @@ if(strlen($contrasena) < $tamano_min['valor']  )
 
               }else{
                 $clave=cifrado::encryption($contrasena);
-                      $sql = "call   proc_insertar_estudiante( '$nombre_estudiante','$apellido_estudiante','$numero_cuenta','$correo','$clave','$sexo','$usuario_final, $lugar_nac, $fecha_nac, $direccion, $telefono, $celular, $correo_alternativo, $dni')";
+                      $sql = "call   proc_insertar_estudiante( '$nombre_estudiante','$apellido_estudiante','$numero_cuenta','$correo','$clave','$sexo','$usuario_final', '$lugar_nac', '$fecha_nac', '$direccion', '$telefono', '$celular', '$correo_alternativo', '$dni')";
 
                         // $result = $mysqli->query($sql);
                         
