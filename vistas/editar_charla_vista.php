@@ -160,7 +160,7 @@ ob_end_flush();
                 <div class="col-sm-2">
                   <div class="form-group">
                     <label>Cupos</label>
-                    <input class="form-control" type="text" value="<?php echo $charla ['cupos']; ?>"maxlength="2" id="txt_cupos" name="txt_cupos">
+                    <input class="form-control" type="text" value="<?php echo $charla ['cupos']; ?>"maxlength="3" id="txt_cupos" name="txt_cupos">
                   </div>
                 </div>
 
