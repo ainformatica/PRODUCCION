@@ -70,7 +70,7 @@
           </div>
 
           <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Número de Cuenta" id="txt_cuenta_estudiante" name="txt_cuenta_estudiante">
+            <input type="text" class="form-control" placeholder="Numero de Cuenta" id="txt_cuenta_estudiante" name="txt_cuenta_estudiante">
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-user"></span>
@@ -79,70 +79,7 @@
           </div>
 
           <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="DNI" id="txt_dni_estudiante" name="txt_dni_estudiante">
-            <div class="input-group-append">
-              <div class="input-group-text">
-                <span class="fas fa-address-card"></span>
-              </div>
-            </div>
-          </div>
-
-          <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Lugar de Nacimiento" id="txt_ln_estudiante" name="txt_ln_estudiante">
-            <div class="input-group-append">
-              <div class="input-group-text">
-                <span class="fas fa-user"></span>
-              </div>
-            </div>
-          </div>
-
-          <div class="input-group mb-3">
-            <input type="date" class="form-control" placeholder="Fecha de Nacimiento" id="txt_fn_estudiante" name="txt_fn_estudiante">
-            <div class="input-group-append">
-              <div class="input-group-text">
-                <span class="fas fa-calendar-alt"></span>
-              </div>
-            </div>
-          </div>
-
-          <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Dirección" id="txt_direccion_estudiante" name="txt_direccion_estudiante">
-            <div class="input-group-append">
-              <div class="input-group-text">
-                <span class="fas fa-user"></span>
-              </div>
-            </div>
-          </div>
-
-          <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Teléfono Fijo" id="txt_telefono_estudiante" name="txt_telefono_estudiante">
-            <div class="input-group-append">
-              <div class="input-group-text">
-                <span class="fas fa-phone"></span>
-              </div>
-            </div>
-          </div>
-
-          <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Celular" id="txt_celular_estudiante" name="txt_celular_estudiante">
-            <div class="input-group-append">
-              <div class="input-group-text">
-                <span class="fas fa-phone"></span>
-              </div>
-            </div>
-          </div>
-
-          <div class="input-group mb-3">
-            <input type="email" class="form-control" placeholder="Correo Electrónico Institucional" id="txt_correo_inst_estudiante" name="txt_correo_inst_estudiante">
-            <div class="input-group-append">
-              <div class="input-group-text">
-                <span class="fas fa-envelope"></span>
-              </div>
-            </div>
-          </div>
-
-          <div class="input-group mb-3">
-            <input type="email" class="form-control" placeholder="Correo Electrónico Alternativo" id="txt_correo_estudiante" name="txt_correo_estudiante">
+            <input type="email" class="form-control" placeholder="Email" id="txt_correo_estudiante" name="txt_correo_estudiante">
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-envelope"></span>
