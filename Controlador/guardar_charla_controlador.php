@@ -50,19 +50,8 @@ $fecha_valida=strtoupper ($_POST['txt_fecha_valida']);
                 });
                 $(".FormularioAjax")[0];
             </script>'; 
-    }else{
-        echo '<script type="text/javascript">
-                                    swal({
-                                        title:"",
-                                        text:"Faltan campos por llenar....",
-                                        type: "error",
-                                        showConfirmButton: false,
-                                        timer: 1500
-                                        });
-                                        $(".FormularioAjax")[0];
-                                    </script>'; 
-    }
-}
+        }
+ }
 }  
 ob_end_flush();
 ?>
