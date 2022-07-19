@@ -183,13 +183,13 @@ function  permisos_a_roles_visualizar($pantalla, $confirmacion)
       }
    }
 
-   if ($_SESSION['pantalla'] == '22' or $_SESSION['pantalla'] == '23') {
+   if ($_SESSION['pantalla'] == '2016' or $_SESSION['pantalla'] == '2017') {
       if ($_SESSION['confirmacion'] == 'block') {
          $_SESSION['egresados_vista'] = "block";
       }
    }
 
-   if ($_SESSION['pantalla'] == '24' or $_SESSION['pantalla'] == '25') {
+   if ($_SESSION['pantalla'] == '2018' or $_SESSION['pantalla'] == '2019') {
       if ($_SESSION['confirmacion'] == 'block') {
          $_SESSION['proyectos_vinculacion_vista'] = "block";
       }
