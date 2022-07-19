@@ -129,16 +129,6 @@ if ($msj==2)
         $_SESSION['modalidad']=$resultadotabla_estudiantes_practica['modalidad'];
         $resultadotabla_estudiantes_practica = $mysqli->query($sql_tabla_estudiantes_practica);
 
-        $validar_aprobacion="SELECT count(tbl2.id_persona) AS persona FROM tbl_vinculacion_aprobacion_practica tbl2
-          WHERE tbl2.id_persona = $id_estudent AND tbl2.id_estado_vinculacion=1 OR tbl2.id_estado_vinculacion=2";
-          $aprobacion = mysqli_fetch_assoc($mysqli->query($validar_aprobacion));
-
-          if ($aprobacion['persona']==1) {
-            $btn_aprobacion="<button type='submit'  class='btn btn-secondary btn-raised btn-sm' name= 'btn_imprimir'>Imprimir";
-          }else{
-            $btn_aprobacion="<button type='button'  class='btn btn-warning btn-raised btn-sm' name= 'btn_imprimir'>Imprimir";
-        }
-
  if (isset($_REQUEST['cuenta']))
         {
   
@@ -287,13 +277,12 @@ $sql_datos_modal="SELECT p.id_persona, px.valor as valor, concat(p.nombres,' ',p
                        <th>MODALIDAD</th>
                        <th>PROCESO</th>
                        <th>EXPEDIENTE</th>                
-                       <th>APROBAR PRACTICA</th>  
-                       <th>CONSTANCIA</th>                
+                       <th>APROBAR PRACTICA</th>                  
 
                      </tr>
                    </thead>
                    <tbody>
-                    <?php if ($_SESSION['Estado_proceso']=='PENDIENTE' and $_SESSION['estado_vin']==1) 
+                    <?php if ($_SESSION['Estado_proceso']=='PENDIENTE' and $_SESSION['estado_vin']==1 and $_SESSION['estado_coor']!=1) 
                     {
                      while($row = $resultadotabla_estudiantes_practica->fetch_array(MYSQLI_ASSOC)) { ?>
                       <tr>
@@ -317,13 +306,91 @@ $sql_datos_modal="SELECT p.id_persona, px.valor as valor, concat(p.nombres,' ',p
                         <i class="fas fa-edit"  title=""  ></i>
                       </a>
                     </td>
+                    </form>
+
+                  </tr>
+                <?php  } 
+              }?>
+            </tbody>
+          </table>
+        </div>
+
+
+
+
+        <!-- /.card-body -->
+      </div>
+
+
+      <div class="RespuestaAjax"></div>
+
+    </div>
+  </section>
+
+  <section class="content">
+            <div class="container-fluid">
+              <!-- pantalla 1 -->
+
+              <div class="card card-default">
+                <div class="card-header">
+                  <h3 class="card-title">Constancias</h3>
+                  <div class="card-tools">
+                    <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+                  </div>
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                     <div class="col-sm-4">
+                  <!-- <div class="form-group">
+                    <label>Tipo de institución</label>
+                    <select class="form-control" name="cb_empresa" id="empresa">
+                      <option selected disabled value="0">Seleccione una opción:</option>
+                      
+                    </select>
+                  </div> -->
+                  <?php
+                   $sql_tabla_estudiantes_aprobacion="SELECT DISTINCT p.id_persona as id, px.valor as valor, concat(p.nombres,' ',p.apellidos) as nombre, m.modalidad, ep.nombre_empresa, sv.descripcion AS estado
+                    from tbl_personas p, tbl_subida_documentacion sd, tbl_personas_extendidas px, tbl_vinculacion_aprobacion_practica vap, tbl_modalidad m, tbl_estado_vinculacion sv, tbl_empresas_practica ep, tbl_practica_estudiantes pe where sd.id_persona=p.id_persona AND m.id_modalidad=pe.id_modalidad AND px.id_atributo=12 and estado_coordinacion=1 and px.id_persona=p.id_persona and ep.id_persona=p.id_persona and pe.id_persona=p.id_persona AND sv.id_estado_vinculacion=vap.id_estado_vinculacion";
+
+                    $resultadotabla_estudiantes_aprobacion = mysqli_fetch_assoc($mysqli->query($sql_tabla_estudiantes_aprobacion));
+                    $id_estudent=$resultadotabla_estudiantes_aprobacion['id'];
+
+                    $_SESSION['txt_estudiante']=$resultadotabla_estudiantes_aprobacion['nombre'];
+                    $_SESSION['cuenta']=$resultadotabla_estudiantes_aprobacion['valor'];
+                    $_SESSION['Estado_proceso']=$resultadotabla_estudiantes_aprobacion['estado'];
+                    $_SESSION['id']=$resultadotabla_estudiantes_aprobacion['id'];
+                    $_SESSION['modalidad']=$resultadotabla_estudiantes_aprobacion['modalidad'];
+                    $resultadotabla_estudiantes_aprobacion = $mysqli->query($sql_tabla_estudiantes_aprobacion); 
+                  ?>
+              </div>
+                    <table id="tabla" class="table table-bordered table-striped">
+                    <thead>
+                      <tr>
+                       <th>NOMBRE COMPLETO</th>
+                       <th>CUENTA</th>   
+                       <th>EMPRESA</th>
+                       <th>MODALIDAD</th>
+                       <th>PROCESO</th> 
+                       <th>CONSTANCIA</th>                
+
+                     </tr>
+                   </thead>
+                   <tbody>
+                    <?php if ($_SESSION['estado_vin']==1 and $_SESSION['estado_coor']!=1) 
+                    {
+                     while($row = $resultadotabla_estudiantes_aprobacion->fetch_array(MYSQLI_ASSOC)) { ?>
+                      <tr>
+                        <td><?php echo strtoupper($row['nombre']); ?></td>
+                        <td><?php echo $row['valor']; ?></td>
+                        <td><?php echo $row['nombre_empresa']; ?></td>
+                        <td><?php echo $row['modalidad']; ?></td>
+                        <td><?php echo $row['estado']; ?></td>
 
                     <td style="text-align: center;">
 
                       <form class="well" action="../pdf/constancia_aprobacion_rechazo.php?id_persona=<?php echo $row['id']; ?>" method="POST" target="_blank">
-                        <?php  
-                          echo $btn_aprobacion;
-                        ?>
+
+                          <button type='submit'  class='btn btn-secondary btn-raised btn-sm' name= 'btn_imprimir'>Imprimir
                           <i class="zmdi zmdi-local-printshop"></i>
                     </td>
                     </form>
@@ -334,6 +401,9 @@ $sql_datos_modal="SELECT p.id_persona, px.valor as valor, concat(p.nombres,' ',p
             </tbody>
           </table>
         </div>
+
+
+      
 
         <!-- /.card-body -->
       </div>

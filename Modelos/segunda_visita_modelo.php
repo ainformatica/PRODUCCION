@@ -53,10 +53,10 @@ class segunda_visita
 	public function selectCurso(){
 		global $instancia_conexion ;
 		$id_persona1=$_SESSION['id_persona'];
-      $sql="SELECT concat(p.nombres,' ',p.apellidos) as nombres, vap.id_persona 
-      FROM tbl_vinculacion_aprobacion_practica vap, tbl_personas p, tbl_evaluaciones_practica evp
+      $sql="SELECT DISTINCT concat(p.nombres,' ',p.apellidos) as nombres, vap.id_persona 
+      FROM tbl_vinculacion_aprobacion_practica vap, tbl_personas p, tbl_evaluaciones_practica evp, tbl_practica_estudiantes pe
       
-      WHERE p.id_persona=vap.id_persona AND p.id_persona=evp.id_persona AND vap.id_estado_vinculacion=1 AND vap.id_horas=800 AND evp.numero_visita='Primera Supervisión' ;";
+      WHERE p.id_persona=vap.id_persona AND p.id_persona=evp.id_persona AND vap.id_estado_vinculacion=1 AND vap.id_horas=800 AND evp.numero_visita='Primera Supervisión' AND pe.segunda_supervision=0 AND pe.primera_supervision=1;";
 		  return $instancia_conexion->ejecutarConsulta($sql);
   
 	  }

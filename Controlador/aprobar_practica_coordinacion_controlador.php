@@ -20,7 +20,8 @@ $dias_prac = strtoupper ($_POST['dias']);
         $resultadop = $mysqli->query($sql);
     
         if ($resultadop === TRUE ) {
-
+              $sqlt= ("UPDATE tbl_subida_documentacion SET  estado_coordinacion='1' WHERE id_persona='$id'") or die(mysqli_error($connection));
+              $resultadop = $mysqli->query($sqlt);
             echo '<script type="text/javascript">
             swal({
              title:"",

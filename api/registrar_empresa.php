@@ -73,8 +73,8 @@ if(isset($_POST['nombre_empresa']) && $_POST['id_persona']!=="" && $_POST['cb_em
 
                
                 
-                $sql= "INSERT INTO tbl_empresas_practica ( id_persona, nombre_empresa, direccion_empresa, id_tipo_empresa, id_trabaja_i, puesto_en_trabajo, jefe_inmediato, id_nivel_a, cargo_jefe_inmediato, correo_jefe_inmediato, telefono_jefe_inmediato, perfil_empresa, croquis_empresa, fecha_inicio_laborar)
-                             VALUES ('$id_persona','$nombreEmpresa','$direccion_empresa','$cb_empresa','$cb_trabaja','$cargo_trabajo','$nombre_jefe','$cb_nivel','$cargo_jefe','$correo_jefe','$telefono_jefe','$perfil_empresa','$documento','$fecha_ingreso')";
+                $sql= "INSERT INTO tbl_empresas_practica ( id_persona, nombre_empresa, direccion_empresa, id_tipo_empresa, id_trabaja_i, puesto_en_trabajo, jefe_inmediato, id_nivel_a, cargo_jefe_inmediato, correo_jefe_inmediato, telefono_jefe_inmediato, celular_jefe_inmediato, perfil_empresa, croquis_empresa, fecha_inicio_laborar)
+                             VALUES ('$id_persona','$nombreEmpresa','$direccion_empresa','$cb_empresa','$cb_trabaja','$cargo_trabajo','$nombre_jefe','$cb_nivel','$cargo_jefe','$correo_jefe','$telefono_jefe','$celular_jefe','$perfil_empresa','$documento','$fecha_ingreso')";
                
                 $resultadop = $mysqli->query($sql);
                 
@@ -157,8 +157,8 @@ if (isset($_POST['cb_modalidad'])) {
     }else{
 
    //INSERTAMOS EL REGITRO DE PRACTICA
-   $sql="INSERT INTO tbl_practica_estudiantes (id_persona,Id_empresa,fecha_inicio,fecha_finaliza,id_jornada_laboral,id_estado,hora_inicio,hora_final,id_modalidad)
-   VALUES ('$persona_id','$empresa_id','$fecha_inicio','$fecha_final','$cb_jornada','1','$txt_hora_inicio','$txt_hora_final','$cb_modalidad')";
+   $sql="INSERT INTO tbl_practica_estudiantes (id_persona,Id_empresa,fecha_inicio,fecha_finaliza,id_jornada_laboral, docente_supervisor, id_estado,hora_inicio,hora_final,id_modalidad)
+   VALUES ('$persona_id','$empresa_id','$fecha_inicio','$fecha_final','$cb_jornada','0','1','$txt_hora_inicio','$txt_hora_final','$cb_modalidad')";
     $resultado = $mysqli->query($sql);
     
 

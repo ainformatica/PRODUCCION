@@ -7,7 +7,7 @@ require_once('../clases/Conexion.php');
 $obs_prac = strtoupper ($_POST['docente']);
 $id = strtoupper( $_POST['id_estudiante']);
 
-    $sql= ("UPDATE tbl_practica_estudiantes SET docente_supervisor='$obs_prac' WHERE id_persona='$id'") or die(mysqli_error($connection));
+    $sql= ("UPDATE tbl_practica_estudiantes SET docente_supervisor='$obs_prac', primera_supervision=0, segunda_supervision=0 WHERE id_persona='$id'") or die(mysqli_error($connection));
         $resultadop = $mysqli->query($sql);
     
         if ($resultadop === TRUE ) {

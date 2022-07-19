@@ -63,10 +63,12 @@ class PDF extends FPDF
 
     $pdf->Image('../dist/img/cuadro_aprobacion.png',20,73,170);
 	$pdf->SetY(73);
-	$pdf->Cell(128, 10, ''.$row['nombre_empresa'].'', 0, 1, 'C');
+	$pdf->SetX(67);
+	$pdf->multicell(128, 10, ''.$row['nombre_empresa'].'', 0);
 	$pdf->ln(-3);
 	$pdf->SetY(82);
-	$pdf->Cell(134, 10, utf8_decode(''.$row['modalidad'].''), 0, 1, 'C');
+	$pdf->SetX(67);
+	$pdf->multicell(134, 10, utf8_decode(''.$row['modalidad'].''), 0);
 	$pdf->ln(-3);
 	$pdf->SetY(91);
 	$pdf->Cell(136, 10, utf8_decode(''.fecha($row['fecha_inicio'].'')), 0, 1, 'C');

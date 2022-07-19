@@ -84,7 +84,7 @@ class asignaturas
 		FROM tbl_empresas_practica ep, tbl_personas a, tbl_vinculacion_aprobacion_practica vap, tbl_practica_estudiantes pe, tbl_personas_extendidas px
 		WHERE
 		pe.id_persona = a.id_persona AND ep.id_persona = a.id_persona AND vap.id_persona = a.id_persona AND
-	    px.id_atributo=12 and ep.id_persona=pe.id_persona and ep.Id_empresa=pe.Id_empresa and px.id_persona=pe.id_persona and vap.id_persona=pe.id_persona and vap.id_estado_vinculacion=1;";
+	    px.id_atributo=12 and ep.id_persona=pe.id_persona and ep.Id_empresa=pe.Id_empresa and px.id_persona=pe.id_persona and vap.id_persona=pe.id_persona and vap.id_estado_vinculacion=1 AND pe.docente_supervisor=0;";
 		return $instancia_conexion->ejecutarConsulta($sql);
 	}
 }
