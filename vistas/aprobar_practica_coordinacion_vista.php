@@ -376,9 +376,11 @@ $sql_datos_modal="SELECT p.id_persona, px.valor as valor, concat(p.nombres,' ',p
                      </tr>
                    </thead>
                    <tbody>
-                    <?php if ($_SESSION['estado_vin']==1 and $_SESSION['estado_coor']!=1) 
-                    {
-                     while($row = $resultadotabla_estudiantes_aprobacion->fetch_array(MYSQLI_ASSOC)) { ?>
+                    <?php if(mysqli_num_rows($resultadotabla_estudiantes_aprobacion) == 0){
+                        echo '<tr><td colspan="8">No hay datos.</td></tr>';
+                      }else{
+                        $no = 1;
+                     while($row = mysqli_fetch_assoc($resultadotabla_estudiantes_aprobacion)) { ?>
                       <tr>
                         <td><?php echo strtoupper($row['nombre']); ?></td>
                         <td><?php echo $row['valor']; ?></td>
