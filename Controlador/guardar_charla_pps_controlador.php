@@ -9,7 +9,7 @@ require_once('../clases/funcion_bitacora.php');
 $No_constancia = strtoupper($_POST['txt_constancia_charla']);
 $clases_aprobadas_ = ($_POST['txt_clases_aprobadas']);
 $porcentaje = (($clases_aprobadas_) * 100) / 52;
-// $porcentaje = number_format($porcentaje, 2, "d", "@");
+$porcentaje = number_format($porcentaje, 2, "d", "@");
 $jornada_ = strtoupper($_POST['cb_charla']);
 $jornada = strtoupper($_POST['txt_jornada']);
 $id_persona_charla = ($_POST['id_persona_charla']);
@@ -49,8 +49,8 @@ if (!empty($No_constancia) and $jornada_ <> "0") {
     // $result = mysqli_fetch_assoc($mysqli->query($id));
     // $id_persona = $result['id_persona'];
 
-    $query="INSERT INTO tbl_charla_practica (Id_charla,id_persona,charla_id,no_constancia,clases_aprobadas,porcentaje_clases,estado_asistencia_charla,charla_impartida,id_verificacion) 
-          VALUES (NULL,'$id_persona_charla','$jornada_','$No_constancia','$clases_aprobadas_','$porcentaje','0','0','3')";
+    $query="INSERT INTO tbl_charla_practica (id_persona,charla_id,no_constancia,clases_aprobadas, porcentaje_clases, estado_asistencia_charla,charla_impartida,id_verificacion) 
+          VALUES ('$id_persona_charla','$jornada_','$No_constancia','$clases_aprobadas_','$porcentaje','0','0','3')";
 
     $resultado2 = $mysqli->query($query);
 
@@ -122,3 +122,5 @@ if (!empty($No_constancia) and $jornada_ <> "0") {
                                     });
                                 </script>';
 }
+
+?>

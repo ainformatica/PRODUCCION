@@ -176,8 +176,8 @@ $sql_datos_modal="SELECT p.id_persona, px.valor as valor, concat(p.nombres,' ',p
 
           $sql_datos_modal="SELECT px.valor as valor, p.id_persona as id, concat(p.nombres,' ',p.apellidos) as nombre , sd.estado_vinculacion,ep.nombre_empresa,m.modalidad from  tbl_personas p, tbl_subida_documentacion sd,tbl_empresas_practica ep ,tbl_personas_extendidas px, tbl_practica_estudiantes pe, tbl_modalidad m where p.id_persona=sd.id_persona AND m.id_modalidad=pe.id_modalidad AND px.id_atributo=12 and px.id_persona=p.id_persona and px.valor=$_REQUEST[cuenta_coordinacion] and ep.id_persona=p.id_persona and pe.id_persona=p.id_persona";
           $resultado_datos = mysqli_fetch_assoc($mysqli->query($sql_datos_modal));
-          $_SESSION['txt_estudiante']=$resultado_datos['nombre'];
-          $_SESSION['cuenta']=$resultado_datos['valor'];
+          $_SESSION['txt_estudiant']=$resultado_datos['nombre'];
+          $_SESSION['cuent']=$resultado_datos['valor'];
           $_SESSION['id_e']=$resultado_datos['id'];
           $_SESSION['empresa']=$resultado_datos['nombre_empresa'];
           $_SESSION['mod']=$resultado_datos['modalidad'];
@@ -363,7 +363,7 @@ $sql_datos_modal="SELECT p.id_persona, px.valor as valor, concat(p.nombres,' ',p
                     $resultadotabla_estudiantes_aprobacion = $mysqli->query($sql_tabla_estudiantes_aprobacion); 
                   ?>
               </div>
-                    <table id="tabla" class="table table-bordered table-striped">
+                    <table id="ctabla" class="table table-bordered table-striped">
                     <thead>
                       <tr>
                        <th>NOMBRE COMPLETO</th>
@@ -453,13 +453,13 @@ $sql_datos_modal="SELECT p.id_persona, px.valor as valor, concat(p.nombres,' ',p
             <div class="col-sm-6">
              <div class="form-group">
                <label>Estudiante</label>
-               <input class="form-control" type="text" id="txt_estudiante_documento" name="txt_estudiante_documento" value="<?php echo strtoupper($_SESSION['txt_estudiante']) ?>" readonly="readonly">
+               <input class="form-control" type="text" id="txt_estudiante_documento" name="txt_estudiante_documento" value="<?php echo strtoupper($_SESSION['txt_estudiant']) ?>" readonly="readonly">
              </div></div>
 
             <div class="col-sm-3">
              <div class="form-group">
                <label>Número de cuenta</label>
-             <input class="form-control" type="text" id="txt_estudiante_cuenta" name="txt_estudiante_cuenta" value="<?php echo strtoupper( $_SESSION['cuenta']) ?>" readonly="readonly">
+             <input class="form-control" type="text" id="txt_estudiante_cuenta" name="txt_estudiante_cuenta" value="<?php echo strtoupper( $_SESSION['cuent']) ?>" readonly="readonly">
              </div></div>
 
 
@@ -528,6 +528,15 @@ $sql_datos_modal="SELECT p.id_persona, px.valor as valor, concat(p.nombres,' ',p
                 </div>
             </div>
             <div class="col-sm-4">
+                <div class="form-group">
+                          <center> <h5>Horario de Trabajo (Día Sábado)</h5></center>
+                          <center> <label>Entrada</label> </center>
+                          <input type="time" name="horario_incio_sab" id="horario_incio_sab" class="form-control" required autofocus title="Horario Entrada">
+                          <center><label>Salida</label>  </center>
+                    <input type="time" name="horario_fin_sab" id="horario_fin_sab" class="form-control" required autofocus title="Horario Salida">
+                </div>
+            </div>
+            <div class="col-sm-4">
                <div class="form-group">
                          <center> <h5>Fecha de finalización de PPS</h5></center>
                          <center><label>Fecha</label>  </center>
@@ -543,6 +552,7 @@ $sql_datos_modal="SELECT p.id_persona, px.valor as valor, concat(p.nombres,' ',p
                     
               </div>
             </div>
+
             <div class="col-sm-12">
                <div class="form-group">
                 <label>Aprobar PPS</label>
@@ -685,7 +695,7 @@ $sql_datos_modal="SELECT p.id_persona, px.valor as valor, concat(p.nombres,' ',p
 
  $(function () {
 
-  $('#tabla').DataTable({
+  $('#tabla, #ctabla').DataTable({
     "paging": true,
     "lengthChange": true,
     "searching": true,

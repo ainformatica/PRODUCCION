@@ -13,8 +13,12 @@ require_once('../clases/funcion_permisos.php');
 
 ob_end_flush();
 
+$usuario=$_SESSION['id_usuario'];
+        $id="SELECT id_persona AS supervisor from tbl_usuarios where id_usuario='$usuario'";
+        $result= mysqli_fetch_assoc($mysqli->query($id));
+        $id_supervisor=$result['supervisor'];
 
-
+        $_SESSION['id_supervisor']= $id_supervisor;
 
 ?>
 
@@ -811,12 +815,12 @@ ob_end_flush();
         //TBL_EMPRESAS_PRACTICA
         $("#empresa_sv").val(data.nombre_empresa);
         $("#empresa_d_sv").val(data.direccion_empresa);
-        $("#jefe_sv").val(data.jefe_inmediato);
-        $("#cargo_sv").val(data.cargo_jefe_inmediato);
+        $("#jefe_sv").val(data.nombre);
+        $("#cargo_sv").val(data.cargo);
         $("#titulo_sv").val(data.nivel_a);
-        $("#celular_sv").val(data.celular_jefe_inmediato);
-        $("#correo_sv").val(data.correo_jefe_inmediato);
-        $("#telefono_sv").val(data.telefono_jefe_inmediato);
+        $("#celular_sv").val(data.celular);
+        $("#correo_sv").val(data.correo);
+        $("#telefono_sv").val(data.telefono);
         //TBL_PERSONAS
         $("#estudiante_sv").val(data.nombres);
         $("#DNI_sv").val(data.identidad);

@@ -53,7 +53,7 @@ class PDF extends FPDF
 if (isset($_GET['id']) ) {
 	$id_persona=$_GET['id'];
 
-	$sql = "SELECT DISTINCT px.valor, concat(a.nombres,' ',a.apellidos) as nombres, a.identidad, ep.nombre_empresa, ep.direccion_empresa, vap.fecha_inicio, vap.fecha_finalizacion, m.modalidad, dp.descripcion AS horario, concat(vap.horario_entrada,' a ',vap.horario_salida) as horas, c.valor Correo, e.valor Celular, ep.jefe_inmediato, na.descripcion as nivel_a, ep.cargo_jefe_inmediato, ep.correo_jefe_inmediato, ep.telefono_jefe_inmediato, ep.celular_jefe_inmediato, a.id_persona, ca.nombre_representante,ca.supervisor, concat(ca.lugar,' ',ca.fecha) AS lugar_fecha, evp.comunicacion, evp.puntualidad, evp.responsabilidad, evp.creatividad, evp.presentacion, evp.atencion_cliente, evp.colaborativo, evp.trabajo_equipo, evp.proactivo_iniciativa, evp.relacion_interpersonal, evp.relacion_interpersonal, evp.analisis_sistema, evp.diseno_aplicacion, evp.programador_aplicacion, fp.funciones_analisis, fp.funciones_redes, fp.funciones_diseno, fp.funciones_capacitacion, fp.funciones_seguridad, fp.funciones_auditoria, fp.funciones_base, fp.funciones_soporte, fp.funciones_programacion, fp.otras_funciones
+	$sql = "SELECT DISTINCT px.valor, concat(a.nombres,' ',a.apellidos) as nombres, a.identidad, ep.nombre_empresa, ep.direccion_empresa, vap.fecha_inicio, vap.fecha_finalizacion, m.modalidad, dp.descripcion AS horario, concat(vap.horario_entrada,' a ',vap.horario_salida) as horas, c.valor Correo, e.valor Celular, cp.nombre, na.descripcion as nivel_a, cp.cargo, cp.correo, cp.telefono, cp.celular, a.id_persona, ca.nombre_representante,ca.supervisor, concat(ca.lugar,' ',ca.fecha) AS lugar_fecha, evp.comunicacion, evp.puntualidad, evp.responsabilidad, evp.creatividad, evp.presentacion, evp.atencion_cliente, evp.colaborativo, evp.trabajo_equipo, evp.proactivo_iniciativa, evp.relacion_interpersonal, evp.relacion_interpersonal, evp.analisis_sistema, evp.diseno_aplicacion, evp.programador_aplicacion, fp.funciones_analisis, fp.funciones_redes, fp.funciones_diseno, fp.funciones_capacitacion, fp.funciones_seguridad, fp.funciones_auditoria, fp.funciones_base, fp.funciones_soporte, fp.funciones_programacion, fp.otras_funciones
         FROM
 
         tbl_empresas_practica AS ep
@@ -66,13 +66,14 @@ if (isset($_GET['id']) ) {
         JOIN tbl_contactos e ON a.id_persona = e.id_persona
         JOIN tbl_tipo_contactos f ON e.id_tipo_contacto = f.id_tipo_contacto AND f.descripcion = 'TELEFONO CELULAR'
         JOIN tbl_vinculacion_aprobacion_practica AS  vap ON vap.id_persona = a.id_persona
-        JOIN tbl_nivel_academico AS na ON na.id_nivel_a = ep.id_nivel_a
+        JOIN tbl_contacto_practica AS cp ON cp.persona_id = a.id_persona
+        JOIN tbl_nivel_academico AS na ON na.id_nivel_a = cp.nivel_academico
         JOIN tbl_modalidad AS m ON m.id_modalidad = pe.id_modalidad
         JOIN tbl_dias_practica AS dp ON dp.id_dias = vap.id_dias
         JOIN tbl_comentarios_alumnos AS ca ON ca.id_persona = '$id_persona'
         JOIN tbl_funciones_practica AS fp ON fp.id_persona = '$id_persona'
         JOIN tbl_evaluaciones_practica AS evp ON evp.id_persona = '$id_persona'
-        JOIN tbl_personas_extendidas AS px ON px.id_persona=a.id_persona and pe.id_persona='$id_persona' and fp.numero_visita='Primera Supervisión' and ca.numero_visita='Primera Supervisión' and evp.numero_visita='Primera Supervisión' and a.id_persona='$id_persona'";
+        JOIN tbl_personas_extendidas AS px ON px.id_persona=a.id_persona and pe.id_persona='$id_persona' and fp.numero_visita='Primera Supervisión' and ca.numero_visita='Primera Supervisión' and evp.numero_visita='Primera Supervisión' and a.id_persona='$id_persona' AND ep.contacto_id = cp.id";
 
         $row= mysqli_fetch_assoc($mysqli->query($sql));
 
@@ -110,17 +111,17 @@ if (isset($_GET['id']) ) {
 	$pdf->SetY(80);
 	$pdf->Cell(325, 10, utf8_decode(''.$row['Celular'].''), 0, 1, 'C');
 	$pdf->SetY(136);
-	$pdf->Cell(98, 10, utf8_decode(''.$row['jefe_inmediato'].''), 0, 1, 'C');
+	$pdf->Cell(98, 10, utf8_decode(''.$row['nombre'].''), 0, 1, 'C');
 	$pdf->SetY(145);
 	$pdf->Cell(329, 10, utf8_decode(''.$row['nivel_a'].''), 0, 1, 'C');
 	$pdf->SetY(136);
-	$pdf->Cell(326, 10, utf8_decode(''.$row['cargo_jefe_inmediato'].''), 0, 1, 'C');
+	$pdf->Cell(326, 10, utf8_decode(''.$row['cargo'].''), 0, 1, 'C');
 	$pdf->SetY(145);
-	$pdf->Cell(107, 10, utf8_decode(''.$row['correo_jefe_inmediato'].''), 0, 1, 'C');
+	$pdf->Cell(107, 10, utf8_decode(''.$row['correo'].''), 0, 1, 'C');
 	$pdf->SetY(154);
-	$pdf->Cell(86, 10, utf8_decode(''.$row['telefono_jefe_inmediato'].''), 0, 1, 'C');
+	$pdf->Cell(86, 10, utf8_decode(''.$row['telefono'].''), 0, 1, 'C');
 	$pdf->SetY(154);
-	$pdf->Cell(328, 10, utf8_decode(''.$row['celular_jefe_inmediato'].''), 0, 1, 'C');
+	$pdf->Cell(328, 10, utf8_decode(''.$row['celular'].''), 0, 1, 'C');
 	$pdf->SetY(205);
 	$pdf->SetX(45);
 	$pdf->multicell(170, 5, utf8_decode(' '.$row['funciones_analisis'].' 

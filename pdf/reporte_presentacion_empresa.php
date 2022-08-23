@@ -32,7 +32,7 @@ $usuario=$_SESSION['id_usuario'];
        $result= mysqli_fetch_assoc($mysqli->query($id));
        $id_persona=$result['id_persona'];
 /* Manda a llamar todos las datos de la tabla para llenar el gridview  */
-$sqltabla="Select ep.nombre_empresa, ep.jefe_inmediato, na.descripcion AS nivela ,ep.cargo_jefe_inmediato, concat(p.nombres,' ',p.apellidos)AS nombre, px.valor from tbl_empresas_practica ep, tbl_personas p, tbl_personas_extendidas px, tbl_nivel_academico na where ep.id_persona=p.id_persona and p.id_persona=$id_persona AND px.id_atributo=12 and px.id_persona= $id_persona and ep.id_nivel_a=na.id_nivel_a";
+$sqltabla="Select ep.nombre_empresa, ca.nombre, na.descripcion AS nivela ,ca.cargo, concat(p.nombres,' ',p.apellidos) AS nombres, px.valor from tbl_empresas_practica ep, tbl_contacto_practica ca, tbl_personas p, tbl_personas_extendidas px, tbl_nivel_academico na where ep.id_persona=p.id_persona and p.id_persona= $id_persona AND px.id_atributo=12 and px.id_persona= $id_persona and ca.nivel_academico=na.id_nivel_a AND ep.contacto_id = ca.id";
 
 
 class PDF extends FPDF
@@ -62,10 +62,10 @@ class PDF extends FPDF
     $pdf->SetFont('Arial','B',12);
     $pdf->SetY(50);
     $pdf->SetX(23);
-    $pdf->Write(15,utf8_decode(''.$row['nivela'].' |'.' '.$row['jefe_inmediato'].' '));
+    $pdf->Write(15,html_entity_decode(''.$row['nivela'].' |'.' '.$row['nombre'].' '));
     $pdf->SetY(55);
     $pdf->SetX(23);
-    $pdf->Write(15,utf8_decode(''.$row['cargo_jefe_inmediato'].''));
+    $pdf->Write(15,utf8_decode(''.$row['cargo'].''));
     $pdf->SetY(60);
     $pdf->SetX(23);
     $pdf->Write(15,utf8_decode(''.$row['nombre_empresa'].' '));
@@ -79,7 +79,7 @@ class PDF extends FPDF
     $pdf->multicell(175,6,utf8_decode('Aprovecho la ocasión para extenderle un cordial saludo, acompañado de mis mejores deseos para su vida personal y profesional.'),0);
 	$pdf->ln(5);
 	$pdf->SetX(22);
-	$pdf->multicell(175,6,utf8_decode('Me dirijo a usted para presentar a '.$row['nombre'].', con número de cuenta '.$row['valor'].', estudiante de la carrera de Informática Administrativa de la Facultad de Ciencias Económicas, Administrativas y Contables de la Universidad Nacional Autónoma de Honduras (UNAH), a fin de poderle brindar la oportunidad de realizar su práctica profesional.'),0);
+	$pdf->multicell(175,6,utf8_decode('Me dirijo a usted para presentar a '.$row['nombres'].', con número de cuenta '.$row['valor'].', estudiante de la carrera de Informática Administrativa de la Facultad de Ciencias Económicas, Administrativas y Contables de la Universidad Nacional Autónoma de Honduras (UNAH), a fin de poderle brindar la oportunidad de realizar su práctica profesional.'),0);
     $pdf->ln(5);
 	$pdf->SetX(22);
 	$pdf->multicell(175,6,utf8_decode('La práctica profesional es una actividad formativa del estudiante, la cual consiste en asumir un rol profesional, a través de su inserción en una realidad o ambiente laboral específico, al mismo tiempo, se convierte en un aporte de valor de a la institución, partiendo de su capacidad, habilidad y conocimientos adquiridos, cuya meta es producir y/o potenciar algún producto dentro de la institución.'),0);
@@ -135,10 +135,10 @@ class PDF extends FPDF
     $pdf->SetFont('Arial','B',12);
     $pdf->SetY(50);
     $pdf->SetX(23);
-    $pdf->Write(15,utf8_decode(''.$row['nivela'].' |'.' '.$row['jefe_inmediato'].' '));
+    $pdf->Write(15,utf8_decode(''.$row['nivela'].''));
     $pdf->SetY(55);
     $pdf->SetX(23);
-    $pdf->Write(15,utf8_decode(''.$row['cargo_jefe_inmediato'].''));
+    $pdf->Write(15,utf8_decode(''.$row['cargo'].''));
     $pdf->SetY(60);
     $pdf->SetX(23);
     $pdf->Write(15,utf8_decode(''.$row['nombre_empresa'].' '));

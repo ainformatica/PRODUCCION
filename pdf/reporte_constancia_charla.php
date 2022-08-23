@@ -125,9 +125,9 @@ $pdf->SetFillColor(232,232,232);
 $pdf->SetFont('Arial','I',12);
 
 $pdf->Image('../dist/img/cuadro.png',20,70,160);
-$pdf->SetX(200);
+$pdf->SetX(400);
 $pdf->SetY(71);
-$pdf->Cell(200, 10, ''.$row['nombre'].'', 0, 1, 'C');
+$pdf->Cell(205, 10, utf8_decode(''.$row['nombre'].''),0, 1, 'C');
 $pdf->ln(-3);
 $pdf->SetX(80);
 $pdf->SetY(81);

@@ -30,7 +30,7 @@ JOIN tbl_personas_extendidas as px on px.id_atributo=12 and px.id_persona=a.id_p
 WHERE a.id_persona = $id_persona
 LIMIT 1");
 
-$sql_empresa = ("SELECT ep.nombre_empresa, ep.direccion_empresa, te.descripcion AS tipoe, ti.descripcion AS trabajai, ep.puesto_en_trabajo, ep.jefe_inmediato, ep.cargo_jefe_inmediato, ep.correo_jefe_inmediato, ep.telefono_jefe_inmediato, ep.celular_jefe_inmediato, na.descripcion AS nivela, ep.perfil_empresa, ep.croquis_empresa, ep.fecha_inicio_laborar from tbl_empresas_practica ep, tbl_tipo_empresa te,tbl_trabaja_institucion ti, tbl_nivel_academico na where id_persona= $id_persona AND ep.id_tipo_empresa= te.id_tipo_empresa AND ep.id_trabaja_i=ti.id_trabaja_i AND ep.id_nivel_a=na.id_nivel_a");
+$sql_empresa = ("SELECT ep.nombre_empresa, ep.direccion_empresa, te.descripcion AS tipoe, ti.descripcion AS trabajai, ep.puesto_trabajo, cp.nombre, cp.cargo, cp.correo, cp.telefono, cp.celular, na.descripcion AS nivela, ep.perfil_empresa, ep.croquis_empresa, ep.fecha_inicio_laborar from tbl_empresas_practica ep, tbl_contacto_practica cp, tbl_tipo_empresa te,tbl_trabaja_institucion ti, tbl_nivel_academico na where id_persona= $id_persona AND ep.id_tipo_empresa= te.id_tipo_empresa AND ep.id_trabaja_i=ti.id_trabaja_i AND cp.nivel_academico=na.id_nivel_a AND ep.contacto_id = cp.id");
 
 $sql_practica = ("SELECT pe.id_persona, pe.fecha_inicio, pe.fecha_finaliza, jl.descripcion AS jornada, concat(pe.hora_inicio,' a ',pe.hora_final) as horariol, m.modalidad from tbl_practica_estudiantes pe, tbl_modalidad m, tbl_jornada_laboral jl where id_persona= $id_persona AND pe.id_modalidad=m.id_modalidad AND pe.id_jornada_laboral=jl.id_jornada_laboral");
 
@@ -166,7 +166,7 @@ class PDF extends FPDF
 	$pdf->cell(170,5,utf8_decode(''.$row2['trabajai'].''),0);
 	$pdf->SetY(182);
 	$pdf->SetX(155);
-	$pdf->cell(170,5,utf8_decode(''.$row2['puesto_en_trabajo'].''),0);
+	$pdf->cell(170,5,utf8_decode(''.$row2['puesto_trabajo'].''),0);
 	$pdf->SetY(194);
 	$pdf->SetX(73);
 	$pdf->cell(170,5,utf8_decode(''.fecha($row2['fecha_inicio_laborar'].'')),0);
@@ -197,19 +197,19 @@ class PDF extends FPDF
 			$pdf->ln(2);
 			$pdf->SetY(58);
 			$pdf->SetX(47);
-			$pdf->cell(170,5,utf8_decode(''.$row2['jefe_inmediato'].''),0);
+			$pdf->cell(170,5,utf8_decode(''.$row2['nombre'].''),0);
 			$pdf->SetY(58);
 			$pdf->SetX(135);
-			$pdf->cell(170,5,utf8_decode(''.$row2['cargo_jefe_inmediato'].''),0);
+			$pdf->cell(170,5,utf8_decode(''.$row2['cargo'].''),0);
 			$pdf->SetY(67);
 			$pdf->SetX(47);
-			$pdf->cell(170,5,utf8_decode(''.$row2['correo_jefe_inmediato'].''),0);
+			$pdf->cell(170,5,utf8_decode(''.$row2['correo'].''),0);
 			$pdf->SetY(67);
 			$pdf->SetX(135);
-			$pdf->cell(170,5,utf8_decode(''.$row2['telefono_jefe_inmediato'].''),0);
+			$pdf->cell(170,5,utf8_decode(''.$row2['telefono'].''),0);
 			$pdf->SetY(67);
 			$pdf->SetX(185);
-			$pdf->cell(170,5,utf8_decode(''.$row2['celular_jefe_inmediato'].''),0);
+			$pdf->cell(170,5,utf8_decode(''.$row2['celular'].''),0);
 			$pdf->SetY(76);
 			$pdf->SetX(47);
 			$pdf->cell(170,5,utf8_decode(''.$row2['nivela'].''),0);
@@ -312,19 +312,19 @@ class PDF extends FPDF
 			$pdf->ln(2);
 			$pdf->SetY(58);
 			$pdf->SetX(47);
-			$pdf->cell(170,5,utf8_decode(''.$row2['jefe_inmediato'].''),0);
+			$pdf->cell(170,5,utf8_decode(''.$row2['nombre'].''),0);
 			$pdf->SetY(58);
 			$pdf->SetX(135);
-			$pdf->cell(170,5,utf8_decode(''.$row2['cargo_jefe_inmediato'].''),0);
+			$pdf->cell(170,5,utf8_decode(''.$row2['cargo'].''),0);
 			$pdf->SetY(67);
 			$pdf->SetX(47);
-			$pdf->cell(170,5,utf8_decode(''.$row2['correo_jefe_inmediato'].''),0);
+			$pdf->cell(170,5,utf8_decode(''.$row2['correo'].''),0);
 			$pdf->SetY(67);
 			$pdf->SetX(135);
-			$pdf->cell(170,5,utf8_decode(''.$row2['telefono_jefe_inmediato'].''),0);
+			$pdf->cell(170,5,utf8_decode(''.$row2['telefono'].''),0);
 			$pdf->SetY(67);
 			$pdf->SetX(185);
-			$pdf->cell(170,5,utf8_decode(''.$row2['celular_jefe_inmediato'].''),0);
+			$pdf->cell(170,5,utf8_decode(''.$row2['celular'].''),0);
 			$pdf->SetY(76);
 			$pdf->SetX(47);
 			$pdf->cell(170,5,utf8_decode(''.$row2['nivela'].''),0);

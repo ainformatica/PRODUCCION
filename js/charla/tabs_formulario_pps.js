@@ -6,6 +6,8 @@ document.addEventListener("DOMContentLoaded", function(){
 });
 
 let $dataEmpresa= document.getElementById('frmempresa'),
+    $dataContacto= document.getElementById('frmcontacto'),
+    $btn_siguiente= document.getElementById('btn_siguiente'),
     $datapractica= document.getElementById('frmPractica');
 let $cb_trabaja= document.getElementById('trabaja_institucion');
 
@@ -28,8 +30,9 @@ $cb_trabaja.addEventListener('change',(e)=>{
         $lb_cargo.classList.add('d-none');
 
     }
+     })
    
-})
+ 
 
 function informacion(id) {
 
@@ -72,6 +75,46 @@ function fecha_inicio() {
 }
 
 // peticiones ajax con fecth() para insertar 
+$dataContacto.addEventListener('submit', (e)=>{
+    e.preventDefault()
+    let data = new FormData(frmcontacto);
+    fetch('../api/registrar_empresa.php',{
+        method: 'POST',
+        body:data
+    })
+    .then(respuesta=> respuesta.json())
+    .then(datos=>{
+        res= datos['Status'];
+        if (res==200) {
+            
+            swal({
+                title:"Solicitud Enviada...",
+                text:"Contacto registrado con exito, puedes registrar mas contactos",
+                type: "success",
+                allowOutsideClick:false,
+                showConfirmButton: true,
+                }).then(function () {
+                
+                    mostrarBoton();
+                    
+                });
+               
+        }else{
+
+            swal({
+                title:"",
+                text:"error",
+                type: "info",
+                allowOutsideClick:false,
+                showConfirmButton: true,
+                }).then(function () {
+               
+                    //siguienteTabs();
+                });
+            }
+            console.log(datos);
+        })
+})
 
 $dataEmpresa.addEventListener('submit', (e)=>{
     e.preventDefault()
@@ -161,11 +204,26 @@ function siguienteTabs() {
   
 }
 
-// let cancelar = document.getElementById('btn_salir');
+function Tabs2() {
+    let tab= document.getElementById('tab2').click();
+  
+}
 
-// cancelar.addEventListener("click",(e)=>{
-//     siguienteTabs();
-// })
+let cancelar = document.getElementById('btn_salir');
+
+cancelar.addEventListener("click",(e)=>{
+    siguienteTabs();
+})
+
+function mostrarBoton() {
+    $btn_siguiente.classList.remove("d-none");
+    $dataContacto.reset();
+    
+}
+
+$btn_siguiente.addEventListener('click', (e)=>{
+Tabs2();
+});
 
 
 
