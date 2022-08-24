@@ -342,12 +342,7 @@ ob_end_flush();
                     <label>Contacto</label>
                     <select class="form-control" name="cb_contacto_empresa" id="contacto_empresa">
                       <option selected disabled value="0">Seleccione una opcion:</option>
-                      <?php
-                      $query = $mysqli->query("SELECT * FROM tbl_contacto_practica where persona_id =$id_persona");
-                      while ($resultado = mysqli_fetch_array($query)) {
-                        echo '<option value="' . $resultado['id'] . '"> ' . $resultado['nombre'] . '</option>';
-                      }
-                      ?>
+                      
                     </select>
                   </div>
               </div>
@@ -451,7 +446,7 @@ ob_end_flush();
    
                      <input class="form-control" type="date" id="fecha_inicio" name="txt_fecha_inicio">
                      <input  type="hidden" id="empresa_id" name="id_empresa">
-                     <input type="hidden" name="id_persona" value="<?php echo $result['id_persona'] ?>">
+                     <input type="hidden" name="id_persona" id="persona" value="<?php echo $result['id_persona'] ?>">
                    </div>
                </div>
                <div class="col-sm-4">

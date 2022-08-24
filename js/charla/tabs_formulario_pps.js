@@ -4,10 +4,11 @@ document.addEventListener("DOMContentLoaded", function(){
  fecha_inicio();
  
 });
-
 let $dataEmpresa= document.getElementById('frmempresa'),
     $dataContacto= document.getElementById('frmcontacto'),
     $btn_siguiente= document.getElementById('btn_siguiente'),
+    $contacto=document.getElementById('contacto_empresa'),
+    $idpersona=document.getElementById('id_estudiante'),
     $datapractica= document.getElementById('frmPractica');
 let $cb_trabaja= document.getElementById('trabaja_institucion');
 
@@ -30,9 +31,41 @@ $cb_trabaja.addEventListener('change',(e)=>{
         $lb_cargo.classList.add('d-none');
 
     }
-     })
-   
- 
+     });
+        
+        $contacto.addEventListener("click",(e)=>{
+            $id_persona=document.getElementById('persona');
+
+            if ($contacto.length > 1) {
+                $contacto.innerHTML="";
+            } else {
+                GetContacto($id_persona.value);
+            }
+        });
+
+        function GetContacto(id) {
+            let formData= new FormData();
+            let contact=1
+            let idcontacto=id;
+            formData.set('contacto',idcontacto);
+                fetch('../api/cargar_contacto.php',{
+                    method: 'POST',
+                body:formData
+                })
+                .then(respuesta=> respuesta.json())
+                .then(res=>contacto(res));
+        }
+
+
+
+        function contacto(info) {
+            
+            info.forEach(element => {
+            $contacto.innerHTML+= `<option value=${element[0]}>${element[1]}</option>`;
+            });
+        } 
+
+
 
 function informacion(id) {
 
@@ -112,7 +145,7 @@ $dataContacto.addEventListener('submit', (e)=>{
                     //siguienteTabs();
                 });
             }
-            console.log(datos);
+            //console.log(datos);
         })
 })
 
