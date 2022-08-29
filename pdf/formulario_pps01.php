@@ -190,7 +190,7 @@ class PDF extends FPDF
 			$pdf->ln(2);
 			$pdf->SetY(66);
 			$pdf->SetX(20);
-			$pdf->multicell(225,5,utf8_decode($row2['perfil_empresa']),0);
+			$pdf->multicell(180,5,utf8_decode($row2['perfil_empresa']),0);
 		}if($i == 2){
 			$pdf->AddPage();
 			$pdf->Image('../dist/img/parte_03.png',3,45,208);
@@ -305,7 +305,7 @@ class PDF extends FPDF
 			$pdf->ln(2);
 			$pdf->SetY(66);
 			$pdf->SetX(20);
-			$pdf->multicell(225,5,utf8_decode($row2['perfil_empresa']),0);
+			$pdf->multicell(180,5,utf8_decode($row2['perfil_empresa']),0);
 		}if($i == 2){
 			$pdf->AddPage();
 			$pdf->Image('../dist/img/parte_03.png',3,45,208);
