@@ -281,7 +281,7 @@ class PDF extends FPDF
 	$pdf->cell(170,5,utf8_decode(''.$row2['trabajai'].''),0);
 	$pdf->SetY(182);
 	$pdf->SetX(155);
-	$pdf->cell(170,5,utf8_decode(''.$row2['puesto_en_trabajo'].''),0);
+	$pdf->cell(170,5,utf8_decode(''.$row2['puesto_trabajo'].''),0);
 	$pdf->SetY(194);
 	$pdf->SetX(73);
 	$pdf->cell(170,5,utf8_decode(''.fecha($row2['fecha_inicio_laborar'].'')),0);
