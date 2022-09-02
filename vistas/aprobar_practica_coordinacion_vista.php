@@ -527,7 +527,7 @@ $sql_datos_modal="SELECT p.id_persona, px.valor as valor, concat(p.nombres,' ',p
                     <input type="time" name="horario_fin" id="horario_fin" class="form-control" required autofocus title="Horario Salida">
                 </div>
             </div>
-            <div class="col-sm-4">
+            <!-- <div class="col-sm-4">
                 <div class="form-group">
                           <center> <h5>Horario de Trabajo (Día Sábado)</h5></center>
                           <center> <label>Entrada</label> </center>
@@ -535,7 +535,7 @@ $sql_datos_modal="SELECT p.id_persona, px.valor as valor, concat(p.nombres,' ',p
                           <center><label>Salida</label>  </center>
                     <input type="time" name="horario_fin_sab" id="horario_fin_sab" class="form-control" required autofocus title="Horario Salida">
                 </div>
-            </div>
+            </div> -->
             <div class="col-sm-4">
                <div class="form-group">
                          <center> <h5>Fecha de finalización de PPS</h5></center>

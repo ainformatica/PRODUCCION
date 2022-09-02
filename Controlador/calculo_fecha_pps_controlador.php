@@ -5,6 +5,8 @@ require_once "../Modelos/calculo_fecha_pps_modelos.php";
 $fecha_inicio = $_POST['fecha_inicio'];
 $horario_incio = $_POST['horario_incio'];
 $horario_fin = $_POST['horario_fin'];
+$horario_incio_sab = $_POST['horario_incio_sab'];
+$horario_fin_sab = $_POST['horario_fin_sab'];
 $dias = $_POST['dias'];
 $cb_practica= $_POST['cb_practica'];
 $cb_horas_practica= $_POST['cb_horas_practica'];
@@ -22,13 +24,13 @@ switch ($_GET["op"])
 case 'fecha':
            
           
-$h1 = new DateTime($horario_incio);
-$h2 = new DateTime($horario_fin);
-$horast = date_diff($h1, $h2);
-$horas_diarias = $horast->format('%H')-1    ; //Me da el calculo de horas diarias 
-$horas_semanales=($horas_diarias*$dias);// Me da el calculo de horas semanales
-$dias_trabajo= ($cb_horas_practica/$horas_diarias);//me da el calculo de dias totales de trabajo
-$semanas_trabajo=($cb_horas_practica/$horas_semanales);//me da el calculo de semanas que va trabajar
+$h1 = date_create($horario_incio);
+$h2 = date_create($horario_fin);
+$horast = date_diff($h2, $h1);
+$horas_diarias = $horast->format('%H') ; //Me da el calculo de horas diarias 
+$horas_semanales=($horas_diarias*5);// Me da el calculo de horas semanales
+$dias_trabajo= (800/$horas_diarias);//me da el calculo de dias totales de trabajo
+$semanas_trabajo=(800/$horas_semanales);//me da el calculo de semanas que va trabajar
 $sabados_domingos=($semanas_trabajo*2);//me da la suma de sabados y domigos a tomar en cuenta 
 $dias_totales_trabajo=($dias_trabajo+$sabados_domingos);
 
