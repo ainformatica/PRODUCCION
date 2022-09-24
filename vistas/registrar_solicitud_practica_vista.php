@@ -37,6 +37,36 @@ JOIN tbl_tipo_contactos k ON j.id_tipo_contacto = k.id_tipo_contacto AND k.descr
 $datos_estudiante = mysqli_fetch_assoc($mysqli->query($sql_estudiante));
 
 
+if ($datos_estudiante) {
+ 
+}else{
+  echo '<script type="text/javascript">
+  swal({
+    title:"¡ Validación de Infromación !",
+    text:"Completa la información de tu perfil",
+    type: "warning",
+    allowOutsideClick:false,
+    showConfirmButton: true,
+    showCancelButton: true,
+    confirmButtonText:"Sí",
+    cancelButtonText:"No",
+    })
+
+    .then(function(isConfirm) {
+        if (isConfirm)  {
+          window.location = "../vistas/menu_estudiantes_practica_vista.php";
+          }    
+    })
+    .catch(function(){
+      window.location = "../vistas/menu_estudiantes_practica_vista.php";
+    });
+
+
+</script>';
+return false;
+}
+
+
 
 
 
@@ -106,22 +136,15 @@ ob_end_flush();
   <input type="radio" name="tabset" id="tab1" aria-controls="marzen" checked>
   <label for="tab1">Información del Estudiante</label>
   <!-- Tab 2 -->
+   
+  <input type="radio" name="tabset" id="tab4" aria-controls="werc">
+  <label for="tab4">Contactos</label>
+
   <input type="radio" name="tabset" id="tab2" aria-controls="rauchbier">
   <label for="tab2">Información de la Institución</label>
   <!-- Tab 3 -->
   <input type="radio" name="tabset" id="tab3" aria-controls="dunkles">
   <label for="tab3">Información de Práctica Profesional </label>
-
-
-
-  
-  <!-- <input type="radio" name="tabset" id="tab4" aria-controls="wilder">
-  <label for="tab4">Documentos</label> -->
-  
-
-
-
-
 
 
 
@@ -202,6 +225,79 @@ ob_end_flush();
     </section>
         <!--FIN DE  INFORMACION PERSONAL -->
 
+    <section id="werc" class="tab-panel">
+
+            <form id="frmcontacto" action="#">
+                
+                <div class="row">
+                  
+                      <div class="col-sm-8">
+                          <div class="form-group">
+                            <label>Nombre</label> 
+                            <input type="text" class="d-none" id="id_contacto" name="persona_id_contacto" value="<?php echo $id_persona ?>">
+                            <input class="form-control" type="text" id="nombre_contacto" name="txt_nombre_contacto">
+                          </div>
+                      </div>
+
+                      <div class="col-sm-4">
+                          <div class="form-group">
+                            <label>Cargo</label> 
+                            <input class="form-control" type="text" id="cargo" name="txt_cargo_contacto">
+                          </div>
+                      </div>
+
+                      <div class="col-sm-4">
+                          <div class="form-group">
+                            <label>Correo electrónico</label> 
+                            <input class="form-control" type="text" id="correo_contacto" name="txt_correo_contacto">
+                          </div>
+                      </div>
+
+                      <div class="col-sm-2">
+                          <div class="form-group">
+                            <label>Telefono (Ext.)</label> 
+                            <input class="form-control" type="text" id="telefono_contacto" name="txt_telefono_contacto">
+                          </div>
+                      </div>
+
+                      <div class="col-sm-2">
+                          <div class="form-group">
+                            <label>Celular</label> 
+                            <input class="form-control" type="text" id="celular_contacto" name="txt_celular_contacto">
+                          </div>
+                      </div>
+
+                      <div class="col-sm-4">
+                          <div class="form-group">
+                            <label>Nivel académico</label>
+                            <select class="form-control" name="cb_nivel" id="nivel">
+                                <option selected disabled value="0">Seleccione una opcion:</option>
+                                      <?php
+                                      $query = $mysqli->query("SELECT * FROM tbl_nivel_academico");
+                                      while ($resultado = mysqli_fetch_array($query)) {
+                                        echo '<option value="' . $resultado['id_nivel_a'] . '"> ' . $resultado['descripcion'] . '</option>';
+                                      }
+                                      ?>
+                            </select>
+                          </div>
+                      </div>
+
+                      <div class="col-sm-6 mb-4">
+                          <div class="form-group">
+                            <button type="button" class="btn btn-danger" id="btn_salir" ><i class="zmdi zmdi-floppy"></i> Cancelar</button>
+                            <button type="submit" class="btn btn-primary" id="btn_contacto" name="registrar" ><i class="zmdi zmdi-floppy"></i> Agregar Contacto</button>
+                            <button type="button" class="btn btn-success d-none" id="btn_siguiente" name="siguiente" ><i class="zmdi zmdi-floppy"></i> Siguiente</button>
+                          </div>
+              
+                       </div>
+
+                  </div>
+                  
+            </form>                      
+
+    </section>
+
+
         <!-- INFORMACION EMPRESA -->
     <section id="dunkles" class="tab-panel">
       <form  id="frmempresa"  enctype="multipart/form-data">
@@ -234,77 +330,34 @@ ob_end_flush();
                   </div>
               </div>
 
-                <div class="col-sm-12">
+                <div class="col-sm-8">
                     <div class="form-group">
                       <label>Dirección Empresa</label> 
 
                       <input class="form-control" type="text" id="direccion" name="direccion_empresa">
                     </div>
                 </div>
+                <div class="col-sm-4">
+                  <div class="form-group">
+                    <label>Contacto</label>
+                    <select class="form-control" name="cb_contacto_empresa" id="contacto_empresa">
+                      <option selected disabled value="0">Seleccione una opcion:</option>
+                      
+                    </select>
+                  </div>
+              </div>
 
-               
-
-                <div class="col-sm-8">
-                        <div class="form-group">
-                          <label>Nombre del Jefe</label> 
-                          <input class="form-control" type="text" id="jefe" name="nombre_jefe">
-                        </div>
-                    </div>
-
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                          <label>Cargo del Jefe</label> 
-                          <input class="form-control" type="text" id="cargo" name="cargo_jefe">
-                        </div>
-                    </div>
-
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                          <label>Correo electrónico</label> 
-                          <input class="form-control" type="text" id="correo" name="correo_jefe">
-                        </div>
-                    </div>
-
-                    <div class="col-sm-2">
-                        <div class="form-group">
-                          <label>Telefono (Ext.)</label> 
-                          <input class="form-control" type="text" id="telefono" name="telefono_jefe">
-                        </div>
-                    </div>
-
-                    <div class="col-sm-2">
-                        <div class="form-group">
-                          <label>Celular</label> 
-                          <input class="form-control" type="text" id="txt_cuenta_solicitud" name="celular_jefe">
-                        </div>
-                    </div>
-
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                          <label>Nivel académico</label>
-                          <select class="form-control" name="cb_nivel" id="nivel_academico">
-                            <option selected disabled value="0">Seleccione una opcion:</option>
-                            <option value="1">Bachillerato</option>
-                            <option value="2">Licenciado</option>
-                            <option value="3">Ingeniero</option>
-                            <option value="4">Máster</option>
-                            <option value="4">Doctor</option>
-                          
-                          </select>
-                        </div>
-                    </div>
-
-                    <div class="col-sm-4">
+                <div class="col-sm-4">
                    
-                   <div class="form-group">
-                     <label>¿ Trabaja para la institución ?</label>
-                     <select class="form-control" name="cb_trabaja" id="trabaja_institucion">
-                       <option selected disabled value="10">Seleccione una opcion:</option>
-                       <option value="1">Sí</option>
-                       <option value="2">No</option>
-                     
-                     </select>
-                   </div>
+                      <div class="form-group">
+                        <label>¿ Trabaja para la institución ?</label>
+                        <select class="form-control" name="cb_trabaja" id="trabaja_institucion">
+                          <option selected disabled value="10">Seleccione una opcion:</option>
+                          <option value="1">Sí</option>
+                          <option value="2">No</option>
+                        
+                        </select>
+                      </div>
                </div>
                  <div class="col-sm-4">
                      <div class="form-group">
@@ -393,7 +446,7 @@ ob_end_flush();
    
                      <input class="form-control" type="date" id="fecha_inicio" name="txt_fecha_inicio">
                      <input  type="hidden" id="empresa_id" name="id_empresa">
-                     <input type="hidden" name="id_persona" value="<?php echo $result['id_persona'] ?>">
+                     <input type="hidden" name="id_persona" id="persona" value="<?php echo $result['id_persona'] ?>">
                    </div>
                </div>
                <div class="col-sm-4">
@@ -456,74 +509,7 @@ ob_end_flush();
    
 
 
-    <section id="wilder" class="tab-panel">
-
-          <form action="#">
-              
-              <div class="row">
-                 
-                    <div class="col-sm-8">
-                        <div class="form-group">
-                          <label>Nombre</label> 
-                          <input class="form-control" type="text" id="txt_cuenta_solicitud" name="txt_cuenta_solicitud">
-                        </div>
-                    </div>
-
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                          <label>Cargo</label> 
-                          <input class="form-control" type="text" id="txt_cuenta_solicitud" name="txt_cuenta_solicitud">
-                        </div>
-                    </div>
-
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                          <label>Correo electrónico</label> 
-                          <input class="form-control" type="text" id="txt_cuenta_solicitud" name="txt_cuenta_solicitud">
-                        </div>
-                    </div>
-
-                    <div class="col-sm-2">
-                        <div class="form-group">
-                          <label>Telefono (Ext.)</label> 
-                          <input class="form-control" type="text" id="txt_cuenta_solicitud" name="txt_cuenta_solicitud">
-                        </div>
-                    </div>
-
-                    <div class="col-sm-2">
-                        <div class="form-group">
-                          <label>Celular</label> 
-                          <input class="form-control" type="text" id="txt_cuenta_solicitud" name="txt_cuenta_solicitud">
-                        </div>
-                    </div>
-
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                          <label>Nivel académico</label>
-                          <select class="form-control" name="cb_empresa" id="empresa">
-                            <option selected disabled value="0">Seleccione una opcion:</option>
-                            <option value="1">Bachillerato</option>
-                            <option value="2">Licenciado</option>
-                            <option value="3">Ingeniero</option>
-                            <option value="4">Máster</option>
-                            <option value="4">Doctor</option>
-                          
-                          </select>
-                        </div>
-                    </div>
-
-                    
-                   
-                   
-                   
-                   
-                  
-                  
-                </div>
-                
-          </form>                      
-
-    </section>
+ 
 
     
 

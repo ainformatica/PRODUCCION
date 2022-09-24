@@ -53,10 +53,11 @@ class segunda_visita
 	public function selectCurso(){
 		global $instancia_conexion ;
 		$id_persona1=$_SESSION['id_persona'];
+		$id_supervisor=$_SESSION['id_supervisor'];
       $sql="SELECT DISTINCT concat(p.nombres,' ',p.apellidos) as nombres, vap.id_persona 
       FROM tbl_vinculacion_aprobacion_practica vap, tbl_personas p, tbl_evaluaciones_practica evp, tbl_practica_estudiantes pe
       
-      WHERE p.id_persona=vap.id_persona AND p.id_persona=evp.id_persona AND vap.id_estado_vinculacion=1 AND vap.id_horas=800 AND evp.numero_visita='Primera Supervisión' AND pe.segunda_supervision=0 AND pe.primera_supervision=1;";
+      WHERE p.id_persona=vap.id_persona AND p.id_persona=evp.id_persona AND vap.id_estado_vinculacion=1 AND pe.docente_supervisor=$id_supervisor AND vap.id_horas=800 AND evp.numero_visita='Primera Supervisión' AND pe.segunda_supervision=0 AND pe.primera_supervision=1;";
 		  return $instancia_conexion->ejecutarConsulta($sql);
   
 	  }
@@ -64,7 +65,7 @@ class segunda_visita
   
 	  public function rellenarDatos($id_persona){
 		  global $instancia_conexion ;
-		  $sql="SELECT px.valor, concat(a.nombres,' ',a.apellidos) as nombres, a.identidad, ep.nombre_empresa, ep.direccion_empresa, pe.docente_supervisor, vap.fecha_inicio, vap.fecha_finalizacion, m.modalidad, dp.descripcion AS horario, concat(vap.horario_entrada,' a ',vap.horario_salida) as horas, c.valor Correo, e.valor Celular, ep.jefe_inmediato, na.descripcion as nivel_a, ep.cargo_jefe_inmediato, ep.correo_jefe_inmediato, ep.telefono_jefe_inmediato, ep.celular_jefe_inmediato, a.id_persona
+		  $sql="SELECT DISTINCT px.valor, concat(a.nombres,' ',a.apellidos) as nombres, a.identidad, ep.nombre_empresa, ep.direccion_empresa, pe.docente_supervisor, vap.fecha_inicio, vap.fecha_finalizacion, m.modalidad, dp.descripcion AS horario, concat(vap.horario_entrada,' a ',vap.horario_salida) as horas, c.valor Correo, e.valor Celular,cp.nombre, na.descripcion as nivel_a, cp.cargo, cp.correo, cp.telefono, cp.celular, a.id_persona
 
 		  FROM
   
@@ -80,10 +81,11 @@ class segunda_visita
 		  JOIN tbl_contactos e ON a.id_persona = e.id_persona
 		  JOIN tbl_tipo_contactos f ON e.id_tipo_contacto = f.id_tipo_contacto AND f.descripcion = 'TELEFONO CELULAR'
 		  JOIN tbl_vinculacion_aprobacion_practica AS  vap ON vap.id_persona = a.id_persona
-		  JOIN tbl_nivel_academico AS na ON na.id_nivel_a = ep.id_nivel_a
+		  JOIN tbl_contacto_practica AS cp ON cp.persona_id = a.id_persona
+          JOIN tbl_nivel_academico AS na ON na.id_nivel_a = cp.nivel_academico
 		  JOIN tbl_modalidad AS m ON m.id_modalidad = pe.id_modalidad
 		  JOIN tbl_dias_practica AS dp ON dp.id_dias = vap.id_dias
-		  JOIN tbl_personas_extendidas AS px on px.id_atributo=12 and px.id_persona=a.id_persona and pe.id_persona='$id_persona' AND evp.numero_visita='Primera Supervisión';";			return $instancia_conexion->ejecutarConsultaSimpleFila($sql);
+		  JOIN tbl_personas_extendidas AS px on px.id_atributo=12 and px.id_persona=a.id_persona and pe.id_persona='$id_persona' AND evp.numero_visita='Primera Supervisión' AND ep.contacto_id = cp.id;";			return $instancia_conexion->ejecutarConsultaSimpleFila($sql);
 	
 		}
   

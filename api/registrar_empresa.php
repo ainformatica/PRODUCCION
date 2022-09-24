@@ -5,24 +5,64 @@ session_start();
 
 require_once ('../clases/Conexion.php');
 
+
+//INGRESO DE LOS CONTACTOS
+if (isset($_POST['txt_nombre_contacto'])) {
+    $nombre_jefe= $_POST['txt_nombre_contacto'];
+    $cargo_jefe=$_POST['txt_cargo_contacto'];
+    $correo_jefe=$_POST['txt_correo_contacto'];
+    $telefono_jefe=$_POST['txt_telefono_contacto'];
+    $celular_jefe=$_POST['txt_celular_contacto'];
+    $cb_nivel=$_POST['cb_nivel'];
+    $id_persona_contacto=$_POST['persona_id_contacto'];
+
+
+
+
+    $consulta_contacto="INSERT INTO tbl_contacto_practica (nombre,cargo,correo,telefono,celular,nivel_academico,persona_id)
+    VALUES ('$nombre_jefe','$cargo_jefe','$correo_jefe','$telefono_jefe','$celular_jefe','$cb_nivel','$id_persona_contacto')";
+
+
+
+
+    $resultset = $mysqli->query($consulta_contacto);
+                        
+                        
+        if($resultset){
+        
+           
+            $msg= Array(
+                "Status"=>"200",
+                "info"=> "Todo bien estas en contacto"
+            );
+            echo json_encode($msg);
+            
+                        } 
+        else {
+            // echo "Error: " . $sql ;
+
+            echo json_encode($resultset); 
+    }
+
+
+
+}
+
 // INGRESO DE LA EMPRESA
-if(isset($_POST['nombre_empresa']) && $_POST['id_persona']!=="" && $_POST['cb_empresa']!=="" && $_POST['direccion_empresa']!==""){ 
+if(isset($_POST['nombre_empresa']) && $_POST['id_persona']!=="" && $_POST['cb_empresa']!==""&& $_POST['direccion_empresa']!==""){ 
 
             $ncuenta = $_POST['txt_cuenta'];
             $id_persona = $_POST['id_persona'];
             $nombreEmpresa = $_POST['nombre_empresa'];
             $cb_empresa = $_POST['cb_empresa'];
             $direccion_empresa = $_POST['direccion_empresa'];
-            $nombre_jefe= $_POST['nombre_jefe'];
-            $cargo_jefe=$_POST['cargo_jefe'];
-            $correo_jefe=$_POST['correo_jefe'];
-            $telefono_jefe=$_POST['telefono_jefe'];
-            $celular_jefe=$_POST['celular_jefe'];
-            $cb_nivel=$_POST['cb_nivel'];
+            $contacto= $_POST['cb_contacto_empresa'];
             $cb_trabaja=$_POST['cb_trabaja'];
             $cargo_trabajo=$_POST['cargo_trabajo'];
             $fecha_ingreso=$_POST['fecha_ingreso'];
             $perfil_empresa=$_POST['perfil_empresa'];
+            
+      
   
     if($_FILES['croquis']['name']!=null){
             
@@ -57,7 +97,7 @@ if(isset($_POST['nombre_empresa']) && $_POST['id_persona']!=="" && $_POST['cb_em
                     if (!file_exists($micarpeta)) {
                          mkdir($micarpeta, 0777, true);
                         }else{
-                            $documento = glob('../archivos/PPS01_CROQUIS/'.$ncuenta.'/*'); // obtiene los documentos
+                            $documento = glob('../archivos/carta_egresado/'.$ncuenta.'/*'); // obtiene los documentos
                             foreach($documento as $documento){ // itera los documentos
                             if(is_file($documento)) 
                             unlink($documento); // borra los documentos
@@ -66,15 +106,16 @@ if(isset($_POST['nombre_empresa']) && $_POST['id_persona']!=="" && $_POST['cb_em
                 for ($i = 0; $i <=count($documento_nombre_temporal)-1 ; $i++) {
                 
                     move_uploaded_file($documento_nombre_temporal[$i],"$micarpeta/$documento_nombre[$i]");
-                    $ruta= '../archivos/PPS01_CROQUIS/'.$ncuenta.'/'.$documento_nombre[$i];
+                    $ruta= '../archivos/carta_egresado/'.$ncuenta.'/'.$documento_nombre[$i];
                     $direccion[]= $ruta;
                 }
                 $documento = json_encode($direccion);
 
                
                 
-                $sql= "INSERT INTO tbl_empresas_practica ( id_persona, nombre_empresa, direccion_empresa, id_tipo_empresa, id_trabaja_i, puesto_en_trabajo, jefe_inmediato, id_nivel_a, cargo_jefe_inmediato, correo_jefe_inmediato, telefono_jefe_inmediato, celular_jefe_inmediato, perfil_empresa, croquis_empresa, fecha_inicio_laborar)
-                             VALUES ('$id_persona','$nombreEmpresa','$direccion_empresa','$cb_empresa','$cb_trabaja','$cargo_trabajo','$nombre_jefe','$cb_nivel','$cargo_jefe','$correo_jefe','$telefono_jefe','$celular_jefe','$perfil_empresa','$documento','$fecha_ingreso')";
+                $sql= "INSERT INTO tbl_empresas_practica ( id_persona, nombre_empresa, direccion_empresa, 
+                    id_tipo_empresa, id_trabaja_i, puesto_trabajo, perfil_empresa, croquis_empresa, fecha_inicio_laborar,contacto_id)
+                             VALUES ('$id_persona','$nombreEmpresa','$direccion_empresa','$cb_empresa','$cb_trabaja', '$cargo_trabajo','$perfil_empresa','$documento','$fecha_ingreso','$contacto')";
                
                 $resultadop = $mysqli->query($sql);
                 
@@ -157,8 +198,8 @@ if (isset($_POST['cb_modalidad'])) {
     }else{
 
    //INSERTAMOS EL REGITRO DE PRACTICA
-   $sql="INSERT INTO tbl_practica_estudiantes (id_persona,Id_empresa,fecha_inicio,fecha_finaliza,id_jornada_laboral, docente_supervisor, id_estado,hora_inicio,hora_final,id_modalidad)
-   VALUES ('$persona_id','$empresa_id','$fecha_inicio','$fecha_final','$cb_jornada','0','1','$txt_hora_inicio','$txt_hora_final','$cb_modalidad')";
+   $sql="INSERT INTO tbl_practica_estudiantes (id_persona,Id_empresa,fecha_inicio,fecha_finaliza,id_jornada_laboral,id_estado,hora_inicio,hora_final,id_modalidad)
+   VALUES ('$persona_id','$empresa_id','$fecha_inicio','$fecha_final','$cb_jornada','1','$txt_hora_inicio','$txt_hora_final','$cb_modalidad')";
     $resultado = $mysqli->query($sql);
     
 
@@ -192,8 +233,8 @@ if (isset($_POST['cuenta'])) {
     $documento_nombre[] = $_FILES['m_solicitud']['name'];
 
  
-//     echo json_encode( $archivo);
-// return false;
+        //     echo json_encode( $archivo);
+        // return false;
     
   
    //VERIFICAMOS QUE NO TENGA REGISTRO EL ESTUDIANTE PARA EVITAR DUPLICIDAD

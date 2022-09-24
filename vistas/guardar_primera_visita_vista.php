@@ -19,8 +19,9 @@ $usuario=$_SESSION['id_usuario'];
         $id="SELECT id_persona AS supervisor from tbl_usuarios where id_usuario='$usuario'";
         $result= mysqli_fetch_assoc($mysqli->query($id));
         $id_supervisor=$result['supervisor'];
-?>
 
+        $_SESSION['id_supervisor']= $id_supervisor;
+?>
 
 <!DOCTYPE html>
 <html>
@@ -680,12 +681,12 @@ $usuario=$_SESSION['id_usuario'];
         //TBL_EMPRESAS_PRACTICA
         $("#empresa_pv").val(data.nombre_empresa);
         $("#empresa_d_pv").val(data.direccion_empresa);
-        $("#jefe_pv").val(data.jefe_inmediato);
-        $("#cargo_pv").val(data.cargo_jefe_inmediato);
+        $("#jefe_pv").val(data.nombre);
+        $("#cargo_pv").val(data.cargo);
         $("#titulo_pv").val(data.nivel_a);
-        $("#celular_pv").val(data.celular_jefe_inmediato);
-        $("#correo_pv").val(data.correo_jefe_inmediato);
-        $("#telefono_pv").val(data.telefono_jefe_inmediato);
+        $("#celular_pv").val(data.celular);
+        $("#correo_pv").val(data.correo);
+        $("#telefono_pv").val(data.telefono);
         //TBL_PERSONAS
         $("#estudiante_pv").val(data.nombres);
         $("#DNI_pv").val(data.identidad);

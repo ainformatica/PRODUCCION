@@ -10,7 +10,7 @@ require_once('../clases/funcion_visualizar.php');
 require_once('../clases/conexion_mantenimientos.php');
 $id_persona = "";
 $id_persona = $_GET["id_persona"];
-print_r($_GET);
+
 
 ob_end_flush();
 ?>
@@ -74,12 +74,12 @@ ob_end_flush();
               <!-- /.card-header -->
               <div class="card-body">
                 <div class="row">
-                <input type="text" class="d-none" name="id_estudiante" id="id_estudiante" value="<?php echo $id_persona; ?>">
+                <input type="hidden" class="d-none" name="id_estudiante" id="id_estudiante" value="<?php echo $id_persona; ?>">
                   <div class="col-sm-12">
                     <div class="form-group">
                       <input Type="hidden" name="id_supervisor" id="id_supervisor" value="<?php echo $id_persona ?>">
                       <label>Docente supervisor</label>
-                      <select class="form-control" name="docente" id="docente" onchange="myFunction();">
+                      <select class="form-control" name="docente" id="id_docente">
                         <option value="" selected hidden>Seleccione</option>
                         <?php
                         $query = $mysqli->query("SELECT id_persona as docente, CONCAT(nombres,' ', apellidos) nombres FROM tbl_personas WHERE id_tipo_persona = 1 AND Estado = 'ACTIVO'");
@@ -129,16 +129,9 @@ ob_end_flush();
     </div>
 
   </body>
-  <script>
-    function myFunction() {
-      var x = document.getElementById("id_supervisor").value;
-        <?php
-          $existe_docente="SELECT count(docente_supervisor) AS docente from tbl_practica_estudiantes where docente_supervisor=x";
-          $data = mysqli_fetch_assoc($existe_docente);
-        ?>
-      document.getElementById("txt_asignados").innerHTML = $data;
-    }
-  </script>
+
+  <script src="../js/charla/contar_alumnos.js"></script>
+
 </html>
 
 

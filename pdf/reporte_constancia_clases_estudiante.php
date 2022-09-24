@@ -61,10 +61,8 @@ $meses_ES = array("Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio"
 
 $fecha=date("Y-m-d H:i:s");
 
+	$row= mysqli_fetch_assoc($mysqli->query($sql));
 
-
-	$resultado = mysqli_query($connection, $sql);
-	$row = mysqli_fetch_array($resultado);
 
 	$pdf = new PDF('P','mm','letter',true);
 	$pdf->AliasNbPages();
