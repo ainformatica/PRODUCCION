@@ -21,6 +21,7 @@ require_once('../Modelos/permisos_modelo.php');
 /*Menu laterales*/
 $_SESSION['gestion_estudiantes_vista'] = 'none'; //24-09-22 Gestión Estudiantes
 $_SESSION['estudiantes_vista'] = 'none'; //24-9-22 Mantenimiento Estudiantes
+$_SESSION['autoregistro_estudiantes_vista'] = 'none'; //28-9-22 Completar Autoregistro de Estudiantes desde Login
 $_SESSION['pregunta_vista'] = 'none';
 $_SESSION['usuarios_vista'] = 'none';
 $_SESSION['roles_vista'] = 'none';
@@ -144,6 +145,12 @@ function  permisos_a_roles_visualizar($pantalla, $confirmacion)
    if ($_SESSION['pantalla'] == '14028') {
       if ($_SESSION['confirmacion'] == 'block') {
          $_SESSION['gestion_estudiantes_vista'] = "block";//Gestión Estudiantes 24-09-22 Victoria Aguilar
+      }
+   }
+
+   if ($_SESSION['pantalla'] == '14029') {
+      if ($_SESSION['confirmacion'] == 'block') {
+         $_SESSION['autoregistro_estudiantes_vista'] = "block";//Completar Autoregistro Estudiantes desde Login 14-04-23 Victoria Aguilar
       }
    }
 
