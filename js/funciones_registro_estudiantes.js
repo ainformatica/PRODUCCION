@@ -24,20 +24,6 @@ function llenar_selectGEN() {
     });
 }
 
-function llenar_selectNAC() {
-    var cadena = '&activar=activar';
-    $.ajax({
-        url: '../Controlador/registro_estudiantes_controlador.php?op=selectNAC',
-        type: 'POST',
-        data: cadena,
-        success: function(r) {
-
-            $('#cb_nacionalidad').html(r).fadeIn();
-        }
-    });
-}
-
-
 function llenar_selectCAR() {
     var cadena = '&activar=activar';
     $.ajax({
@@ -139,10 +125,6 @@ $(document).click(function() {
     
 if ((document.getElementsByName = 'cb_ecivil')) {
     llenar_selectEST();
-}
-
-if ((document.getElementsByName = 'cb_nacionalidad')) {
-    llenar_selectNAC();
 }
 
 if ((document.getElementsByName = 'cb_genero')) {
