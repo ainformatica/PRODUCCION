@@ -157,232 +157,43 @@ if ((document.getElementsByName = 'cb_cr')) {
     llenar_selectCR();
 }
 
-
-//telefonos
-var sendData = {};
-var list = [];
-var telefono = document.getElementById('tel');
-var table1 = document.getElementById('tbData2');
-
 //FUNCION QUE VALIDA QUE LOS NUMEROS DE TELEFONO SEAN LOCALES
 function valtel(tel) {
     var expresion3 = /(9|8|3|2)\d{3}[-]\d{4}/;
     console.log(expresion3.test(tel));
-    if (list.length <= 3 && expresion3.test(tel)) {
-        return 1;
-    } else {
-        return 0;
-    }
-}
-
-var addTask = () => {
-    //var n = telefono.search("_");
-    if ($('#tel').val().length == 0) {
-        swal('Ingrese el telefono!', '', 'warning');
-
-        return false;
-    } else {
-        if (list.length == 0) {
-            if (valtel($('#tel').val()) == 0) {
-                //aqui debo validar que no se agregue a la tabla ...
-                swal('Ingrese un número válido');
-
-                limpiarTEL();
-                return false;
-            }
+    if (telef.value.match(expresion3)){
+        document.miFormulario.tel.length();
+                return true;
         } else {
-            if (valtel($('#tel').val()) == 0) {
-                //aqui debo validar que no se agregue a la tabla ...
-                swal('Ingrese un número válido');
-
-                limpiarTEL();
-                return false;
-            }
-        }
-
-        var item = {
-            telefono: telefono.value
-        };
-        console.log(item);
-
-        list.push(item);
-
-        viewlist();
+        
+        swal('Ingresar un número de teléfono válido');
         limpiarTEL();
-    }
-
-
-};
-
-function limpiarTEL() {
-    document.getElementById('tel').value = '';
-}
-
-
-var viewlist = () => {
-    if (list.length <= 3) {
-        var viewItem = '';
-        list.map((item, index) => {
-            item.id = index + 1;
-            viewItem += `<tr>`;
-            viewItem += `<td >${item.telefono}</td>`;
-            viewItem += `</tr>`;
-        });
-        table1.innerHTML = viewItem;
-        $('#ModalTask1').modal('hide');
-
-        if (list.length == 3) {
-            desactivarboton1();
-            swal('¡Aviso!', 'límite 3 teléfonos', 'warning');
-
-            $('#ModalTask1').modal('hide');
-        }
-    }
-
-
-};
-
-var saveAll = () => {
-    if (list.length > 0) {
-        sendData.id = 1;
-        sendData.data = list;
-        console.log(sendData);
-
-        fetch('../api/guardar_telefonos.php', {
-                method: 'POST',
-                body: JSON.stringify(sendData)
-            })
-            .then((response) => response.json())
-            .then((response) => console.log(response));
-    } else {
-    }
-};
-
-function limpiarTEL() {
-    document.getElementById('tel').value = '';
-}
-
-function desactivarboton1() {
-    document.getElementById('gcorreotel').disabled = true;
-}
-
-//correos
-var sendData5 = {};
-var list5 = [];
-var correo = document.getElementById('email');
-var table5 = document.getElementById('tbData5');
-
-const x = 0;
-
-function correoInstDet(correo) {
-    var expresion = /^([a-z0-9_\.-]+)@unah\.hn$/;
-    if (list5.length <= 2 && expresion.test(correo)) {
-        return 1;
-    } else {
-        return 0;
-    }
-}
-//FUNCION QUE VERIFICA UN CORREO VALIDO
-function correovalido(correo1) {
-    var expresion1 = /^\w+([\.-]?\w+)*@(?:|hotmail|outlook|yahoo|live|gmail)\.(?:|com|es)+$/;
-
-    if (list5.length <= 2 && expresion1.test(correo1)) {
-        return 1;
-    } else {
-        return 0;
-    }
-}
-
-var addTask5 = () => {
-    if ($('#email').val().length == 0) {
-        swal('¡Ingrese el correo!', '', 'warning');
-
         return false;
-    } else {
-        if (list5.length == 0) {
-            if (correoInstDet($('#email').val()) == 0) {
-                //aqui debo validar que no se agregue a la tabla ...
-
-                swal('¡Alerta!', 'Primero ingresar correo institucional', 'warning');
-
-                limpiarCOR();
-                return false;
-            } else {
-                //console.log("exitosss xD") ;
-            }
-        } else {
-            if (correovalido($('#email').val()) == 0) {
-                //aqui debo validar que no se agregue a la tabla ...
-                swal('Ingresar un correo válido');
-
-                limpiarCOR();
-                return false;
-            } else {
-                desactivarboton();
-
-                swal('¡Aviso!', 'Límite 2 correos', 'warning');
-
-                $('#ModalTask5').modal('hide');
-            }
         }
-        var item5 = {
-            correo: correo.value
-        };
+}
 
-        list5.push(item5);
+//FUNCION QUE VERIFICA UN CORREO VALIDO
+function validarcorreo(Input) {
 
-        viewlist5();
+    var expresion1 = /^\w+([\.-]?\w+)*@[a-zA-Z_]+?.[a-zA-Z]{2,3}$/;//ingresa cualquier dominio de correo electronico
+        if (Input.value.match(expresion1)){
+        document.miFormulario.email.length();
+                return true;
+        } else {
+        
+        swal('Ingresar un correo válido');
         limpiarCOR();
-    }
-};
+        return false;
+        }
+}
+
+function limpiarTEL() {
+    document.getElementById('tel').value = '';
+}
 
 function limpiarCOR() {
     document.getElementById('email').value = '';
 }
-
-function limpiarTEL() {
-    document.getElementById('tel').value = '';
-}
-
-var viewlist5 = () => {
-    if (list5.length <= 2) {
-        var viewItem5 = '';
-        list5.map((item5, index) => {
-            item5.id = index + 1;
-            viewItem5 += `<tr>`;
-            viewItem5 += `<td>${item5.correo}</td>`;
-            viewItem5 += `</tr>`;
-            console.log(index);
-            console.log(item5);
-        });
-
-        table5.innerHTML = viewItem5;
-
-        $('#ModalTask5').modal('hide');
-    } else {
-        alert('Sólo puede ingresar 2 correos warning');
-        return false;
-    }
-};
-
-function desactivarboton() {
-    document.getElementById('gcorreo').disabled = true;
-}
-
-var saveAll2 = () => {
-    if (list5.length > 0) {
-        sendData5.id = 1;
-        sendData5.data = list5;
-
-        fetch('../api/guardar_correos.php', {
-                method: 'POST',
-                body: JSON.stringify(sendData5)
-            })
-            .then((response) => response.json())
-            .then((response) => console.log(response));
-    } else {
-    }
-};
 
 //FECHA MAXIMA HOY
 let today = new Date();
@@ -397,89 +208,6 @@ if (mm < 10) {
 }
 
 today = yyyy + '-' + mm + '-' + dd;
-
-//FUNCIO QUE VALIDA QUE EL NUMERO DE IDENTIDAD ESTÉ CORRECTO
-function ValidarIdentidad(identidad) {
-    
-    var n = identidad.search('_');
-    console.log(n);
-    var mayor_edad = $('#mayoria_edad').val();
-    var depto = identidad.substring(0, 4);
-    var contar = depto;
-
-    console.log(contar);
-
-    if (n == 5) {
-        var ver = false;
-        $.post('../Controlador/registro_estudiantes_controlador.php?op=validar_depto', { codigo: contar }, function(
-            data,
-            status
-        ) {
-            console.log(data);
-            data = JSON.parse(data);
-            console.log(data);
-
-            if (data.regis == 0) {
-                var ver = true;
-
-                if (ver == true) {
-                    swal(
-                        '¡Datos incorrectos!',
-                        'Asegúrese de introducir los dígitos correspondientes a su departamento y município',
-                        'warning'
-                    );
-                    $('#contar_depto').val('');
-                    $('#identidad').val('');
-                    $('#identidad').attr('placeholder', '____-____-_____');
-                }
-            }
-        });
-    }
-
-    if (n == 10) {
-        var currentTime = new Date();
-        var year = currentTime.getFullYear();
-        var anio = identidad.substring(5, 9);
-        //console.log(year-anio);
-        if (year < anio) {
-            //swal("Aviso", "Debe ser mayor de edad", "warning");
-            $('#Textomayor1').removeAttr('hidden');
-            $("#identidad").val("");
-            $("#identidad").attr("placeholder", "____-____-_____");
-            //$("#identidad").val("");
-            //$("#identidad").attr("placeholder", "____-____-_____");
-        } else if (year - anio < mayor_edad)
-
-        {
-            $('#Textomayor').removeAttr('hidden');
-
-
-        } else {
-
-            $('#Textomayor').attr('hidden', 'hidden');
-            $('#Textomayor1').attr('hidden', 'hidden');
-
-        }
-        if (anio == '0000') {
-            swal('¡Aviso!', 'Año inválido', 'warning');
-            $('#identidad').val('');
-            $('#identidad').attr('placeholder', '____-____-_____');
-            $('#Textomayor').attr('hidden', 'hidden');
-        } else {}
-    }
-
-    if (n == -1) {
-        var ultimo = identidad.substring(10, 15);
-        // console.log(anio);
-        if (ultimo == '00000') {
-            swal('¡Aviso!', 'No se permiten 5 ceros', 'warning');
-            $('#identidad').val('');
-            $('#identidad').attr('placeholder', '____-____-_____');
-            $('#Textomayor').attr('hidden', 'hidden');
-        } else {}
-    }
-}
-
 
 //FUNCION CONSULTA SI EXISTE UN NUMERO DE IDENTIDAD EN LA BASE
 function ExisteIdentidad() {
@@ -552,22 +280,6 @@ function pierdeFoco(e) {
     e.value = valor;
 }
 
-
-$(document).ready(function() {
-    $("#tel").keyup(function() {
-        var value = $(this).val();
-        $("#telefonox").val(value);
-    });
-});
-
-
-$(document).ready(function() {
-    $("#email").keyup(function() {
-        var value = $(this).val();
-        $("#correosx").val(value);
-    });
-});
-
 //============================
 //      TAMAÑO DE FOTO       =
 //============================
@@ -605,29 +317,81 @@ function RegistrarEstudiante(
     nacionalidad,
     estado,    
     fecha_nacimiento,
+    lugar_nacimiento,
     ncuenta,
     tipo_estudiante,
-    trabajo
+    trabajo,
+    idcarrera,
+    idcr,
+    telefono,
+    correo
         
 ) {
-    var idcarrera = $('#cb_carrera').children('option:selected').val();
-    var idcr = $('#cb_cr').children('option:selected').val();
     var foto = document.getElementById('seleccionararchivo');
     var curriculo = document.getElementById('curriculum');
-    var telefonox = $("#telefonox").val();
-    var correosx = $("#correosx").val();
-    
-     {
+
+    if(
+        
+        foto.value == 0 ||
+        nombre.length == 0 ||
+        apellidos.length == 0 ||
+        nacionalidad == null ||
+        identidad.length == 0 ||
+        fecha_nacimiento.length == 0 ||
+        lugar_nacimiento.length == 0 ||
+        estado == null ||
+        sexo == null ||
+        curriculo.value == 0   
+
+    ) {
+        swal({
+            title: '¡Alerta!',
+            text: 'Rellene o seleccione los campos vacíos de Datos Personales',
+            type: 'warning',
+            showConfirmButton: true,
+            timer: 15000
+        });
+
+    } else if (
+        telefono.length == 0 ||
+        correo.length == 0 ||
+        trabajo.length == 0
+    ) {
+        swal({
+            title: '¡Alerta!',
+            text: 'Rellene o seleccione los campos vacíos de Información de Contacto',
+            type: 'warning',
+            showConfirmButton: true,
+            timer: 15000
+        });
+
+    } else {
+        if (
+
+            ncuenta.length == 0 ||
+            idcarrera.length == null ||
+            idcr.length == null ||
+            tipo_estudiante.length == 0
+
+        ) {
+            swal({
+                title: '¡Alerta!',
+                text: 'Rellene o seleccione los campos vacíos en Información de Estudiante',
+                type: 'warning',
+                showConfirmButton: true,
+                timer: 15000
+            });
+        } else {
             nombre = nombre.toUpperCase();
             apellidos = apellidos.toUpperCase();
             sexo = sexo.toUpperCase();
             identidad = identidad.toUpperCase();
             nacionalidad = nacionalidad.toUpperCase();
             estado = estado.toUpperCase();
-            ncuenta = ncuenta.toUpperCase();
-            trabajo = trabajo.toUpperCase();            
+            lugar_nacimiento = lugar_nacimiento.toUpperCase();            
             tipo_estudiante = tipo_estudiante.toUpperCase();
-                        
+            trabajo = trabajo.toUpperCase();            
+                                    
             $.post(
                 '../Controlador/registro_estudiantes_controlador.php?op=registrar', {
                     nombre: nombre,
@@ -637,24 +401,27 @@ function RegistrarEstudiante(
                     nacionalidad: nacionalidad,
                     estado: estado,
                     fecha_nacimiento: fecha_nacimiento,                    
+                    lugar_nacimiento: lugar_nacimiento,
                     ncuenta: ncuenta,
                     tipo_estudiante: tipo_estudiante, 
-                    trabajo: trabajo,                   
+                    trabajo: trabajo,
                     idcarrera: idcarrera,
-                    idcr: idcr
+                    idcr: idcr,
+                    telefono: telefono,
+                    correo: correo
                     
                 },
-
-                function(e) {
-                    saveAll();                                        
-                    saveAll2();
+                
+                function(data,status) {
+                    
+                    console.log(data);
+                    console.log(status);
                     Registrar();
                     Registrarcurriculum();
 
                 }
 
             );
-
 
             swal({
                 title: "¡Alerta!",
@@ -670,7 +437,7 @@ function RegistrarEstudiante(
         }
 
     }
-
+}
 
 
 

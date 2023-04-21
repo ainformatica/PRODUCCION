@@ -11,6 +11,7 @@ require_once('../clases/funcion_bitacora.php');
 require_once('../clases/funcion_visualizar.php');
 require_once('../clases/funcion_permisos.php');
 require_once('../clases/conexion_mantenimientos.php');
+require_once('../Controlador/import_registro_estudiantes_controlador.php');
 
 
 $Id_objeto = 14028;
@@ -81,9 +82,26 @@ if ($visualizacion == 0) {
                     <a href="../vistas/registro_estudiantes_vista.php" class="btn btn-warning"><i class="fas fa-arrow"></i>
                     Registro de Nuevo Estudiante</a>
                 </div>
+
+                <!--IMPORTACIÓN DE DATOS-->
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-6">
+                            <form action="" method="post" name="frmExcelImport" id="frmExcelImport" enctype="multipart/form-data">
+                                <input type="file" id="file" name="file" class="form-control" accept=".xls,.xlsx,.xlsb">
+                        </div>
+                        <div class="col-2">
+                            <button type="submit" id="submit" name="import" class="btn btn-success" style="width: 100%">Importar de Excel</button>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
                 </div>
+                </form>
+            </div>
+            <div id="response" class="<?php if(!empty($type)) { echo $type . " display-block"; } ?>"><?php if(!empty($message)) { echo $message; } ?></div>
             </div>
 
             <!-- /.card-header -->
@@ -290,3 +308,19 @@ if ($visualizacion == 0) {
 <script src="../plugins/datatables/pdfmake-0.1.36/pdfmake.min.js"></script>
 <script src="../plugins/datatables/pdfmake-0.1.36/vfs_fonts.js"></script>
 <script src="../plugins/datatables/Buttons-1.5.6/js/buttons.html5.min.js"></script>
+<script>
+    //Validacion para que solo acepte archivos EXCEL
+    document.getElementById("submit").addEventListener("change", () => {
+        var fileName = document.getElementById("submit").value;
+        var idxDot = fileName.lastIndexOf(".") + 1;
+        var extFile = fileName.substr(idxDot, fileName.length).
+        toLowerCase();
+        if (extFile == "xlsx" || extFile == "xlsb") {
+            //TO DO
+        } else {
+            swal("Mensaje de Advertencia", "Solo se aceptan archivos Excel - Usted subió un archivo con extensión " + extFile, "warning");
+            document.getElementById("submit").value = "";
+        }
+    });
+
+</script>

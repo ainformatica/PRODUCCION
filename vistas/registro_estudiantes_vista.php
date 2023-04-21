@@ -29,7 +29,6 @@ if ($visualizacion == 0) {
 } else {
 
   bitacora::evento_bitacora($Id_objeto, $_SESSION['id_usuario'], 'INGRESO', 'A REGISTRO NUEVO ESTUDIANTE');
-
 }
 
 ob_end_flush();
@@ -88,8 +87,6 @@ ob_end_flush();
 
       <section>
 
-        <input type="text" name="mayoria_edad" id="mayoria_edad" readonly onload="mayoria_edad()" hidden>
-
         <!-- Main content -->
         <section class="content">
           <div class="container-fluid">
@@ -147,7 +144,17 @@ ob_end_flush();
                       <!-- NACIONALIDAD -->
                       <label>Nacionalidad</label>
                       <select class="form-control" name="cb_nacionalidad" id="cb_nacionalidad" style="text-transform: uppercase" required>
-                    </select>
+                      <?php
+                      $query = $mysqli->query('select * from `tbl_nacionalidad`;');
+                      while ($resultado = mysqli_fetch_array($query)) {
+                        if ($resultado['id_nacionalidad']==82) {
+                          # code...
+                          echo '<option value="' . $resultado['nacionalidad'] . '" selected=true > ' . $resultado['nacionalidad'] . '</option>';
+                        }
+                      echo '<option value="' . $resultado['nacionalidad'] . '"> ' . $resultado['nacionalidad'] . '</option>';
+                      }
+                      ?>
+                      </select>
                     </div>
 
                   </div>
@@ -157,11 +164,10 @@ ob_end_flush();
                     <div class="form-group">
                       <div class="input-group-prepend">
 
-                        <input name="identidad" type="text" data-inputmask="'mask': '9999-9999-99999'" data-mask class="form-control" id="identidad" onkeyup="ValidarIdentidad($('#identidad').val());" onblur="ExisteIdentidad();">
+                        <input name="identidad" type="text" data-inputmask="'mask': '9999999999999'" data-mask class="form-control" id="identidad" onkeyup="ValidarIdentidad($('#identidad').val());" onblur="ExisteIdentidad();">
                       </div>
                     </div>
                     <p hidden id="TextoIdentidad" style="color:red;">¡Ya existe un registro con esta identidad! </p>
-                    <p hidden id="Textomayor1" style="color:red;">¡Año incorrecto! </p>
 
                   </div>
 
@@ -174,6 +180,14 @@ ob_end_flush();
 
                     </div>
                     </div>
+
+                    <div class="col-sm-3">
+                    <div class="form-group">
+                      <!-- LUGAR DE NACIMIENTO -->
+                      <label>Lugar de Nacimiento </label>
+                      <input class="form-control" type="text" id="txt_lugar_nacimiento" name="txt_lugar_nacimiento" maxlength="25" value="" required style="text-transform: uppercase" onkeyup="DobleEspacio(this, event); MismaLetra('txt_lugar_nacimiento');" onkeypress="return sololetras(event)" ;>
+                    </div>
+                  </div>
 
                   <div class="col-sm-3">
                     <div class="form-group">
@@ -226,107 +240,20 @@ ob_end_flush();
               <!-- /.card-header -->
               <div class="card-body">
                 <div class="row">
-                  <div class="col-md-4">
+
+                <div class="col-sm-2">
                     <div class="form-group">
-                      <div class="container">
-                        <button class="btn btn-primary btn-sm" name="add" id="gcorreotel" data-toggle="modal" data-target="#ModalTask1">Agregar</button>
-
-
-                        <label for="">Teléfonos</label>
-
-                        <table class="table table-bordered table-striped m-0">
-                          <thead>
-                            <tr>
-                              <th>Teléfonos</th>
-                            </tr>
-                          </thead>
-                          <tbody id="tbData2"></tbody>
-                        </table>
-                      </div>
+                      <label for="">Teléfono</label>
+                      <input type="text" name="tel" id="tel" class="form-control name_list" data-inputmask="'mask': '9999-9999'" onblur="valtel(document.miFormulario.tel);" data-mask required>
                     </div>
                   </div>
 
-                  <div class="modal fade" tabindex="-1" role="dialog" id="ModalTask1">
-                    <div class="modal-dialog" role="document">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title">Datos</h5>
-                          <button class="close" data-dismiss="modal">
-                            &times;
-                          </button>
-                        </div>
-
-                        <div class="modal-body">
-                          <div class="container">
-                            <div class="form-group">
-                              <label for="">Teléfono</label>
-                              <input type="text" name="tel" id="tel" class="form-control name_list" data-inputmask="'mask': '9999-9999'" data-mask required>
-
-                            </div>
-                          </div>
-                        </div>
-                        <div class="modal-footer">
-                          <button class="btn btn-success" onclick="addTask(); ">Agregar</button>
-                          <button class="btn btn-danger" onclick="limpiarTEL()" ; data-dismiss="modal">Cerrar</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-
-                  <!-- copia del input telefonos -->
-                  <input hidden type="text" name="telefonox" id="telefonox" class="form-control name_list" data-inputmask="'mask': '9999-9999'" data-mask required readonly>
-                  <input hidden type="email" class="form-control" id="correosx" name="correosx" maxlength="30" readonly>
-                  
-                  <div class="col-sm-4">
+                  <div class="col-sm-3">
                     <div class="form-group">
-
-                      <!-- TABLA Correos -->
-                      <div class="container">
-                        <button class="btn btn-primary btn-sm" data-toggle="modal" id="gcorreo" data-target="#ModalTask5">Agregar</button>
-
-                        <label for="">Correos Electrónicos </label>
-                        <table class="table table-bordered table-striped m-0">
-                          <thead>
-                            <tr>
-                              <th>Correo</th>
-                            </tr>
-                          </thead>
-                          <tbody id="tbData5"></tbody>
-                        </table>
-                      </div>                      
+                      <label for="">Correo Electrónico</label>
+                      <input type="email" class="form-control" id="email" name="email" maxlength="100" onblur="validarcorreo(document.miFormulario.email);">
                     </div>
                   </div>
-
-                  
-                  <div class="modal fade" tabindex="-1" role="dialog" id="ModalTask5">
-                    <div class="modal-dialog" role="document">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title">Datos</h5>
-                          <button class="close" data-dismiss="modal">
-                            &times;
-                          </button>
-                        </div>
-
-                        <div class="modal-body">
-                          <div class="container">
-                            <div class="form-group">
-                              <label for="">Correo Electrónico</label>
-                              <input type="email" class="form-control" id="email" name="email" maxlength="100">
-
-
-                            </div>
-                          </div>
-                        </div>
-                        <div class="modal-footer">
-                          <button class="btn btn-success" id="gcorreo1" onclick="addTask5()">Agregar</button>
-                          <button class="btn btn-danger" onclick="limpiarCOR()" data-dismiss="modal">Cerrar</button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
 
                   <div class="col-sm-3">
                     <label>¿Trabaja?</label>
@@ -432,9 +359,7 @@ ob_end_flush();
           <!-- /.card-body -->
           <p class="text-center" style="margin-top: 10px;">
             <button type="submit" class="btn btn-primary btn-lg" id="btn_guardar_registro_estudiantes" name="btn_guardar_registro_estudiantes" 
-            onclick="RegistrarEstudiante($('#txt_nombres').val(), $('#txt_apellidos').val(), $('#cb_genero').val(), $('#identidad').val(), 
-            $('#cb_nacionalidad').val(), $('#cb_ecivil').val(), $('#txt_fecha_nacimiento').val(), $('#txt_n_cuenta').val(), 
-            $('#tipo_estudiante').val(), $('#trabajo').val(), $('#cb_carrera').val(), $('#cb_cr').val());   ">
+            onclick="RegistrarEstudiante($('#txt_nombres').val(), $('#txt_apellidos').val(), $('#cb_genero').val(), $('#identidad').val(), $('#cb_nacionalidad').val(), $('#cb_ecivil').val(), $('#txt_fecha_nacimiento').val(), $('#txt_lugar_nacimiento').val(), $('#txt_n_cuenta').val(), $('#tipo_estudiante').val(), $('#trabajo').val(), $('#cb_carrera').val(), $('#cb_cr').val(), $('#tel').val(), $('#email').val());   ">
               <i class="zmdi zmdi-floppy"></i>GUARDAR</button>
 
           </p>

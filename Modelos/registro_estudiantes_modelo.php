@@ -1,6 +1,5 @@
 <?php
 require_once "../clases/conexion_mantenimientos.php";
-//require_once "../clases/Conexion.php";
 
 $instancia_conexion = new conexion();
 
@@ -10,11 +9,9 @@ class modelo_registro_estudiantes
 {
 
     //Insertar registros
-    public function registrar($nombre,$apellidos,$sexo,$identidad,$nacionalidad,$estado,$fecha_nacimiento,$ncuenta,$tipo_estudiante,
-    $trabajo, $idcarrera,$idcr){
+    public function registrar($nombre,$apellidos,$sexo,$identidad,$nacionalidad,$estado,$fecha_nacimiento,$lugar_nacimiento,$ncuenta,$tipo_estudiante,$trabajo, $idcarrera,$idcr,$usuario,$contrasena, $telefono, $correo){
         global $instancia_conexion;
-        $sql="call proc_insertar_estudiantes_persona ('$nombre', '$apellidos', '$sexo', '$identidad', '$nacionalidad', '$estado', 
-        '$fecha_nacimiento', '2', 'ACTIVO', '$ncuenta', '$tipo_estudiante', '$trabajo', '$idcarrera', '$idcr')";
+        $sql="call proc_insertar_estudiantes_persona ('$nombre','$apellidos','$sexo','$identidad','$nacionalidad','$estado','$fecha_nacimiento','$lugar_nacimiento','2','ACTIVO','$ncuenta','$tipo_estudiante','$trabajo','$idcarrera','$idcr','$usuario','$contrasena','$telefono','$correo')";
         
 
         return $instancia_conexion->ejecutarConsulta($sql);
@@ -66,14 +63,6 @@ class modelo_registro_estudiantes
         return $consulta;
 
     }
-    
-    function listar_selectNAC(){
-        global $instancia_conexion;
-        $consulta=$instancia_conexion->ejecutarConsulta('select * from tbl_nacionalidad');
-
-        return $consulta;
-
-    }
 
     function listar_selectCR (){
         global $instancia_conexion;
@@ -87,17 +76,5 @@ class modelo_registro_estudiantes
         return $consulta;
     }
 
-    function validardepto($codigo)
-    {
-        global $instancia_conexion;
-        $sql4 = "call proc_existe_municipio_depto($codigo)";
-        return $instancia_conexion->ejecutarConsultaSimpleFila($sql4);
-    }
-
-
-
-  
-    
-
-
 }
+?>
